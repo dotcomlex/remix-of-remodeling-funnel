@@ -93,7 +93,7 @@ const Quiz = () => {
       case "asap": return "Within 2 weeks (ASAP)";
       case "30-days": return "Within 30 days";
       case "1-3-months": return "1-3 months";
-      case "exploring": return "Just exploring options";
+      case "exploring": return "Not Sure";
       default: return "";
     }
   };
@@ -207,8 +207,8 @@ const Quiz = () => {
         }`} />
       </div>
 
-      <span className={`text-[13px] sm:text-sm font-medium text-center leading-tight transition-colors duration-200 ${
-        selected ? "text-primary font-semibold" : "text-foreground"
+      <span className={`text-sm font-normal text-center leading-tight transition-colors duration-200 ${
+        selected ? "text-primary font-medium" : "text-foreground"
       }`}>
         {label}
       </span>
@@ -241,7 +241,7 @@ const Quiz = () => {
           : "border-slate-200 hover:border-primary/50 shadow-sm"
       }`}
     >
-      <span className={`text-base sm:text-lg font-semibold transition-colors duration-200 ${
+      <span className={`text-base sm:text-lg font-medium transition-colors duration-200 ${
         selected ? "text-primary" : "text-foreground"
       }`}>
         {label}
@@ -288,7 +288,7 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-5 text-center leading-snug">
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-5 text-center leading-snug">
                 Which project are you planning?
               </h3>
               <div className="grid grid-cols-2 gap-2 sm:gap-3">
@@ -334,7 +334,7 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-5 text-center leading-snug">
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-5 text-center leading-snug">
                 When do you want to start?
               </h3>
               <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
@@ -361,7 +361,7 @@ const Quiz = () => {
                 />
                 <OptionCard
                   icon={Clock}
-                  label="Just exploring options"
+                  label="Not Sure"
                   selected={data.timeline === "exploring"}
                   onClick={() => handleTileSelect("timeline", "exploring")}
                   accentColor="text-slate-500"
@@ -387,7 +387,7 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-5 text-center leading-snug">
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-5 text-center leading-snug">
                 What's your budget range?
               </h3>
               <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
@@ -436,7 +436,7 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-5 text-center leading-snug">
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-5 text-center leading-snug">
                 What's your zip code?
               </h3>
               <div className="mb-5">

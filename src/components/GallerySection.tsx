@@ -2,28 +2,24 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// New optimized gallery images
-import drivewayBrick from "@/assets/gallery-driveway-brick.webp";
-import patioBackyard from "@/assets/gallery-patio-backyard.webp";
-import drivewayStucco from "@/assets/gallery-driveway-stucco.webp";
-import drivewayWinter from "@/assets/gallery-driveway-winter.webp";
-import patioEvening from "@/assets/gallery-patio-evening.webp";
-import drivewayRanch from "@/assets/gallery-driveway-ranch.webp";
-import drivewayFlorida from "@/assets/gallery-driveway-florida.webp";
-import crewAction from "@/assets/gallery-crew-action.webp";
+// Bathroom renovation images (uploaded)
+import bathroomReno1 from "@/assets/gallery-bathroom-1.png";
+import bathroomReno2 from "@/assets/gallery-bathroom-2.png";
+import bathroomReno3 from "@/assets/gallery-bathroom-3.png";
+
+// Kitchen renovation images (AI generated)
+import kitchenReno1 from "@/assets/gallery-kitchen-1.jpg";
+import kitchenReno2 from "@/assets/gallery-kitchen-2.jpg";
 
 const GallerySection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const projects = [
-    { image: drivewayBrick, alt: "Outdated kitchen transformed to modern design with custom cabinets", label: "Kitchen Remodel", location: "Denver, CO" },
-    { image: patioBackyard, alt: "Traditional bathroom updated to spa-like retreat with tile work", label: "Bathroom", location: "Littleton, CO" },
-    { image: drivewayStucco, alt: "Unfinished basement converted to beautiful living space", label: "Basement", location: "Boulder, CO" },
-    { image: drivewayWinter, alt: "Complete kitchen renovation with countertops and lighting", label: "Kitchen Remodel", location: "Lakewood, CO" },
-    { image: patioEvening, alt: "Master bathroom remodel with walk-in shower and vanity", label: "Bathroom", location: "Aurora, CO" },
-    { image: drivewayRanch, alt: "Basement finishing with entertainment area and bar", label: "Basement", location: "Arvada, CO" },
-    { image: drivewayFlorida, alt: "Kitchen and bathroom combo remodel transformation", label: "Kitchen & Bath", location: "Castle Rock, CO" },
-    { image: crewAction, alt: "14er Renovation crew working on a kitchen remodel", label: "Our Crew", location: "Colorado" },
+    { image: bathroomReno1, alt: "Bathroom renovation before and after transformation" },
+    { image: bathroomReno2, alt: "Luxury bathroom remodel with blue tile and gold accents" },
+    { image: bathroomReno3, alt: "Complete bathroom renovation with modern fixtures" },
+    { image: kitchenReno1, alt: "Kitchen renovation before and after with white cabinets" },
+    { image: kitchenReno2, alt: "Modern kitchen remodel transformation with island" },
   ];
 
   const nextSlide = () => {
@@ -65,11 +61,6 @@ const GallerySection = () => {
               fetchPriority="high"
               className="w-full h-full object-cover transition-opacity duration-300"
             />
-            {/* Project Label Overlay */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-              <p className="text-white font-medium text-lg">{projects[currentIndex].label}</p>
-              <p className="text-white/70 text-sm">{projects[currentIndex].location}</p>
-            </div>
           </div>
 
           <Button
