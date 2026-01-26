@@ -29,7 +29,7 @@ const formatPhoneNumber = (value: string): string => {
 };
 
 const Quiz = () => {
-  const [step, setStep] = useState<QuizStep>(1);
+  const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<{ firstName?: string; phone?: string }>({});
@@ -73,7 +73,7 @@ const Quiz = () => {
   };
 
   const handleBack = () => {
-    if (step > 1) {
+    if (step > 1 && step < 5) {
       setStep((step - 1) as QuizStep);
     }
   };
@@ -191,7 +191,7 @@ const Quiz = () => {
   }) => (
     <button
       onClick={onClick}
-      className={`relative flex items-center gap-4 p-4 sm:p-5 rounded-xl border-2 bg-white w-full transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
+      className={`relative flex flex-col items-center justify-center gap-3 p-4 sm:p-5 rounded-xl border-2 bg-white w-full transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
         selected 
           ? "border-primary bg-gradient-to-r from-primary/10 to-primary/5 shadow-md" 
           : "border-slate-200 hover:border-primary/50 shadow-sm"
@@ -207,15 +207,15 @@ const Quiz = () => {
         }`} />
       </div>
 
-      <span className={`text-base sm:text-lg font-medium text-left leading-tight transition-colors duration-200 ${
+      <span className={`text-sm sm:text-base font-medium text-center leading-tight transition-colors duration-200 ${
         selected ? "text-primary font-semibold" : "text-foreground"
       }`}>
         {label}
       </span>
       
       {selected && (
-        <div className="absolute right-4 w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center">
-          <Check className="w-4 h-4 text-white" />
+        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center">
+          <Check className="w-3 h-3 text-white" />
         </div>
       )}
     </button>
@@ -300,7 +300,7 @@ const Quiz = () => {
               <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6 text-center leading-snug">
                 Which project are you planning?
               </h3>
-              <div className="flex flex-col gap-3">
+              <div className="grid grid-cols-2 gap-3">
                 <OptionCard
                   icon={ChefHat}
                   label="Kitchen remodel"
@@ -346,7 +346,7 @@ const Quiz = () => {
               <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6 text-center leading-snug">
                 When do you want to start?
               </h3>
-              <div className="flex flex-col gap-3 mb-4">
+              <div className="grid grid-cols-2 gap-3 mb-4">
                 <OptionCard
                   icon={Zap}
                   label="Within 2 weeks (ASAP)"
@@ -399,7 +399,7 @@ const Quiz = () => {
               <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6 text-center leading-snug">
                 What's your budget range?
               </h3>
-              <div className="flex flex-col gap-3 mb-4">
+              <div className="grid grid-cols-2 gap-3 mb-4">
                 <BudgetCard
                   label="Under $25,000"
                   value="under-25k"
