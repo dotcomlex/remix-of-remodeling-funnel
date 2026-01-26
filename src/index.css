@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core brand colors - premium neutral palette */
+    --background: 0 0% 100%;
+    --foreground: 220 20% 15%;
+
+    /* Hero dark section - deep slate */
+    --hero: 220 30% 10%;
+    --hero-foreground: 0 0% 98%;
+
+    /* Primary - Warm amber (used sparingly for CTAs only) */
+    --primary: 38 85% 50%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 38 85% 42%;
+
+    /* Secondary - Deep slate blue */
+    --secondary: 220 25% 22%;
+    --secondary-foreground: 0 0% 98%;
+
+    /* Tertiary - Cool blue accent */
+    --tertiary: 210 50% 45%;
+    --tertiary-foreground: 0 0% 100%;
+
+    /* Muted surfaces - neutral grays */
+    --muted: 220 12% 95%;
+    --muted-foreground: 220 10% 45%;
+
+    /* Cards and popover */
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 15%;
+
+    /* Accent - Very light warm tint */
+    --accent: 38 40% 97%;
+    --accent-foreground: 38 70% 35%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Borders and inputs */
+    --border: 220 13% 90%;
+    --input: 220 13% 90%;
+    --ring: 38 85% 50%;
+
+    /* Radius */
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --success: 142 70% 38%;
+    --success-foreground: 0 0% 100%;
+    
+    /* Highlight - Bright yellow for key offers */
+    --highlight: 50 100% 60%;
+    --highlight-foreground: 220 20% 15%;
+    
+    /* Section backgrounds - premium transitions */
+    --section-warm: 30 30% 98%;
+    --section-slate: 220 20% 97%;
+    --section-dark: 220 30% 12%;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.04);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.08), 0 2px 4px -2px hsl(0 0% 0% / 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.08), 0 4px 6px -4px hsl(0 0% 0% / 0.06);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 8px 10px -6px hsl(0 0% 0% / 0.08);
+
+    /* Sidebar defaults */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222 20% 8%;
+    --foreground: 0 0% 98%;
+    --hero: 222 25% 6%;
+    --hero-foreground: 0 0% 98%;
+    --card: 222 20% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 222 20% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 38 85% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 20% 20%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 217 32% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 38 40% 15%;
+    --accent-foreground: 38 85% 65%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 32% 17%;
+    --input: 217 32% 17%;
+    --ring: 38 85% 50%;
+    --section-warm: 220 20% 10%;
+    --section-slate: 222 20% 10%;
+    --section-dark: 222 25% 6%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hero gradients */
+  .hero-gradient {
+    background: linear-gradient(135deg, hsl(var(--hero)) 0%, hsl(220 30% 15%) 100%);
+  }
+
+  .hero-overlay {
+    background: 
+      radial-gradient(ellipse at center, transparent 0%, hsl(var(--hero) / 0.3) 70%, hsl(var(--hero) / 0.7) 100%),
+      linear-gradient(to right, hsl(var(--hero) / 0.95) 0%, hsl(var(--hero) / 0.8) 35%, hsl(var(--hero) / 0.5) 100%);
+  }
+
+  /* Quiz card - larger shadow for prominence */
+  .quiz-card-gradient {
+    background: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 14% 98%) 100%);
+  }
+
+  .quiz-card-glass {
+    background: linear-gradient(
+      180deg, 
+      hsl(0 0% 100% / 0.95) 0%, 
+      hsl(220 14% 98% / 0.9) 100%
+    );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .shadow-quiz {
+    box-shadow: 0 25px 50px -12px hsl(0 0% 0% / 0.25), 0 0 0 1px hsl(var(--primary) / 0.1);
+  }
+
+  .shadow-quiz-glow {
+    box-shadow: 
+      0 25px 50px -12px hsl(0 0% 0% / 0.25),
+      0 0 0 1px hsl(var(--primary) / 0.15),
+      0 0 40px -10px hsl(var(--primary) / 0.3);
+  }
+
+  /* Section gradients for premium transitions */
+  .section-gradient-warm {
+    background: linear-gradient(180deg, hsl(var(--section-warm)) 0%, hsl(var(--background)) 100%);
+  }
+
+  .section-gradient-slate {
+    background: linear-gradient(180deg, hsl(var(--section-slate)) 0%, hsl(var(--background)) 100%);
+  }
+
+  .section-gradient-dark {
+    background: linear-gradient(180deg, hsl(var(--section-dark)) 0%, hsl(220 30% 15%) 100%);
+  }
+
+  .section-accent {
+    background: linear-gradient(180deg, hsl(var(--muted)) 0%, hsl(0 0% 100%) 100%);
+  }
+
+  .cta-gradient {
+    background: linear-gradient(135deg, hsl(var(--hero)) 0%, hsl(220 35% 18%) 100%);
+  }
+
+  /* Texture overlay */
+  .texture-overlay {
+    position: relative;
+  }
+  
+  .texture-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  /* Emphasized text for key outcomes */
+  .text-emphasis {
+    @apply font-semibold text-foreground;
+  }
+
+  /* Hero text shadow for contrast */
+  .hero-text-shadow {
+    text-shadow: 0 2px 8px hsl(0 0% 0% / 0.5), 0 4px 20px hsl(0 0% 0% / 0.3);
+  }
+}
+
+/* Quiz tile animations */
+.quiz-tile {
+  @apply transition-all duration-200 ease-out;
+}
+
+.quiz-tile:hover {
+  @apply scale-[1.02];
+  box-shadow: 0 8px 25px -5px hsl(var(--primary) / 0.2);
+}
+
+.quiz-tile.selected {
+  @apply ring-2 ring-primary ring-offset-2;
+}
+
+/* Hide scrollbar for trust badges */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 8px hsl(var(--highlight) / 0.5);
+  }
+  50% {
+    opacity: 0.85;
+    text-shadow: 0 0 20px hsl(var(--highlight) / 0.8);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Progress bar animation */
+.progress-fill {
+  @apply transition-all duration-500 ease-out;
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Stagger children animations */
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+
+/* Trust badge scroll animation */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Optimize image rendering */
+img {
+  content-visibility: auto;
+}
