@@ -6,7 +6,7 @@ import FloatingCTA from "@/components/FloatingCTA";
 const TrustBadgesSection = lazy(() => import("@/components/TrustBadgesSection"));
 const GallerySection = lazy(() => import("@/components/GallerySection"));
 const ReviewsSection = lazy(() => import("@/components/ReviewsSection"));
-const FAQSection = lazy(() => import("@/components/FAQSection"));
+
 const Footer = lazy(() => import("@/components/Footer"));
 
 const Index = () => {
@@ -21,9 +21,6 @@ const Index = () => {
       </Suspense>
       <Suspense fallback={<div className="h-96 section-gradient-dark" />}>
         <ReviewsSection />
-      </Suspense>
-      <Suspense fallback={<div className="h-48 bg-muted/50" />}>
-        <FAQSection />
       </Suspense>
       <Suspense fallback={null}>
         <Footer />
