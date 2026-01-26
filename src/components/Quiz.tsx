@@ -191,23 +191,23 @@ const Quiz = () => {
   }) => (
     <button
       onClick={onClick}
-      className={`relative flex flex-col items-center justify-center gap-3 p-4 sm:p-5 rounded-xl border-2 bg-white w-full transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
+      className={`relative flex flex-col items-center justify-center gap-2 p-3 sm:p-4 rounded-xl border-2 bg-white w-full transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
         selected 
           ? "border-primary bg-gradient-to-r from-primary/10 to-primary/5 shadow-md" 
           : "border-slate-200 hover:border-primary/50 shadow-sm"
       }`}
     >
-      <div className={`w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+      <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
         selected 
           ? "bg-primary" 
           : "bg-slate-100 group-hover:bg-slate-200"
       }`}>
-        <Icon className={`w-6 h-6 transition-colors duration-200 ${
+        <Icon className={`w-5 h-5 sm:w-6 sm:h-6 transition-colors duration-200 ${
           selected ? "text-primary-foreground" : accentColor
         }`} />
       </div>
 
-      <span className={`text-sm sm:text-base font-medium text-center leading-tight transition-colors duration-200 ${
+      <span className={`text-[13px] sm:text-sm font-medium text-center leading-tight transition-colors duration-200 ${
         selected ? "text-primary font-semibold" : "text-foreground"
       }`}>
         {label}
@@ -235,7 +235,7 @@ const Quiz = () => {
   }) => (
     <button
       onClick={onClick}
-      className={`relative flex items-center justify-center p-4 sm:p-5 rounded-xl border-2 bg-white w-full transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] ${
+      className={`relative flex items-center justify-center p-3 sm:p-4 rounded-xl border-2 bg-white w-full transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] ${
         selected 
           ? "border-primary bg-gradient-to-r from-primary/10 to-primary/5 shadow-md" 
           : "border-slate-200 hover:border-primary/50 shadow-sm"
@@ -260,7 +260,7 @@ const Quiz = () => {
     <div className="w-full max-w-lg">
       {/* Simple Progress Dots */}
       {!isSubmitted && (
-        <div className="flex justify-center gap-2 mb-6">
+        <div className="flex justify-center gap-2 mb-4">
           {[1, 2, 3, 4, 5].map((dotStep) => (
             <div
               key={dotStep}
@@ -275,16 +275,7 @@ const Quiz = () => {
       )}
 
       {/* Quiz Card */}
-      <div className="quiz-card-glass rounded-2xl shadow-quiz-glow p-6 sm:p-8 w-full border-2 border-primary/30">
-        {/* Header Badge - show on Steps 1-4 only */}
-        {step < 5 && !isSubmitted && (
-          <div className="text-center mb-7">
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/20 to-primary/10 text-primary text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-full border border-primary/20">
-              <Sparkles className="w-3.5 h-3.5" />
-              Winter Upgrade Program
-            </div>
-          </div>
-        )}
+      <div className="quiz-card-glass rounded-2xl shadow-quiz-glow p-4 sm:p-6 w-full border-2 border-primary/30">
 
         <AnimatePresence mode="wait">
           {/* Step 1: Project Type */}
@@ -297,10 +288,10 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6 text-center leading-snug">
+              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-5 text-center leading-snug">
                 Which project are you planning?
               </h3>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 <OptionCard
                   icon={ChefHat}
                   label="Kitchen remodel"
@@ -343,10 +334,10 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6 text-center leading-snug">
+              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-5 text-center leading-snug">
                 When do you want to start?
               </h3>
-              <div className="grid grid-cols-2 gap-3 mb-4">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
                 <OptionCard
                   icon={Zap}
                   label="Within 2 weeks (ASAP)"
@@ -396,10 +387,10 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6 text-center leading-snug">
+              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-5 text-center leading-snug">
                 What's your budget range?
               </h3>
-              <div className="grid grid-cols-2 gap-3 mb-4">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
                 <BudgetCard
                   label="Under $25,000"
                   value="under-25k"
@@ -445,7 +436,7 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6 text-center leading-snug">
+              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-5 text-center leading-snug">
                 What's your zip code?
               </h3>
               <div className="mb-5">
