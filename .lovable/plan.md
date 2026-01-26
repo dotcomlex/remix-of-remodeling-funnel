@@ -1,71 +1,75 @@
 
 
-# Quiz Component Update Plan
+# Hero Section Cleanup Plan
 
 ## Overview
-Update the Quiz component with refined styling and layout changes based on the provided code structure.
+Clean up the hero section to reduce visual clutter by repositioning trust badges and removing elements that feel overwhelming.
 
 ---
 
 ## Changes to Implement
 
-### 1. handleBack Function Update
-**Current (line 75-79):**
-```typescript
-const handleBack = () => {
-  if (step > 1) {
-    setStep((step - 1) as QuizStep);
-  }
-};
+### 1. Move Trust Strip Below Quiz
+**File:** `src/components/HeroSection.tsx`
+
+**Current location:** Lines 66-76 (in left column, under the headline text)
+**New location:** Below the Quiz component (replacing the urgency/Google badges)
+
+The "Licensed & Insured" and "1-Year Warranty" trust badges will be moved from the left headline column to directly below the quiz card.
+
+### 2. Remove Urgency and Google Rating Badges
+**File:** `src/components/HeroSection.tsx`
+
+**Remove:** Lines 89-115 (the entire "Trust badges row" div containing):
+- Urgency badge ("Ends Jan 31 · 7 Spots Left")
+- Google Rating badge ("4.9 ★★★★★ 50+ reviews")
+
+These will be replaced with the simpler "Licensed & Insured" and "1-Year Warranty" badges.
+
+### 3. Remove FAQ Section
+**File:** `src/pages/Index.tsx`
+
+**Remove:** 
+- Import for FAQSection (line 9)
+- Suspense wrapper and FAQSection component (lines 25-27)
+
+---
+
+## Visual Result
+
+**Before:**
+```text
+[Left Column]              [Right Column]
+- Breaking Badge           - Quiz Card
+- Headline                 - Urgency Badge
+- Subheadline              - Google Rating Badge
+- Licensed & Insured
+- 1-Year Warranty
 ```
 
-**New:**
-```typescript
-const handleBack = () => {
-  if (step > 1 && step < 5) {
-    setStep((step - 1) as QuizStep);
-  }
-};
+**After:**
+```text
+[Left Column]              [Right Column]
+- Breaking Badge           - Quiz Card
+- Headline                 - Licensed & Insured | 1-Year Warranty
+- Subheadline
 ```
-
-This prevents users from navigating back from Step 5 (Contact Form) using the handleBack function, though the back button UI remains.
-
----
-
-### 2. OptionCard Component - Vertical Grid Style
-**Current:** Horizontal layout with icon on left, text on right
-**New:** Vertical grid style with icon on top, text below
-
-Changes to the OptionCard component:
-- Change flex direction to column
-- Center the icon above the text
-- Adjust padding and spacing for grid display
-- Maintain the accent color and checkmark functionality
-
----
-
-### 3. Budget Step Grid Layout
-**Current:** Vertical stacked cards (`flex flex-col gap-3`)
-**New:** 2x2 grid layout (`grid grid-cols-2 gap-3`)
-
-This creates a more compact budget selection with 4 options in a 2x2 grid.
-
----
-
-### 4. State Typing Simplification
-**Current:** `const [step, setStep] = useState<QuizStep>(1);`
-**New:** `const [step, setStep] = useState(1);`
-
-This is a minor cleanup, keeping TypeScript inference without explicit type annotation.
 
 ---
 
 ## Files to Modify
-- `src/components/Quiz.tsx`
+
+| File | Changes |
+|------|---------|
+| `src/components/HeroSection.tsx` | Move trust strip, remove urgency/Google badges |
+| `src/pages/Index.tsx` | Remove FAQ section import and component |
+
+---
 
 ## Technical Notes
-- All webhook, validation, and Facebook Pixel logic remains unchanged
-- Animation variants stay the same
-- Progress dots and header badge remain unchanged
-- Contact form (Step 5) and Success screen remain unchanged
+
+- The trust badges will maintain the same styling (icons + text)
+- Centered positioning below the quiz card
+- Clean, minimal look matching the reference screenshots
+- FAQ section fully removed from page flow
 
