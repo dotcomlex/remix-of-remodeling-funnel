@@ -288,7 +288,7 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-5 text-center leading-snug">
+              <h3 className="text-lg sm:text-xl font-medium text-foreground mb-5 text-center leading-snug">
                 Which project are you planning?
               </h3>
               <div className="grid grid-cols-2 gap-2 sm:gap-3">
@@ -334,7 +334,7 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-5 text-center leading-snug">
+              <h3 className="text-lg sm:text-xl font-medium text-foreground mb-5 text-center leading-snug">
                 When do you want to start?
               </h3>
               <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
@@ -387,7 +387,7 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-5 text-center leading-snug">
+              <h3 className="text-lg sm:text-xl font-medium text-foreground mb-5 text-center leading-snug">
                 What's your budget range?
               </h3>
               <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
@@ -436,7 +436,7 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-5 text-center leading-snug">
+              <h3 className="text-lg sm:text-xl font-medium text-foreground mb-5 text-center leading-snug">
                 What's your zip code?
               </h3>
               <div className="mb-5">
@@ -449,7 +449,7 @@ const Quiz = () => {
                     placeholder="Enter ZIP code"
                     value={data.zipCode}
                     onChange={(e) => setData({ ...data, zipCode: e.target.value.replace(/\D/g, '') })}
-                    className="pl-12 h-16 text-lg text-center rounded-2xl border-2 focus:border-primary font-bold tracking-wider"
+                    className="pl-12 h-14 text-base text-center rounded-2xl border-2 focus:border-primary font-medium"
                     maxLength={5}
                   />
                 </div>
@@ -488,7 +488,7 @@ const Quiz = () => {
               {/* Celebration Header */}
               <div className="text-center mb-5">
                 <span className="text-3xl mb-1 block">🎉</span>
-                <h3 className="text-lg sm:text-2xl font-bold text-foreground mb-1.5">
+                <h3 className="text-base sm:text-xl font-semibold text-foreground mb-1.5">
                   Your ZIP Code Qualifies!
                 </h3>
                 <p className="text-sm text-muted-foreground leading-snug max-w-sm mx-auto">
@@ -629,7 +629,7 @@ const Quiz = () => {
                 <CheckCircle2 className="w-8 h-8 text-emerald-600" />
               </motion.div>
               
-              <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3 leading-snug">
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3 leading-snug">
                 Thanks, {data.firstName}!
               </h3>
               
