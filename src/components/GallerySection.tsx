@@ -2,24 +2,22 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// Bathroom renovation images (uploaded)
-import bathroomReno1 from "@/assets/gallery-bathroom-1.png";
-import bathroomReno2 from "@/assets/gallery-bathroom-2.png";
-import bathroomReno3 from "@/assets/gallery-bathroom-3.png";
-
-// Kitchen renovation images (AI generated)
-import kitchenReno1 from "@/assets/gallery-kitchen-1.jpg";
-import kitchenReno2 from "@/assets/gallery-kitchen-2.jpg";
+// Gallery images - optimized webp before/after renovation photos
+import galleryKitchenModern from "@/assets/gallery-kitchen-modern.webp";
+import galleryKitchenNavy from "@/assets/gallery-kitchen-navy.webp";
+import galleryKitchenDark from "@/assets/gallery-kitchen-dark.webp";
+import galleryKitchenWhite from "@/assets/gallery-kitchen-white.webp";
+import galleryBathroomSpa from "@/assets/gallery-bathroom-spa.webp";
 
 const GallerySection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const projects = [
-    { image: bathroomReno1, alt: "Bathroom renovation before and after transformation" },
-    { image: bathroomReno2, alt: "Luxury bathroom remodel with blue tile and gold accents" },
-    { image: bathroomReno3, alt: "Complete bathroom renovation with modern fixtures" },
-    { image: kitchenReno1, alt: "Kitchen renovation before and after with white cabinets" },
-    { image: kitchenReno2, alt: "Modern kitchen remodel transformation with island" },
+    { image: galleryKitchenModern, alt: "Kitchen renovation before and after with modern wood cabinets" },
+    { image: galleryKitchenNavy, alt: "Kitchen transformation with navy blue cabinets and marble backsplash" },
+    { image: galleryKitchenDark, alt: "Small kitchen remodel with dark modern cabinets" },
+    { image: galleryKitchenWhite, alt: "Full kitchen renovation with white shaker cabinets" },
+    { image: galleryBathroomSpa, alt: "Bathroom before and after with spa-like marble shower" },
   ];
 
   const nextSlide = () => {
@@ -39,10 +37,10 @@ const GallerySection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
-            Transformations
+            Our Work
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Real Colorado <span className="text-primary">Transformations</span>
+            Take a Look at Our <span className="text-primary">Recent Projects</span>
           </h2>
           <p className="text-base text-muted-foreground max-w-xl mx-auto">
             See what's possible — kitchens, bathrooms, basements, and more
