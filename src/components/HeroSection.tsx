@@ -59,9 +59,27 @@ const HeroSection = () => {
                 any remodeling project through our Winter Upgrade Program!
               </h1>
 
-              <p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-lg leading-relaxed hero-text-shadow mb-6">
+              <p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-lg leading-relaxed hero-text-shadow">
                 Trusted by Colorado homeowners for kitchens, bathrooms, basements, and more. Book your FREE in-home consultation and claim the <span className="font-semibold text-highlight">$2,000 OFF</span> offer today.
               </p>
+
+              {/* Urgency Indicator */}
+              <motion.div 
+                className="flex items-center gap-2 text-white/90 mt-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+              >
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                </span>
+                <p className="text-xs sm:text-sm font-medium hero-text-shadow">
+                  <span className="text-red-400 font-bold">Only 7 spots left</span>
+                  <span className="text-white/70"> for January — </span>
+                  <span className="text-highlight font-semibold">book yours now</span>
+                </p>
+              </motion.div>
               
             </div>
           </motion.div>
