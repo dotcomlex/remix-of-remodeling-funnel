@@ -32,7 +32,7 @@ const Quiz = () => {
   const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState<{ firstName?: string; phone?: string }>({});
+  const [errors, setErrors] = useState<{ firstName?: string; phone?: string; email?: string }>({});
   const [data, setData] = useState<QuizData>({
     projectType: "",
     timeline: "",
@@ -109,7 +109,7 @@ const Quiz = () => {
   };
 
   const validateForm = (): boolean => {
-    const newErrors: { firstName?: string; phone?: string } = {};
+    const newErrors: { firstName?: string; phone?: string; email?: string } = {};
     
     if (!data.firstName.trim()) {
       newErrors.firstName = "Name is required";
@@ -120,6 +120,12 @@ const Quiz = () => {
       newErrors.phone = "Phone is required";
     } else if (phoneDigits.length < 10) {
       newErrors.phone = "Enter a valid 10-digit phone number";
+    }
+    
+    if (!data.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      newErrors.email = "Enter a valid email address";
     }
     
     setErrors(newErrors);
@@ -441,7 +447,7 @@ const Quiz = () => {
               </h3>
               <div className="mb-5">
                 <div className="relative">
-                  <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <Input
                     type="text"
                     inputMode="numeric"
@@ -449,7 +455,7 @@ const Quiz = () => {
                     placeholder="Enter ZIP code"
                     value={data.zipCode}
                     onChange={(e) => setData({ ...data, zipCode: e.target.value.replace(/\D/g, '') })}
-                    className="pl-12 h-14 text-base text-center rounded-2xl border-2 focus:border-primary font-medium"
+                    className="pl-12 h-14 text-lg rounded-xl border-2 focus:border-primary"
                     maxLength={5}
                   />
                 </div>
@@ -555,15 +561,25 @@ const Quiz = () => {
                   )}
                 </div>
                 
-                <div className="relative">
-                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input
-                    type="email"
-                    placeholder="Email (optional)"
-                    value={data.email}
-                    onChange={(e) => setData({ ...data, email: e.target.value })}
-                    className="pl-12 h-14 text-base rounded-xl border-2 focus:border-primary transition-all"
-                  />
+                <div>
+                  <div className="relative">
+                    <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                    <Input
+                      type="email"
+                      placeholder="Email"
+                      value={data.email}
+                      onChange={(e) => {
+                        setData({ ...data, email: e.target.value });
+                        if (errors.email) setErrors({ ...errors, email: undefined });
+                      }}
+                      className={`pl-12 h-14 text-base rounded-xl border-2 transition-all ${
+                        errors.email ? 'border-red-500 focus:border-red-500' : 'focus:border-primary'
+                      }`}
+                    />
+                  </div>
+                  {errors.email && (
+                    <p className="text-xs text-red-500 mt-1 pl-1">{errors.email}</p>
+                  )}
                 </div>
               </div>
 
