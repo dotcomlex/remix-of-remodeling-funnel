@@ -197,18 +197,18 @@ const Quiz = () => {
   }) => (
     <button
       onClick={onClick}
-      className={`relative flex flex-col items-center justify-center gap-2 p-3 sm:p-4 rounded-xl border-2 bg-white w-full transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
+      className={`relative flex flex-col items-center justify-center gap-1.5 p-3.5 sm:p-4 rounded-xl border-2 bg-white w-full min-h-[100px] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
         selected 
           ? "border-primary bg-gradient-to-r from-primary/10 to-primary/5 shadow-md" 
           : "border-slate-200 hover:border-primary/50 shadow-sm"
       }`}
     >
-      <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+      <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
         selected 
           ? "bg-primary" 
           : "bg-slate-100 group-hover:bg-slate-200"
       }`}>
-        <Icon className={`w-5 h-5 sm:w-6 sm:h-6 transition-colors duration-200 ${
+        <Icon className={`w-5 h-5 transition-colors duration-200 ${
           selected ? "text-primary-foreground" : accentColor
         }`} />
       </div>
@@ -281,7 +281,7 @@ const Quiz = () => {
       )}
 
       {/* Quiz Card */}
-      <div className="quiz-card-glass rounded-2xl shadow-quiz-glow p-4 sm:p-6 w-full border-2 border-primary/30">
+      <div className="quiz-card-glass rounded-2xl shadow-quiz-glow p-5 sm:p-6 w-full border border-primary/20">
 
         <AnimatePresence mode="wait">
           {/* Step 1: Project Type */}
@@ -294,7 +294,7 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-lg sm:text-xl font-medium text-foreground mb-5 text-center leading-snug">
+              <h3 className="text-base sm:text-lg font-medium text-foreground mb-4 text-center leading-tight">
                 Which project are you planning?
               </h3>
               <div className="grid grid-cols-2 gap-2 sm:gap-3">
@@ -340,7 +340,7 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-lg sm:text-xl font-medium text-foreground mb-5 text-center leading-snug">
+              <h3 className="text-base sm:text-lg font-medium text-foreground mb-4 text-center leading-tight">
                 When do you want to start?
               </h3>
               <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
@@ -393,7 +393,7 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-lg sm:text-xl font-medium text-foreground mb-5 text-center leading-snug">
+              <h3 className="text-base sm:text-lg font-medium text-foreground mb-4 text-center leading-tight">
                 What's your budget range?
               </h3>
               <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
@@ -442,12 +442,12 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-lg sm:text-xl font-medium text-foreground mb-5 text-center leading-snug">
+              <h3 className="text-base sm:text-lg font-medium text-foreground mb-4 text-center leading-tight">
                 What's your zip code?
               </h3>
-              <div className="mb-5">
+              <div className="mb-4">
                 <div className="relative">
-                  <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
                     type="text"
                     inputMode="numeric"
@@ -455,7 +455,7 @@ const Quiz = () => {
                     placeholder="Enter ZIP code"
                     value={data.zipCode}
                     onChange={(e) => setData({ ...data, zipCode: e.target.value.replace(/\D/g, '') })}
-                    className="pl-12 h-14 text-lg rounded-xl border-2 focus:border-primary"
+                    className="pl-10 h-12 text-[15px] rounded-xl border-2 focus:border-primary"
                     maxLength={5}
                   />
                 </div>
@@ -492,9 +492,9 @@ const Quiz = () => {
               transition={{ duration: 0.25 }}
             >
               {/* Celebration Header */}
-              <div className="text-center mb-5">
-                <span className="text-3xl mb-1 block">🎉</span>
-                <h3 className="text-base sm:text-xl font-semibold text-foreground mb-1.5">
+              <div className="text-center mb-4">
+                <span className="text-2xl mb-0.5 block">🎉</span>
+                <h3 className="text-[15px] sm:text-lg font-semibold text-foreground mb-1.5">
                   Your ZIP Code Qualifies!
                 </h3>
                 <p className="text-sm text-muted-foreground leading-snug max-w-sm mx-auto">
@@ -504,7 +504,7 @@ const Quiz = () => {
               </div>
 
               {/* Social Proof Badge */}
-              <div className="flex items-center justify-center gap-1.5 mb-5">
+              <div className="flex items-center justify-center gap-1.5 mb-4">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
@@ -516,10 +516,10 @@ const Quiz = () => {
               </div>
               
               {/* Form Fields */}
-              <div className="space-y-3 mb-5">
+              <div className="space-y-2.5 mb-4">
                 <div>
                   <div className="relative">
-                    <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input
                       type="text"
                       placeholder="First name"
@@ -528,7 +528,7 @@ const Quiz = () => {
                         setData({ ...data, firstName: e.target.value });
                         if (errors.firstName) setErrors({ ...errors, firstName: undefined });
                       }}
-                      className={`pl-12 h-14 text-base rounded-xl border-2 transition-all ${
+                      className={`pl-10 h-12 text-[15px] rounded-xl border-2 transition-all ${
                         errors.firstName ? 'border-red-500 focus:border-red-500' : 'focus:border-primary'
                       }`}
                     />
@@ -540,7 +540,7 @@ const Quiz = () => {
                 
                 <div>
                   <div className="relative">
-                    <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input
                       type="tel"
                       inputMode="tel"
@@ -550,7 +550,7 @@ const Quiz = () => {
                         setData({ ...data, phone: formatPhoneNumber(e.target.value) });
                         if (errors.phone) setErrors({ ...errors, phone: undefined });
                       }}
-                      className={`pl-12 h-14 text-base rounded-xl border-2 transition-all ${
+                      className={`pl-10 h-12 text-[15px] rounded-xl border-2 transition-all ${
                         errors.phone ? 'border-red-500 focus:border-red-500' : 'focus:border-primary'
                       }`}
                       maxLength={14}
@@ -563,7 +563,7 @@ const Quiz = () => {
                 
                 <div>
                   <div className="relative">
-                    <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input
                       type="email"
                       placeholder="Email"
@@ -572,7 +572,7 @@ const Quiz = () => {
                         setData({ ...data, email: e.target.value });
                         if (errors.email) setErrors({ ...errors, email: undefined });
                       }}
-                      className={`pl-12 h-14 text-base rounded-xl border-2 transition-all ${
+                      className={`pl-10 h-12 text-[15px] rounded-xl border-2 transition-all ${
                         errors.email ? 'border-red-500 focus:border-red-500' : 'focus:border-primary'
                       }`}
                     />
@@ -587,7 +587,7 @@ const Quiz = () => {
               <Button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="w-full h-14 text-base font-semibold bg-gradient-to-r from-primary to-orange-500 hover:from-primary/90 hover:to-orange-500/90 text-white rounded-xl shadow-lg"
+                className="w-full h-12 text-[15px] font-semibold bg-gradient-to-r from-primary to-orange-500 hover:from-primary/90 hover:to-orange-500/90 text-white rounded-xl shadow-lg"
               >
                 {isSubmitting ? (
                   <>
@@ -610,7 +610,7 @@ const Quiz = () => {
               </button>
 
               {/* Trust Footer - Enhanced */}
-              <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5 text-[11px] text-muted-foreground pt-4 mt-4 border-t border-border/50">
+              <div className="flex flex-wrap items-center justify-center gap-x-1.5 text-[10px] text-muted-foreground pt-4 mt-4 border-t border-border/50">
                 <span className="flex items-center gap-1">
                   <div className="w-4 h-4 rounded-full bg-emerald-100 flex items-center justify-center">
                     <Shield className="w-2.5 h-2.5 text-emerald-600" />
@@ -645,7 +645,7 @@ const Quiz = () => {
                 <CheckCircle2 className="w-8 h-8 text-emerald-600" />
               </motion.div>
               
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3 leading-snug">
+              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-3 leading-snug">
                 Thanks, {data.firstName}!
               </h3>
               
