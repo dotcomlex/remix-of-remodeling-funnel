@@ -28,44 +28,6 @@ const formatPhoneNumber = (value: string): string => {
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
 };
 
-// Trust Bar Component
-const TrustBar = () => (
-  <div className="bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 mb-3">
-    {/* Desktop: single row */}
-    <div className="hidden sm:flex items-center justify-center gap-4 text-xs text-gray-600">
-      <span className="flex items-center gap-1">
-        <span className="text-amber-400">★★★★★</span> 200+ Google Reviews
-      </span>
-      <span className="text-gray-300">|</span>
-      <span className="flex items-center gap-1">
-        <Award className="w-3.5 h-3.5 text-primary" /> A+ BBB Rated
-      </span>
-      <span className="text-gray-300">|</span>
-      <span className="flex items-center gap-1">
-        <Shield className="w-3.5 h-3.5 text-primary" /> Licensed & Insured
-      </span>
-      <span className="text-gray-300">|</span>
-      <span className="flex items-center gap-1">
-        <CheckCircle2 className="w-3.5 h-3.5 text-primary" /> 15+ Years in Colorado
-      </span>
-    </div>
-    {/* Mobile: 2 rows */}
-    <div className="sm:hidden flex flex-col gap-1.5 text-xs text-gray-600">
-      <div className="flex items-center justify-center gap-3">
-        <span className="flex items-center gap-1">
-          <span className="text-amber-400">★★★★★</span> 200+ Reviews
-        </span>
-        <span className="text-gray-300">|</span>
-        <span>A+ BBB Rated</span>
-      </div>
-      <div className="flex items-center justify-center gap-3">
-        <span>Licensed & Insured</span>
-        <span className="text-gray-300">|</span>
-        <span>15+ Years</span>
-      </div>
-    </div>
-  </div>
-);
 
 const Quiz = () => {
   const [step, setStep] = useState(1);
@@ -271,41 +233,36 @@ const Quiz = () => {
     </button>
   );
 
-  // BudgetOptionCard - larger with icon and subtext
+  // BudgetOptionCard - clean without subtext
   const BudgetOptionCard = ({ 
     icon: Icon, 
     label, 
-    subtext,
     selected, 
     onClick 
   }: { 
     icon: React.ElementType;
     label: string;
-    subtext: string;
     selected: boolean; 
     onClick: () => void;
   }) => (
     <button
       onClick={onClick}
-      className={`relative flex items-center gap-4 p-4 rounded-xl border-2 bg-white w-full min-h-[90px] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
+      className={`relative flex items-center gap-3 p-4 rounded-xl border-2 bg-white w-full min-h-[70px] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
         selected 
           ? "border-primary bg-gradient-to-r from-primary/10 to-primary/5 shadow-md" 
           : "border-slate-200 hover:border-primary/50 shadow-sm"
       }`}
     >
-      <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+      <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
         selected ? "bg-primary" : "bg-slate-100 group-hover:bg-slate-200"
       }`}>
-        <Icon className={`w-6 h-6 transition-colors duration-200 ${
+        <Icon className={`w-5 h-5 transition-colors duration-200 ${
           selected ? "text-primary-foreground" : "text-primary"
         }`} />
       </div>
-      <div className="text-left">
-        <span className={`text-base font-medium block ${selected ? "text-primary" : "text-foreground"}`}>
-          {label}
-        </span>
-        <span className="text-sm text-muted-foreground">{subtext}</span>
-      </div>
+      <span className={`text-sm font-medium ${selected ? "text-primary" : "text-foreground"}`}>
+        {label}
+      </span>
       {selected && (
         <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center">
           <Check className="w-3 h-3 text-white" />
@@ -323,9 +280,6 @@ const Quiz = () => {
 
   return (
     <div className="w-full max-w-lg">
-      {/* Trust Bar - Above Progress Dots */}
-      {!isSubmitted && <TrustBar />}
-
       {/* Simple Progress Dots */}
       {!isSubmitted && (
         <div className="flex justify-center gap-2 mb-4">
@@ -357,10 +311,7 @@ const Quiz = () => {
               transition={{ duration: 0.25 }}
             >
               {/* Quiz Header - Step 1 only */}
-              <div className="text-center mb-4">
-                <p className="text-sm font-semibold text-foreground mb-1">
-                  Answer 5 Quick Questions to Claim Your $2,000 Discount
-                </p>
+              <div className="text-center mb-3">
                 <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
                   <Clock className="w-3 h-3" /> Takes About 60 Seconds
                 </p>
@@ -429,7 +380,6 @@ const Quiz = () => {
                   selected={data.timeline === "30-days"}
                   onClick={() => handleTileSelect("timeline", "30-days")}
                   accentColor="text-orange-600"
-                  badge="Most Popular"
                 />
                 <OptionCard
                   icon={CalendarClock}
@@ -473,14 +423,12 @@ const Quiz = () => {
                 <BudgetOptionCard
                   icon={Gem}
                   label="Yes, I know my budget"
-                  subtext="We'll match your vision to your investment"
                   selected={data.budgetRange === "yes"}
                   onClick={() => handleTileSelect("budgetRange", "yes")}
                 />
                 <BudgetOptionCard
                   icon={HelpCircle}
                   label="Not yet, need guidance"
-                  subtext="We'll help you determine the best investment"
                   selected={data.budgetRange === "not-yet"}
                   onClick={() => handleTileSelect("budgetRange", "not-yet")}
                 />
@@ -554,31 +502,14 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              {/* Celebration Header */}
+              {/* Celebration Header - Simplified */}
               <div className="text-center mb-4">
-                <span className="text-2xl mb-0.5 block">🎉</span>
-                <h3 className="text-[15px] sm:text-lg font-semibold text-foreground mb-1.5">
-                  CONGRATULATIONS! You Qualify for the $2,000 Discount
+                <span className="text-2xl mb-1 block">🎉</span>
+                <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
+                  You Qualify for the $2,000 Discount!
                 </h3>
-                <p className="text-sm text-muted-foreground leading-snug max-w-sm mx-auto mb-3">
-                  Complete the form below to reserve your consultation and lock in:
-                </p>
-                <div className="text-left max-w-xs mx-auto space-y-1 mb-2">
-                  <p className="text-sm text-foreground flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                    <span><span className="font-semibold text-primary">$2,000 OFF</span> Your Remodeling Project</span>
-                  </p>
-                  <p className="text-sm text-foreground flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                    FREE In-Home Consultation & Estimate
-                  </p>
-                  <p className="text-sm text-foreground flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                    1-Year Warranty Included
-                  </p>
-                </div>
-                <p className="text-xs font-semibold text-orange-600 flex items-center justify-center gap-1">
-                  <Zap className="w-3.5 h-3.5" /> Only 7 spots remaining this month
+                <p className="text-sm text-muted-foreground leading-snug max-w-sm mx-auto">
+                  Complete the form below to schedule your free consultation.
                 </p>
               </div>
 
@@ -674,10 +605,7 @@ const Quiz = () => {
                     Submitting...
                   </>
                 ) : (
-                  <>
-                    <span className="hidden sm:inline">Claim My $2,000 Discount</span>
-                    <span className="sm:hidden">Claim Discount</span>
-                  </>
+                  "Get My Free Consultation"
                 )}
               </Button>
 
