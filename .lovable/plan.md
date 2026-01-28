@@ -1,55 +1,59 @@
 
-
-# Fix Subheadline - Correct Location
+# Add More Spacing in Hero Section
 
 ## Overview
-Revert the quiz contact form subheadline back to original, and update the MAIN hero subheadline instead.
+Increase the vertical spacing between the headline, subheadline, and the quiz card to create better visual hierarchy and breathing room.
 
 ---
 
-## Files to Modify
+## File to Modify
 
 | File | Change |
 |------|--------|
-| `src/components/Quiz.tsx` | Revert subheadline back to original |
-| `src/components/HeroSection.tsx` | Update the main hero subheadline |
+| `src/components/HeroSection.tsx` | Increase spacing between elements |
 
 ---
 
-## 1. Revert Quiz Subheadline
+## Change Details
 
-**File:** `src/components/Quiz.tsx` (lines 504-506)
+**File:** `src/components/HeroSection.tsx`
 
-```tsx
-// Revert back to:
-<p className="text-sm text-muted-foreground leading-snug max-w-sm mx-auto">
-  Complete the form below so we can contact you and schedule your 100% free estimate.
-</p>
-```
-
----
-
-## 2. Update Hero Subheadline
-
-**File:** `src/components/HeroSection.tsx` (lines 55-56)
-
+### 1. Increase space-y on the headline container (line 41)
 ```tsx
 // Before:
-<p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-lg leading-relaxed hero-text-shadow">Trusted by Colorado homeowners for kitchens, bathrooms, basements, and much more. Book your FREE estimate before spots fill up!<span className="font-semibold text-highlight">$2,000 OFF</span> offer today.
-</p>
+<div className="space-y-4 sm:space-y-5 lg:space-y-6">
 
 // After:
+<div className="space-y-6 sm:space-y-7 lg:space-y-8">
+```
+
+### 2. Increase gap between left and right columns (line 29)
+```tsx
+// Before:
+<div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 lg:gap-8">
+
+// After:
+<div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-12">
+```
+
+### 3. Add more top margin to subheadline (line 55)
+```tsx
+// Before:
 <p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-lg leading-relaxed hero-text-shadow">
-  Trusted by Colorado homeowners for kitchens, bathrooms, basements, and much more. Answer the questions below to receive your free estimate, free consultation + <span className="font-semibold text-highlight">$2,000 Off!</span>
-</p>
+
+// After:
+<p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-lg leading-relaxed hero-text-shadow mt-2">
 ```
 
 ---
 
 ## Summary
 
-| Location | Before | After |
-|----------|--------|-------|
-| Hero subheadline | "...Book your FREE estimate before spots fill up!$2,000 OFF offer today." | "...Answer the questions below to receive your free estimate, free consultation + $2,000 Off!" |
-| Quiz contact form | (incorrectly changed) | Reverted to "Complete the form below so we can contact you and schedule your 100% free estimate." |
+| Element | Before | After |
+|---------|--------|-------|
+| Headline container spacing | `space-y-4/5/6` | `space-y-6/7/8` |
+| Column gap (mobile) | `gap-4` | `gap-8` |
+| Column gap (desktop) | `gap-8` | `gap-12` |
+| Subheadline margin | none | `mt-2` |
 
+This will add more breathing room between all elements, making the layout feel less cramped.
