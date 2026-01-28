@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import heroImage from "@/assets/hero-colorado-home.png";
 import { Button } from "@/components/ui/button";
 import avatar1 from "@/assets/avatar-1.jpg";
 import avatar2 from "@/assets/avatar-2.jpg";
@@ -121,8 +122,19 @@ const ReviewsSection = () => {
   const getVisibleReviews = () => reviews.slice(currentIndex, currentIndex + visibleCount);
 
   return (
-    <section className="py-16 lg:py-24 section-gradient-dark">
-      <div className="container mx-auto px-4">
+    <section className="py-16 lg:py-24 relative overflow-hidden">
+      {/* Background image with overlay */}
+      <div className="absolute inset-0">
+        <img 
+          src={heroImage} 
+          alt="" 
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-black/75" />
+      </div>
+      
+      <div className="relative z-10 container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
             Why 100+ Homeowners <span className="text-primary">Choose 14er</span>
