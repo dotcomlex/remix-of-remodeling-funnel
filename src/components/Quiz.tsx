@@ -653,7 +653,7 @@ const Quiz = () => {
               </motion.div>
               
               <h3 className="text-base sm:text-lg font-semibold text-foreground mb-3 leading-snug">
-                Awesome, {data.firstName}—you're all set! 🎉
+                Awesome, {data.firstName.split(' ')[0]}—you're all set! 🎉
               </h3>
               
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 max-w-sm mx-auto">
