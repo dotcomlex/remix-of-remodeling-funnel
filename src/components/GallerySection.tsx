@@ -40,10 +40,10 @@ const GallerySection = () => {
             Our Work
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Take a Look at Our <span className="text-primary">Recent Projects</span>
+            See What's Possible - <span className="text-primary">Real Home Transformations</span>
           </h2>
           <p className="text-base text-muted-foreground max-w-xl mx-auto">
-            See what's possible — kitchens, bathrooms, basements, and more
+            200+ projects completed. Your home could be next.
           </p>
         </div>
 

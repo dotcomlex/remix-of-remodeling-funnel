@@ -47,7 +47,7 @@ const ServicesSection = () => {
             What We Do
           </span>
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
-            Our <span className="text-primary">Services</span>
+            Expert <span className="text-primary">Remodeling Services</span>
           </h2>
         </div>
 

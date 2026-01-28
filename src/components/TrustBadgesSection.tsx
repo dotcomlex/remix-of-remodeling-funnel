@@ -3,11 +3,13 @@ import logoHomeadvisor from "@/assets/logo-homeadvisor-elite.png";
 import logoQualifiedRemodeler from "@/assets/logo-qualified-remodeler.png";
 import logoInstallationMasters from "@/assets/logo-installation-masters.png";
 import logoEnergyStar from "@/assets/logo-energy-star.png";
+import logoBbb from "@/assets/logo-bbb.png";
 
 const TrustBadgesSection = () => {
   const logos = [
     { src: logoNahb, alt: "NAHB Member" },
     { src: logoHomeadvisor, alt: "HomeAdvisor Elite Service" },
+    { src: logoBbb, alt: "BBB A+ Rated" },
     { src: logoQualifiedRemodeler, alt: "Qualified Remodeler Top 500 2025" },
     { src: logoInstallationMasters, alt: "Installation Masters" },
     { src: logoEnergyStar, alt: "Energy Star Partner" },

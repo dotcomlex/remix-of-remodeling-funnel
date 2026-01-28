@@ -33,7 +33,7 @@ const HeroSection = () => {
           <img 
             src={logo} 
             alt="14er Renovations" 
-            className="h-24 sm:h-28 lg:h-36 w-auto object-contain"
+            className="h-16 sm:h-24 lg:h-36 w-auto object-contain"
           />
         </motion.div>
 
@@ -70,7 +70,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
               >
-                ⏳ Only 7 spots left for January
+                ⏳ Only 7 spots remaining this month
               </motion.p>
               
             </div>

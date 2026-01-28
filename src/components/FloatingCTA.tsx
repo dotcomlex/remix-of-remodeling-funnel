@@ -41,7 +41,7 @@ const FloatingCTA = () => {
             size="lg"
             className="w-full sm:w-auto shadow-premium text-sm sm:text-base font-semibold px-6 py-4 h-auto"
           >
-            Get My Free Consultation
+            Claim $2,000 Discount
           </Button>
         </motion.div>
       )}

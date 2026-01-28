@@ -15,12 +15,12 @@ const FinalCTASection = () => {
         </div>
 
         <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-6 max-w-3xl mx-auto leading-tight">
-          Winter Upgrade Program:{" "}
-          <span className="text-primary">$2,000 Off</span> Any Remodeling Project
+          Don't Wait - Reserve Your{" "}
+          <span className="text-primary">$2,000 Discount</span> Today
         </h2>
 
         <p className="text-base sm:text-lg lg:text-xl opacity-80 mb-8 max-w-2xl mx-auto">
-          Don't wait until spring. Transform your kitchen, bathroom, or basement now and save big.
+          Join 200+ satisfied homeowners. Get your free consultation and $2,000 discount before spots fill up.
         </p>
 
         <Button variant="cta" size="xl" onClick={scrollToTop} className="group">

@@ -128,7 +128,7 @@ const ReviewsSection = () => {
             50+ Five-Star Reviews
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
-            Why Colorado Homeowners <span className="text-primary">Trust Us</span>
+            Why 200+ Homeowners <span className="text-primary">Choose 14er</span>
           </h2>
           <p className="text-base text-white/70 max-w-xl mx-auto">
             Hear from families who transformed their homes with 14er

@@ -4,7 +4,7 @@ import {
   MapPin, ChefHat, Bath, Home, HelpCircle, 
   Zap, Calendar, CalendarClock, Clock,
   ArrowRight, ArrowLeft, CheckCircle2, Shield, Phone,
-  User, Mail, Loader2, Star, Sparkles, Check
+  User, Mail, Loader2, Star, Check, Award, Gem
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,6 +27,45 @@ const formatPhoneNumber = (value: string): string => {
   if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
 };
+
+// Trust Bar Component
+const TrustBar = () => (
+  <div className="bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 mb-3">
+    {/* Desktop: single row */}
+    <div className="hidden sm:flex items-center justify-center gap-4 text-xs text-gray-600">
+      <span className="flex items-center gap-1">
+        <span className="text-amber-400">★★★★★</span> 200+ Google Reviews
+      </span>
+      <span className="text-gray-300">|</span>
+      <span className="flex items-center gap-1">
+        <Award className="w-3.5 h-3.5 text-primary" /> A+ BBB Rated
+      </span>
+      <span className="text-gray-300">|</span>
+      <span className="flex items-center gap-1">
+        <Shield className="w-3.5 h-3.5 text-primary" /> Licensed & Insured
+      </span>
+      <span className="text-gray-300">|</span>
+      <span className="flex items-center gap-1">
+        <CheckCircle2 className="w-3.5 h-3.5 text-primary" /> 15+ Years in Colorado
+      </span>
+    </div>
+    {/* Mobile: 2 rows */}
+    <div className="sm:hidden flex flex-col gap-1.5 text-xs text-gray-600">
+      <div className="flex items-center justify-center gap-3">
+        <span className="flex items-center gap-1">
+          <span className="text-amber-400">★★★★★</span> 200+ Reviews
+        </span>
+        <span className="text-gray-300">|</span>
+        <span>A+ BBB Rated</span>
+      </div>
+      <div className="flex items-center justify-center gap-3">
+        <span>Licensed & Insured</span>
+        <span className="text-gray-300">|</span>
+        <span>15+ Years</span>
+      </div>
+    </div>
+  </div>
+);
 
 const Quiz = () => {
   const [step, setStep] = useState(1);
@@ -100,10 +139,8 @@ const Quiz = () => {
 
   const getBudgetLabel = (budget: string): string => {
     switch (budget) {
-      case "under-25k": return "Under $25,000";
-      case "25k-50k": return "$25,000 - $50,000";
-      case "50k-plus": return "$50,000+";
-      case "not-sure": return "Not sure yet";
+      case "yes": return "Yes, I know my budget";
+      case "not-yet": return "Not yet, need guidance";
       default: return "";
     }
   };
@@ -181,19 +218,21 @@ const Quiz = () => {
       });
   };
 
-  // OptionCard with horizontal layout, accent colors, and checkmark indicator
+  // OptionCard with vertical layout
   const OptionCard = ({ 
     icon: Icon, 
     label, 
     selected, 
     onClick,
-    accentColor = "text-primary"
+    accentColor = "text-primary",
+    badge
   }: { 
     icon: React.ElementType; 
     label: string; 
     selected: boolean; 
     onClick: () => void;
     accentColor?: string;
+    badge?: string;
   }) => (
     <button
       onClick={onClick}
@@ -203,6 +242,11 @@ const Quiz = () => {
           : "border-slate-200 hover:border-primary/50 shadow-sm"
       }`}
     >
+      {badge && (
+        <span className="absolute -top-2 right-2 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+          {badge}
+        </span>
+      )}
       <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
         selected 
           ? "bg-primary" 
@@ -227,31 +271,46 @@ const Quiz = () => {
     </button>
   );
 
-  // BudgetCard - simple text-only cards
-  const BudgetCard = ({ 
+  // BudgetOptionCard - larger with icon and subtext
+  const BudgetOptionCard = ({ 
+    icon: Icon, 
     label, 
-    value,
+    subtext,
     selected, 
     onClick 
   }: { 
+    icon: React.ElementType;
     label: string;
-    value: string;
+    subtext: string;
     selected: boolean; 
     onClick: () => void;
   }) => (
     <button
       onClick={onClick}
-      className={`relative flex items-center justify-center p-3 sm:p-4 rounded-xl border-2 bg-white w-full transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] ${
+      className={`relative flex items-center gap-4 p-4 rounded-xl border-2 bg-white w-full min-h-[90px] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
         selected 
           ? "border-primary bg-gradient-to-r from-primary/10 to-primary/5 shadow-md" 
           : "border-slate-200 hover:border-primary/50 shadow-sm"
       }`}
     >
-      <span className={`text-base sm:text-lg font-medium transition-colors duration-200 ${
-        selected ? "text-primary" : "text-foreground"
+      <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+        selected ? "bg-primary" : "bg-slate-100 group-hover:bg-slate-200"
       }`}>
-        {label}
-      </span>
+        <Icon className={`w-6 h-6 transition-colors duration-200 ${
+          selected ? "text-primary-foreground" : "text-primary"
+        }`} />
+      </div>
+      <div className="text-left">
+        <span className={`text-base font-medium block ${selected ? "text-primary" : "text-foreground"}`}>
+          {label}
+        </span>
+        <span className="text-sm text-muted-foreground">{subtext}</span>
+      </div>
+      {selected && (
+        <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center">
+          <Check className="w-3 h-3 text-white" />
+        </div>
+      )}
     </button>
   );
 
@@ -264,6 +323,9 @@ const Quiz = () => {
 
   return (
     <div className="w-full max-w-lg">
+      {/* Trust Bar - Above Progress Dots */}
+      {!isSubmitted && <TrustBar />}
+
       {/* Simple Progress Dots */}
       {!isSubmitted && (
         <div className="flex justify-center gap-2 mb-4">
@@ -294,6 +356,16 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
+              {/* Quiz Header - Step 1 only */}
+              <div className="text-center mb-4">
+                <p className="text-sm font-semibold text-foreground mb-1">
+                  Answer 5 Quick Questions to Claim Your $2,000 Discount
+                </p>
+                <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
+                  <Clock className="w-3 h-3" /> Takes About 60 Seconds
+                </p>
+              </div>
+
               <h3 className="text-base sm:text-lg font-medium text-foreground mb-4 text-center leading-tight">
                 Which project are you planning?
               </h3>
@@ -341,7 +413,7 @@ const Quiz = () => {
               transition={{ duration: 0.25 }}
             >
               <h3 className="text-base sm:text-lg font-medium text-foreground mb-4 text-center leading-tight">
-                When do you want to start?
+                When would you like to get started?
               </h3>
               <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
                 <OptionCard
@@ -357,6 +429,7 @@ const Quiz = () => {
                   selected={data.timeline === "30-days"}
                   onClick={() => handleTileSelect("timeline", "30-days")}
                   accentColor="text-orange-600"
+                  badge="Most Popular"
                 />
                 <OptionCard
                   icon={CalendarClock}
@@ -383,7 +456,7 @@ const Quiz = () => {
             </motion.div>
           )}
 
-          {/* Step 3: Budget - 4 OPTIONS */}
+          {/* Step 3: Budget - 2 OPTIONS */}
           {step === 3 && !isSubmitted && (
             <motion.div
               key="step3"
@@ -394,32 +467,22 @@ const Quiz = () => {
               transition={{ duration: 0.25 }}
             >
               <h3 className="text-base sm:text-lg font-medium text-foreground mb-4 text-center leading-tight">
-                What's your budget range?
+                Do you have a set budget for this project?
               </h3>
-              <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
-                <BudgetCard
-                  label="Under $25,000"
-                  value="under-25k"
-                  selected={data.budgetRange === "under-25k"}
-                  onClick={() => handleTileSelect("budgetRange", "under-25k")}
+              <div className="flex flex-col gap-3 mb-4">
+                <BudgetOptionCard
+                  icon={Gem}
+                  label="Yes, I know my budget"
+                  subtext="We'll match your vision to your investment"
+                  selected={data.budgetRange === "yes"}
+                  onClick={() => handleTileSelect("budgetRange", "yes")}
                 />
-                <BudgetCard
-                  label="$25,000 - $50,000"
-                  value="25k-50k"
-                  selected={data.budgetRange === "25k-50k"}
-                  onClick={() => handleTileSelect("budgetRange", "25k-50k")}
-                />
-                <BudgetCard
-                  label="$50,000+"
-                  value="50k-plus"
-                  selected={data.budgetRange === "50k-plus"}
-                  onClick={() => handleTileSelect("budgetRange", "50k-plus")}
-                />
-                <BudgetCard
-                  label="Not sure yet"
-                  value="not-sure"
-                  selected={data.budgetRange === "not-sure"}
-                  onClick={() => handleTileSelect("budgetRange", "not-sure")}
+                <BudgetOptionCard
+                  icon={HelpCircle}
+                  label="Not yet, need guidance"
+                  subtext="We'll help you determine the best investment"
+                  selected={data.budgetRange === "not-yet"}
+                  onClick={() => handleTileSelect("budgetRange", "not-yet")}
                 />
               </div>
               <button
@@ -495,11 +558,27 @@ const Quiz = () => {
               <div className="text-center mb-4">
                 <span className="text-2xl mb-0.5 block">🎉</span>
                 <h3 className="text-[15px] sm:text-lg font-semibold text-foreground mb-1.5">
-                  Your ZIP Code Qualifies!
+                  CONGRATULATIONS! You Qualify for the $2,000 Discount
                 </h3>
-                <p className="text-sm text-muted-foreground leading-snug max-w-sm mx-auto">
-                  Fill out the form below to schedule your free estimate and claim your{" "}
-                  <span className="font-semibold text-primary">$2,000 discount</span> before spots fill up.
+                <p className="text-sm text-muted-foreground leading-snug max-w-sm mx-auto mb-3">
+                  Complete the form below to reserve your consultation and lock in:
+                </p>
+                <div className="text-left max-w-xs mx-auto space-y-1 mb-2">
+                  <p className="text-sm text-foreground flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                    <span><span className="font-semibold text-primary">$2,000 OFF</span> Your Remodeling Project</span>
+                  </p>
+                  <p className="text-sm text-foreground flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                    FREE In-Home Consultation & Estimate
+                  </p>
+                  <p className="text-sm text-foreground flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                    1-Year Warranty Included
+                  </p>
+                </div>
+                <p className="text-xs font-semibold text-orange-600 flex items-center justify-center gap-1">
+                  <Zap className="w-3.5 h-3.5" /> Only 7 spots remaining this month
                 </p>
               </div>
 
@@ -511,7 +590,7 @@ const Quiz = () => {
                   ))}
                 </div>
                 <span className="text-xs font-medium text-foreground/70">
-                  200+ Colorado homeowners
+                  200+ homeowners
                 </span>
               </div>
               
@@ -595,7 +674,10 @@ const Quiz = () => {
                     Submitting...
                   </>
                 ) : (
-                  "Get My Free Estimate"
+                  <>
+                    <span className="hidden sm:inline">Claim My $2,000 Discount</span>
+                    <span className="sm:hidden">Claim Discount</span>
+                  </>
                 )}
               </Button>
 
@@ -646,12 +728,11 @@ const Quiz = () => {
               </motion.div>
               
               <h3 className="text-base sm:text-lg font-semibold text-foreground mb-3 leading-snug">
-                Thanks, {data.firstName}!
+                🎉 SUCCESS! Your $2,000 Discount is Reserved, {data.firstName}!
               </h3>
               
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 max-w-sm mx-auto">
-                A local team member will contact you{" "}
-                <span className="font-medium text-foreground">within 24 hours</span> to schedule your free consultation.
+                We'll be contacting you very soon to schedule your free consultation.
               </p>
               
               <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-muted-foreground pt-3 border-t border-border/50">
