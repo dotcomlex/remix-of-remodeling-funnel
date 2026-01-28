@@ -26,7 +26,7 @@ const HeroSection = () => {
           <img src={logo} alt="14er Renovations" className="h-16 sm:h-24 lg:h-36 w-auto object-contain" />
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 lg:gap-8">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-12">
           {/* Left column - Headline */}
           <motion.div className="lg:w-1/2 xl:w-[55%]" initial={{
           opacity: 0,
@@ -38,7 +38,7 @@ const HeroSection = () => {
           duration: 0.6,
           delay: 0.2
         }}>
-            <div className="space-y-4 sm:space-y-5 lg:space-y-6">
+            <div className="space-y-6 sm:space-y-7 lg:space-y-8">
               {/* Breaking Badge - separate with more margin */}
               <div className="mb-4 sm:mb-5">
               <span className="inline-block bg-red-600 text-white text-xs sm:text-sm font-bold uppercase px-2 py-1 rounded">
@@ -52,7 +52,7 @@ const HeroSection = () => {
                 Any Remodeling Project—Only 7 Spots Left
               </h1>
 
-              <p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-lg leading-relaxed hero-text-shadow">
+              <p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-lg leading-relaxed hero-text-shadow mt-2">
                 Trusted by Colorado homeowners for kitchens, bathrooms, basements, and much more. Answer the questions below to receive your free estimate, free consultation + <span className="font-semibold text-highlight">$2,000 Off!</span>
               </p>
 
