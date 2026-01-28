@@ -2,49 +2,42 @@ import { motion } from "framer-motion";
 import Quiz from "./Quiz";
 import heroImage from "@/assets/hero-colorado-home.png";
 import logo from "@/assets/14er-logo.png";
-
 import { Shield, CheckCircle } from "lucide-react";
-
 const HeroSection = () => {
-  return (
-    <section id="hero" className="relative bg-hero overflow-hidden">
+  return <section id="hero" className="relative bg-hero overflow-hidden">
       {/* Background image with overlay */}
       <div className="absolute inset-0">
-        <img
-          src={heroImage}
-          alt="Beautiful Colorado home with modern kitchen remodel and mountain backdrop"
-          className="w-full h-full object-cover"
-          fetchPriority="high"
-          loading="eager"
-          decoding="async"
-        />
+        <img src={heroImage} alt="Beautiful Colorado home with modern kitchen remodel and mountain backdrop" className="w-full h-full object-cover" fetchPriority="high" loading="eager" decoding="async" />
         <div className="absolute inset-0 hero-overlay" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-4 lg:py-10">
         {/* Logo - centered and larger */}
-        <motion.div 
-          className="flex justify-center mb-0 lg:mb-2"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <img 
-            src={logo} 
-            alt="14er Renovations" 
-            className="h-16 sm:h-24 lg:h-36 w-auto object-contain"
-          />
+        <motion.div className="flex justify-center mb-0 lg:mb-2" initial={{
+        opacity: 0,
+        scale: 0.9
+      }} animate={{
+        opacity: 1,
+        scale: 1
+      }} transition={{
+        duration: 0.5
+      }}>
+          <img src={logo} alt="14er Renovations" className="h-16 sm:h-24 lg:h-36 w-auto object-contain" />
         </motion.div>
 
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 lg:gap-8">
           {/* Left column - Headline */}
-          <motion.div 
-            className="lg:w-1/2 xl:w-[55%]"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <motion.div className="lg:w-1/2 xl:w-[55%]" initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6,
+          delay: 0.2
+        }}>
             <div className="space-y-4 sm:space-y-5 lg:space-y-6">
               {/* Breaking Badge - separate with more margin */}
               <div className="mb-4 sm:mb-5">
@@ -59,8 +52,7 @@ const HeroSection = () => {
                 Any Remodeling Project—Only 7 Spots Left
               </h1>
 
-              <p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-lg leading-relaxed hero-text-shadow">
-                Trusted by Colorado homeowners for kitchens, bathrooms, basements, and more. Book your FREE in-home consultation and claim the <span className="font-semibold text-highlight">$2,000 OFF</span> offer today.
+              <p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-lg leading-relaxed hero-text-shadow">Trusted by Colorado homeowners for kitchens, bathrooms, basements, and much more. Book your FREE estimate before spots fill up!<span className="font-semibold text-highlight">$2,000 OFF</span> offer today.
               </p>
 
               
@@ -68,12 +60,16 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Right column - Quiz */}
-          <motion.div 
-            className="lg:w-1/2 xl:w-[45%] flex flex-col items-center lg:items-end gap-4"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
+          <motion.div className="lg:w-1/2 xl:w-[45%] flex flex-col items-center lg:items-end gap-4" initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6,
+          delay: 0.4
+        }}>
             <Quiz />
             
             {/* Trust Strip - Below Quiz */}
@@ -90,8 +86,6 @@ const HeroSection = () => {
           </motion.div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
