@@ -1,9 +1,9 @@
 
 
-# Minimal Quiz Funnel Simplification
+# Clean Up & Mobile Optimization Updates
 
 ## Overview
-Simplify the quiz funnel by removing clutter and keeping everything clean, elegant, and optimized for mobile. This maintains the premium aesthetic while improving the user experience.
+Remove visual clutter, move progress dots inside the quiz card, update text to be more realistic (100+ instead of 200+), and create more engaging headlines for the gallery and reviews sections.
 
 ---
 
@@ -11,75 +11,96 @@ Simplify the quiz funnel by removing clutter and keeping everything clean, elega
 
 | File | Changes |
 |------|---------|
-| `src/components/Quiz.tsx` | Remove trust bar, simplify header, simplify budget cards, update button text, remove extra text |
-| `src/components/HeroSection.tsx` | Already correct - urgency says "remaining this month" ✓ |
+| `src/components/HeroSection.tsx` | Remove blinking animation, remove urgency line |
+| `src/components/Quiz.tsx` | Move dots inside quiz card, remove "Takes About 60 Seconds" |
+| `src/components/GallerySection.tsx` | Update to 100+, improve headline |
+| `src/components/ReviewsSection.tsx` | Update to 100+, creative reviews tagline |
 
 ---
 
-## 1. Remove Trust Bar
+## 1. Hero Section Updates
 
-**File:** `src/components/Quiz.tsx`
+**File:** `src/components/HeroSection.tsx`
 
-**Delete the TrustBar component (lines 31-68):**
-Remove the entire TrustBar component definition.
+### A. Remove blinking effect (line 51)
 
-**Remove the TrustBar usage (line 327):**
 ```tsx
-// DELETE THIS LINE:
-{!isSubmitted && <TrustBar />}
+// Before:
+<span className="inline-block bg-red-600 text-white text-xs sm:text-sm font-bold uppercase px-2 py-1 rounded animate-pulse">
+  🚨 BREAKING
+</span>
+
+// After:
+<span className="inline-block bg-red-600 text-white text-xs sm:text-sm font-bold uppercase px-2 py-1 rounded">
+  🚨 BREAKING
+</span>
+```
+
+### B. Remove urgency line (lines 66-74)
+
+Delete entirely:
+```tsx
+{/* Urgency Indicator - Clean version */}
+<motion.p 
+  className="text-xs sm:text-sm font-medium text-white/80 hero-text-shadow mt-3"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.5, delay: 0.8 }}
+>
+  ⏳ Only 7 spots remaining this month
+</motion.p>
 ```
 
 ---
 
-## 2. Remove "Most Popular" Badge
+## 2. Quiz Component Updates
 
 **File:** `src/components/Quiz.tsx`
 
-**Update Step 2 timeline option (lines 426-433):**
+### A. Move progress dots INSIDE the quiz card (lines 283-300)
 
-Remove the `badge` prop from the "Within 30 days" option:
-
+Current structure:
 ```tsx
-// Before:
-<OptionCard
-  icon={Calendar}
-  label="Within 30 days"
-  selected={data.timeline === "30-days"}
-  onClick={() => handleTileSelect("timeline", "30-days")}
-  accentColor="text-orange-600"
-  badge="Most Popular"  // ← DELETE THIS LINE
-/>
-
-// After:
-<OptionCard
-  icon={Calendar}
-  label="Within 30 days"
-  selected={data.timeline === "30-days"}
-  onClick={() => handleTileSelect("timeline", "30-days")}
-  accentColor="text-orange-600"
-/>
+<div className="w-full max-w-lg">
+  {/* Progress Dots - OUTSIDE card */}
+  {!isSubmitted && (
+    <div className="flex justify-center gap-2 mb-4">...</div>
+  )}
+  
+  {/* Quiz Card */}
+  <div className="quiz-card-glass ...">
 ```
 
----
-
-## 3. Simplify Quiz Card Header (Step 1)
-
-**File:** `src/components/Quiz.tsx`
-
-**Replace the header section (lines 359-367):**
-
+New structure:
 ```tsx
-// Before:
-<div className="text-center mb-4">
-  <p className="text-sm font-semibold text-foreground mb-1">
-    Answer 5 Quick Questions to Claim Your $2,000 Discount
-  </p>
-  <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
-    <Clock className="w-3 h-3" /> Takes About 60 Seconds
-  </p>
-</div>
+<div className="w-full max-w-lg">
+  {/* Quiz Card */}
+  <div className="quiz-card-glass rounded-2xl shadow-quiz-glow p-5 sm:p-6 w-full border border-primary/20">
+    
+    {/* Progress Dots - INSIDE card, at top */}
+    {!isSubmitted && (
+      <div className="flex justify-center gap-2 mb-4">
+        {[1, 2, 3, 4, 5].map((dotStep) => (
+          <div
+            key={dotStep}
+            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+              dotStep <= step 
+                ? "bg-primary" 
+                : "bg-slate-300"
+            }`}
+          />
+        ))}
+      </div>
+    )}
+    
+    {/* Rest of content */}
+```
 
-// After:
+### B. Remove "Takes About 60 Seconds" (lines 313-318)
+
+Delete this entire block from Step 1:
+```tsx
+{/* Quiz Header - Step 1 only */}
 <div className="text-center mb-3">
   <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
     <Clock className="w-3 h-3" /> Takes About 60 Seconds
@@ -89,185 +110,78 @@ Remove the `badge` prop from the "Within 30 days" option:
 
 ---
 
-## 4. Simplify Budget Cards (Step 3)
+## 3. Gallery Section Updates
 
-**File:** `src/components/Quiz.tsx`
+**File:** `src/components/GallerySection.tsx`
 
-**Update BudgetOptionCard component (lines 274-315):**
-
-Simplify to remove subtext and match the clean style of other cards:
-
-```tsx
-const BudgetOptionCard = ({ 
-  icon: Icon, 
-  label, 
-  selected, 
-  onClick 
-}: { 
-  icon: React.ElementType;
-  label: string;
-  selected: boolean; 
-  onClick: () => void;
-}) => (
-  <button
-    onClick={onClick}
-    className={`relative flex items-center gap-3 p-4 rounded-xl border-2 bg-white w-full min-h-[70px] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
-      selected 
-        ? "border-primary bg-gradient-to-r from-primary/10 to-primary/5 shadow-md" 
-        : "border-slate-200 hover:border-primary/50 shadow-sm"
-    }`}
-  >
-    <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-      selected ? "bg-primary" : "bg-slate-100 group-hover:bg-slate-200"
-    }`}>
-      <Icon className={`w-5 h-5 transition-colors duration-200 ${
-        selected ? "text-primary-foreground" : "text-primary"
-      }`} />
-    </div>
-    <span className={`text-sm font-medium ${selected ? "text-primary" : "text-foreground"}`}>
-      {label}
-    </span>
-    {selected && (
-      <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center">
-        <Check className="w-3 h-3 text-white" />
-      </div>
-    )}
-  </button>
-);
-```
-
-**Update Step 3 budget cards usage (lines 472-487):**
-
-Remove the `subtext` prop:
+### A. Update subheadline (lines 45-47)
 
 ```tsx
 // Before:
-<BudgetOptionCard
-  icon={Gem}
-  label="Yes, I know my budget"
-  subtext="We'll match your vision to your investment"
-  selected={data.budgetRange === "yes"}
-  onClick={() => handleTileSelect("budgetRange", "yes")}
-/>
-
-// After:
-<BudgetOptionCard
-  icon={Gem}
-  label="Yes, I know my budget"
-  selected={data.budgetRange === "yes"}
-  onClick={() => handleTileSelect("budgetRange", "yes")}
-/>
-```
-
-Same for the second card - remove the `subtext` prop.
-
----
-
-## 5. Simplify Step 5 Contact Form
-
-**File:** `src/components/Quiz.tsx`
-
-### A. Update Button Text (lines 666-682)
-
-```tsx
-// Before:
-<span className="hidden sm:inline">Claim My $2,000 Discount</span>
-<span className="sm:hidden">Claim Discount</span>
-
-// After:
-Get My Free Consultation
-```
-
-### B. Remove Extra Bullet Points/Value Stack (lines 557-583)
-
-Simplify the header section:
-
-```tsx
-// Before (complex with bullet points):
-<div className="text-center mb-4">
-  <span className="text-2xl mb-0.5 block">🎉</span>
-  <h3 className="text-[15px] sm:text-lg font-semibold text-foreground mb-1.5">
-    CONGRATULATIONS! You Qualify for the $2,000 Discount
-  </h3>
-  <p className="text-sm text-muted-foreground leading-snug max-w-sm mx-auto mb-3">
-    Complete the form below to reserve your consultation and lock in:
-  </p>
-  <div className="text-left max-w-xs mx-auto space-y-1 mb-2">
-    ... bullet points ...
-  </div>
-  <p className="text-xs font-semibold text-orange-600 flex items-center justify-center gap-1">
-    <Zap className="w-3.5 h-3.5" /> Only 7 spots remaining this month
-  </p>
-</div>
-
-// After (clean and simple):
-<div className="text-center mb-4">
-  <span className="text-2xl mb-1 block">🎉</span>
-  <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
-    You Qualify for the $2,000 Discount!
-  </h3>
-  <p className="text-sm text-muted-foreground leading-snug max-w-sm mx-auto">
-    Complete the form below to schedule your free consultation.
-  </p>
-</div>
-```
-
----
-
-## 6. Keep Success Screen As-Is
-
-The success screen already matches the requirements:
-
-```tsx
-<h3 className="text-base sm:text-lg font-semibold text-foreground mb-3 leading-snug">
-  🎉 SUCCESS! Your $2,000 Discount is Reserved, {data.firstName}!
-</h3>
-
-<p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 max-w-sm mx-auto">
-  We'll be contacting you very soon to schedule your free consultation.
+<p className="text-base text-muted-foreground max-w-xl mx-auto">
+  200+ projects completed. Your home could be next.
 </p>
 
-// Shield icon is already present ✓
-<div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-muted-foreground pt-3 border-t border-border/50">
-  <Shield className="w-4 h-4" />
-  <span>Your information is secure</span>
-</div>
+// After:
+<p className="text-base text-muted-foreground max-w-xl mx-auto">
+  Whether you're dreaming of a new kitchen, spa-like bathroom, or finished basement—we've got you covered.
+</p>
 ```
 
 ---
 
-## 7. Hero Section - Already Updated
+## 4. Reviews Section Updates
 
-The urgency line in HeroSection.tsx (line 73) already says:
+**File:** `src/components/ReviewsSection.tsx`
+
+### A. Update tagline - remove specific number (line 127-128)
+
 ```tsx
-⏳ Only 7 spots remaining this month
+// Before:
+<span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
+  50+ Five-Star Reviews
+</span>
+
+// After:
+<span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
+  ⭐ Rated 5 Stars by Homeowners Like You
+</span>
 ```
 
-No changes needed here.
+### B. Update headline to 100+ (lines 130-131)
+
+```tsx
+// Before:
+<h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
+  Why 200+ Homeowners <span className="text-primary">Choose 14er</span>
+</h2>
+
+// After:
+<h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
+  Why 100+ Homeowners <span className="text-primary">Choose 14er</span>
+</h2>
+```
 
 ---
 
 ## Summary of Changes
 
-| Element | Action |
-|---------|--------|
-| Trust Bar | Remove completely |
-| "Most Popular" badge | Remove from timeline step |
-| Quiz header (Step 1) | Simplify to just "⏱️ Takes About 60 Seconds" |
-| Budget cards | Remove subtext, keep clean |
-| Step 5 header | Simplify, remove bullet points |
-| Step 5 button | Change to "Get My Free Consultation" |
-| Success screen | Already correct ✓ |
-| Hero urgency | Already correct ✓ |
+| Element | Before | After |
+|---------|--------|-------|
+| Breaking badge | `animate-pulse` (blinking) | Static (no animation) |
+| Urgency line | "⏳ Only 7 spots remaining..." | Removed |
+| Progress dots | Outside quiz card | Inside quiz card |
+| "Takes About 60 Seconds" | Shown on Step 1 | Removed |
+| Gallery subheadline | "200+ projects completed..." | "Whether you're dreaming of a new kitchen..." |
+| Reviews tagline | "50+ Five-Star Reviews" | "⭐ Rated 5 Stars by Homeowners Like You" |
+| Reviews headline | "200+ Homeowners" | "100+ Homeowners" |
 
 ---
 
 ## Mobile Optimization Notes
 
-All changes maintain mobile-first design:
-- Reduced vertical space consumption
-- Cleaner, more scannable content
-- Faster visual processing for users
-- Touch targets remain appropriately sized
-- Text sizes already optimized for mobile (`text-sm`, `text-xs`)
+- Removing the "Takes About 60 Seconds" saves vertical space
+- Moving dots inside the card creates a more cohesive, contained design
+- Removing the urgency line (already in headline) reduces redundancy
+- All changes reduce visual clutter for mobile users
 
