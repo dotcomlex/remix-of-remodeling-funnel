@@ -52,7 +52,8 @@ const HeroSection = () => {
                 Any Remodeling Project—Only 7 Spots Left
               </h1>
 
-              <p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-lg leading-relaxed hero-text-shadow">Trusted by Colorado homeowners for kitchens, bathrooms, basements, and much more. Book your FREE estimate before spots fill up!<span className="font-semibold text-highlight">$2,000 OFF</span> offer today.
+              <p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-lg leading-relaxed hero-text-shadow">
+                Trusted by Colorado homeowners for kitchens, bathrooms, basements, and much more. Answer the questions below to receive your free estimate, free consultation + <span className="font-semibold text-highlight">$2,000 Off!</span>
               </p>
 
               
