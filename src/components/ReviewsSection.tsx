@@ -124,9 +124,6 @@ const ReviewsSection = () => {
     <section className="py-16 lg:py-24 section-gradient-dark">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
-          <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
-            ⭐ Rated 5 Stars by Homeowners Like You
-          </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
             Why 100+ Homeowners <span className="text-primary">Choose 14er</span>
           </h2>

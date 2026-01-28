@@ -499,10 +499,10 @@ const Quiz = () => {
               <div className="text-center mb-4">
                 <span className="text-2xl mb-1 block">🎉</span>
                 <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
-                  You Qualify for the $2,000 Discount!
+                  Your Zip Code Qualifies For This Offer!
                 </h3>
                 <p className="text-sm text-muted-foreground leading-snug max-w-sm mx-auto">
-                  Complete the form below to schedule your free consultation.
+                  Complete the form below so we can contact you and schedule your 100% free estimate.
                 </p>
               </div>
 
@@ -525,7 +525,7 @@ const Quiz = () => {
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input
                       type="text"
-                      placeholder="First name"
+                      placeholder="Name"
                       value={data.firstName}
                       onChange={(e) => {
                         setData({ ...data, firstName: e.target.value });
@@ -559,8 +559,12 @@ const Quiz = () => {
                       maxLength={14}
                     />
                   </div>
-                  {errors.phone && (
+                  {errors.phone ? (
                     <p className="text-xs text-red-500 mt-1 pl-1">{errors.phone}</p>
+                  ) : (
+                    <p className="text-[10px] text-muted-foreground mt-1 pl-1">
+                      📱 Please double-check your number so we can reach you
+                    </p>
                   )}
                 </div>
                 
