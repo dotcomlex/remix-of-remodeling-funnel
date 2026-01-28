@@ -653,11 +653,11 @@ const Quiz = () => {
               </motion.div>
               
               <h3 className="text-base sm:text-lg font-semibold text-foreground mb-3 leading-snug">
-                🎉 SUCCESS! Your $2,000 Discount is Reserved, {data.firstName}!
+                Awesome, {data.firstName}—you're all set! 🎉
               </h3>
               
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 max-w-sm mx-auto">
-                We'll be contacting you very soon to schedule your free consultation.
+                We'll be reaching out very soon to get more details on your project and schedule your free consultation. Talk soon!
               </p>
               
               <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-muted-foreground pt-3 border-t border-border/50">
