@@ -8,6 +8,9 @@ import galleryKitchenNavy from "@/assets/gallery-kitchen-navy.webp";
 import galleryKitchenDark from "@/assets/gallery-kitchen-dark.webp";
 import galleryKitchenWhite from "@/assets/gallery-kitchen-white.webp";
 import galleryBathroomSpa from "@/assets/gallery-bathroom-spa.webp";
+import galleryBathModern from "@/assets/gallery-bath-modern.webp";
+import galleryBathDouble from "@/assets/gallery-bath-double.webp";
+import galleryBathWalnut from "@/assets/gallery-bath-walnut.webp";
 
 const GallerySection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,6 +21,9 @@ const GallerySection = () => {
     { image: galleryKitchenDark, alt: "Small kitchen remodel with dark modern cabinets" },
     { image: galleryKitchenWhite, alt: "Full kitchen renovation with white shaker cabinets" },
     { image: galleryBathroomSpa, alt: "Bathroom before and after with spa-like marble shower" },
+    { image: galleryBathModern, alt: "Bathroom renovation with modern floating vanity and walk-in shower" },
+    { image: galleryBathDouble, alt: "Bathroom transformation with double vanity and arched mirrors" },
+    { image: galleryBathWalnut, alt: "Bathroom remodel with walnut vanity and LED mirror" },
   ];
 
   const nextSlide = () => {
