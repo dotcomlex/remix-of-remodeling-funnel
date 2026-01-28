@@ -280,24 +280,24 @@ const Quiz = () => {
 
   return (
     <div className="w-full max-w-lg">
-      {/* Simple Progress Dots */}
-      {!isSubmitted && (
-        <div className="flex justify-center gap-2 mb-4">
-          {[1, 2, 3, 4, 5].map((dotStep) => (
-            <div
-              key={dotStep}
-              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                dotStep <= step 
-                  ? "bg-primary" 
-                  : "bg-slate-300"
-              }`}
-            />
-          ))}
-        </div>
-      )}
-
       {/* Quiz Card */}
       <div className="quiz-card-glass rounded-2xl shadow-quiz-glow p-5 sm:p-6 w-full border border-primary/20">
+        
+        {/* Progress Dots - Inside card */}
+        {!isSubmitted && (
+          <div className="flex justify-center gap-2 mb-4">
+            {[1, 2, 3, 4, 5].map((dotStep) => (
+              <div
+                key={dotStep}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  dotStep <= step 
+                    ? "bg-primary" 
+                    : "bg-slate-300"
+                }`}
+              />
+            ))}
+          </div>
+        )}
 
         <AnimatePresence mode="wait">
           {/* Step 1: Project Type */}
@@ -310,13 +310,6 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              {/* Quiz Header - Step 1 only */}
-              <div className="text-center mb-3">
-                <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
-                  <Clock className="w-3 h-3" /> Takes About 60 Seconds
-                </p>
-              </div>
-
               <h3 className="text-base sm:text-lg font-medium text-foreground mb-4 text-center leading-tight">
                 Which project are you planning?
               </h3>
@@ -521,7 +514,7 @@ const Quiz = () => {
                   ))}
                 </div>
                 <span className="text-xs font-medium text-foreground/70">
-                  200+ homeowners
+                  100+ homeowners
                 </span>
               </div>
               

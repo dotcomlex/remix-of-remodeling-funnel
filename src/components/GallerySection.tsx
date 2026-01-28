@@ -43,7 +43,7 @@ const GallerySection = () => {
             See What's Possible - <span className="text-primary">Real Home Transformations</span>
           </h2>
           <p className="text-base text-muted-foreground max-w-xl mx-auto">
-            200+ projects completed. Your home could be next.
+            Whether you're dreaming of a new kitchen, spa-like bathroom, or finished basement—we've got you covered.
           </p>
         </div>
 

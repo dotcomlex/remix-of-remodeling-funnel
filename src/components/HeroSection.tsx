@@ -48,7 +48,7 @@ const HeroSection = () => {
             <div className="space-y-4 sm:space-y-5 lg:space-y-6">
               {/* Breaking Badge - separate with more margin */}
               <div className="mb-4 sm:mb-5">
-                <span className="inline-block bg-red-600 text-white text-xs sm:text-sm font-bold uppercase px-2 py-1 rounded animate-pulse">
+              <span className="inline-block bg-red-600 text-white text-xs sm:text-sm font-bold uppercase px-2 py-1 rounded">
                   🚨 BREAKING
                 </span>
               </div>
@@ -63,15 +63,6 @@ const HeroSection = () => {
                 Trusted by Colorado homeowners for kitchens, bathrooms, basements, and more. Book your FREE in-home consultation and claim the <span className="font-semibold text-highlight">$2,000 OFF</span> offer today.
               </p>
 
-              {/* Urgency Indicator - Clean version */}
-              <motion.p 
-                className="text-xs sm:text-sm font-medium text-white/80 hero-text-shadow mt-3"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-              >
-                ⏳ Only 7 spots remaining this month
-              </motion.p>
               
             </div>
           </motion.div>
