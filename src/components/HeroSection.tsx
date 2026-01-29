@@ -47,9 +47,9 @@ const HeroSection = () => {
               </div>
               
               <h1 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-extrabold text-white leading-tight hero-text-shadow">
-                Transform your kitchen, bathroom, or any space into something you'll love. Fill out the form below to claim your{" "}
-                <span className="text-highlight">$2,000 discount</span>{" "}
-                and schedule your free consultation.
+                New Winter Program Gives Colorado Homeowners{" "}
+                <span className="text-highlight">$2,000 OFF</span>{" "}
+                Any Remodeling Project—Only 7 Spots Left
               </h1>
 
               <p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-lg leading-relaxed hero-text-shadow mt-2">
