@@ -28,11 +28,23 @@ const formatPhoneNumber = (value: string): string => {
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
 };
 
+// Colorado ZIP code validation - covers ALL Colorado addresses
+const isColoradoZipCode = (zip: string): boolean => {
+  // Must be exactly 5 digits
+  if (zip.length !== 5 || !/^\d{5}$/.test(zip)) {
+    return false;
+  }
+  // Colorado's official USPS range: 80001-81658
+  const zipNum = parseInt(zip, 10);
+  return zipNum >= 80001 && zipNum <= 81658;
+};
+
 
 const Quiz = () => {
   const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDisqualified, setIsDisqualified] = useState(false);
   const [errors, setErrors] = useState<{ firstName?: string; phone?: string; email?: string }>({});
   const [data, setData] = useState<QuizData>({
     projectType: "",
@@ -69,7 +81,11 @@ const Quiz = () => {
 
   const handleNext = () => {
     if (step === 4 && data.zipCode.length >= 5) {
-      setStep(5);
+      if (isColoradoZipCode(data.zipCode)) {
+        setStep(5);
+      } else {
+        setIsDisqualified(true);
+      }
     }
   };
 
@@ -284,7 +300,7 @@ const Quiz = () => {
       <div className="quiz-card-glass rounded-2xl shadow-quiz-glow p-5 sm:p-6 w-full border border-primary/20">
         
         {/* Progress Dots - Inside card */}
-        {!isSubmitted && (
+        {!isSubmitted && !isDisqualified && (
           <div className="flex justify-center gap-2 mb-4">
             {[1, 2, 3, 4, 5].map((dotStep) => (
               <div
@@ -676,6 +692,51 @@ const Quiz = () => {
                 <Shield className="w-4 h-4" />
                 <span>Your information is secure</span>
               </div>
+            </motion.div>
+          )}
+
+          {/* Disqualification Screen - Out of State */}
+          {isDisqualified && (
+            <motion.div
+              key="disqualified"
+              variants={cardVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.3 }}
+              className="py-6 text-center"
+            >
+              <motion.div 
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                className="w-16 h-16 mx-auto mb-5 rounded-full bg-amber-100 flex items-center justify-center"
+              >
+                <MapPin className="w-8 h-8 text-amber-600" />
+              </motion.div>
+              
+              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-3 leading-snug">
+                We Only Serve Colorado
+              </h3>
+              
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 max-w-sm mx-auto">
+                Thank you for your interest in 14er Renovation! Unfortunately, we currently only serve homeowners in Colorado.
+              </p>
+              
+              <div className="bg-muted/50 rounded-lg p-4 mb-4">
+                <p className="text-xs text-muted-foreground">
+                  <strong>Looking for a contractor in your area?</strong>
+                </p>
+                <div className="flex gap-3 justify-center mt-2">
+                  <a href="https://www.homeadvisor.com" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline font-medium">HomeAdvisor</a>
+                  <a href="https://www.angi.com" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline font-medium">Angi</a>
+                  <a href="https://www.thumbtack.com" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline font-medium">Thumbtack</a>
+                </div>
+              </div>
+              
+              <p className="text-xs text-muted-foreground/70 italic">
+                Think this is an error? Your ZIP code was: <strong>{data.zipCode}</strong>
+              </p>
             </motion.div>
           )}
         </AnimatePresence>
