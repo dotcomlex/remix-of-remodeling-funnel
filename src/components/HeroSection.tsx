@@ -53,7 +53,7 @@ const HeroSection = () => {
               </h1>
 
               <p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-lg leading-relaxed hero-text-shadow mt-2">
-                Trusted by Colorado homeowners for kitchens, bathrooms, basements, and much more. Answer the questions below to receive your free estimate, free consultation + <span className="font-semibold text-highlight">$2,000 Off!</span>
+                Transform your kitchen, bathroom, or any space into something you'll love. Fill out the form below to claim your <span className="font-semibold text-highlight">$2,000 discount</span> and schedule your free consultation.
               </p>
 
               
