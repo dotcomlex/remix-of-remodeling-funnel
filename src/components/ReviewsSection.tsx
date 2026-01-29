@@ -22,84 +22,84 @@ const ReviewsSection = () => {
       location: "Denver, CO",
       avatar: avatar1,
       rating: 5,
-      text: "Juan and the 14er crew completely transformed our outdated kitchen into a modern dream space. They were professional, on time every day, and the quality is outstanding. We're cooking more than ever now!",
+      text: "Juan and the 14er crew completely transformed our outdated 1980s kitchen into a modern dream space. They ripped out everything - old cabinets, laminate counters, fluorescent lights - and rebuilt it from scratch. New shaker cabinets, quartz countertops, subway tile backsplash, under-cabinet lighting, the works. They were professional, showed up on time every single day at 7:30am, and cleaned up before leaving. The quality is outstanding. We're cooking more than ever now because the kitchen actually makes us want to be in there!",
     },
     {
       name: "Sarah M.",
       location: "Boulder, CO",
       avatar: avatar2,
       rating: 5,
-      text: "Our bathroom remodel exceeded expectations. Juan explained everything clearly and his team was respectful of our home. The attention to detail is incredible - from tile work to fixtures. Highly recommend!",
+      text: "We had a tiny 1960s bathroom that was basically unusable - old pink tile, cramped shower, no storage. Juan's team gutted it down to the studs and rebuilt everything. They relocated plumbing to fit a walk-in shower with beautiful marble tile, added a floating vanity with tons of storage, installed a heated floor (game changer in winter!), and added recessed lighting. Juan explained every step clearly and his crew was so respectful of our home - they covered everything with plastic, used our side entrance, never tracked dirt. The attention to detail is incredible. It's like having a spa in our house now.",
     },
     {
       name: "James T.",
       location: "Fort Collins, CO",
       avatar: avatar3,
       rating: 5,
-      text: "We hired 14er for a full basement finish and they delivered ahead of schedule. Fair pricing, no surprises, and the craftsmanship is top-notch. Our neighbors keep asking who did the work!",
+      text: "We hired 14er to finish our entire 1200 sq ft basement - framing, drywall, electrical, plumbing, flooring, everything. They built us a full guest bedroom, a 3/4 bathroom, a home theater area, and a small kitchenette. Came in ahead of schedule and under the original estimate because they planned it so well upfront. The craftsmanship is absolutely top-notch - perfectly straight walls, clean electrical work, beautiful tile in the bathroom. Our neighbors have been asking who did the work because it looks so professional. Already had three people at our Super Bowl party ask for Juan's number!",
     },
     {
       name: "Linda K.",
       location: "Littleton, CO",
       avatar: avatar4,
       rating: 5,
-      text: "After getting quotes from several contractors, Juan stood out for his honesty and expertise. Our kitchen and bathroom combo project turned out beautifully. Worth every penny!",
+      text: "After getting quotes from five different contractors, Juan stood out immediately for his honesty and expertise. We did a combo project - kitchen and master bathroom - and it was a big investment. He never tried to upsell us on things we didn't need, gave us options at different price points, and his quote was extremely detailed so we knew exactly what we were paying for. The work took 9 weeks and they hit every milestone on schedule. Kitchen has white shaker cabinets, gray quartz, stainless appliances, and the bathroom has a gorgeous walk-in shower with floor-to-ceiling tile. Worth every penny and we have zero regrets.",
     },
     {
-      name: "David P.",
+      name: "David & Rachel P.",
       location: "Aurora, CO",
       avatar: avatar5,
       rating: 5,
-      text: "From initial consultation to final walkthrough, everything was stress-free. The team was clean, hardworking, and Juan followed up to ensure we were happy. This is how remodeling should be!",
+      text: "We wanted to convert our garage into a home office/gym space and everyone said it was too complicated. Juan came out, looked at it, and had a plan within a week. His team insulated, drywalled, added heating and AC, built in custom shelving, ran electrical for outlets and overhead lighting, and installed luxury vinyl plank flooring. The whole project took 5 weeks and now we have a beautiful 400 sq ft space that we use every day. From initial consultation to final walkthrough, everything was stress-free. The team was clean, hardworking, and Juan followed up multiple times to make sure we were 100% happy. This is how remodeling should be done!",
     },
     {
       name: "Carlos G.",
       location: "Lakewood, CO",
-      avatar: avatar1,
+      avatar: avatar6,
       rating: 5,
-      text: "We had our master bathroom remodeled in winter and it's still flawless a year later. Juan's team handled everything - plumbing, tile, electrical. True professionals who stand behind their work!",
+      text: "We had our master bathroom completely remodeled in January - tore out old tub, old vanity, old tile, everything. They installed a huge walk-in shower with a rain head and hand spray, double vanity with quartz tops, heated tile floor, and modern fixtures throughout. The tile work alone is museum-quality - perfectly level, tight grout lines, no lippage. It's been over a year now and everything still looks and works perfectly. Juan's team doesn't cut corners. They did things right the first time - proper waterproofing, quality materials, clean plumbing work. True professionals who stand behind their work 100%.",
     },
     {
       name: "Jennifer & Tom H.",
       location: "Castle Rock, CO",
-      avatar: avatar2,
+      avatar: avatar7,
       rating: 5,
-      text: "Best decision we made for our home. The basement remodel added so much value and livable space. The team was efficient, respectful, and the finished product is magazine-worthy!",
+      text: "Finishing our basement was the best decision we've made for our home. 14er turned our cold, dark, concrete dungeon into a beautiful living space - bedroom, full bathroom, family room, and wet bar. Added egress windows for safety, proper insulation, radiant floor heating, and the tile work in the bathroom is stunning. The space added so much value to our home and it's where our family spends most of our time now. The team was efficient, respectful of our property, and the finished product looks like something out of a magazine. Our realtor said it probably added $60-80k to our home value.",
     },
     {
       name: "Robert S.",
       location: "Arvada, CO",
-      avatar: avatar3,
+      avatar: avatar8,
       rating: 5,
-      text: "Third project with 14er - first kitchen, then bathroom, now basement. Same excellent experience every time. Juan treats every project like it's his own home. Already planning our next remodel!",
+      text: "This is our third project with 14er - first was kitchen (5 years ago), then our master bath (3 years ago), now we just had them finish our basement. Same excellent experience every time. Juan treats every single project like it's his own home - he's meticulous about details, uses quality materials, and his crews are professional craftsmen, not just laborers. We've referred probably 10 friends to him at this point and every single one has thanked us. Already planning our next remodel (sunroom addition) and won't even call anyone else. When you find someone this good, you stick with them!",
     },
     {
       name: "Lisa W.",
       location: "Thornton, CO",
-      avatar: avatar6,
+      avatar: avatar9,
       rating: 5,
-      text: "I was nervous about a major kitchen renovation, but 14er made it smooth and actually enjoyable. They explained everything, stayed on budget, and the quality is exceptional. Our kitchen is the heart of our home now!",
+      text: "I was so nervous about doing a major kitchen renovation - I'd heard horror stories from friends about contractors who disappeared, went over budget, left messes. Juan and 14er were the complete opposite. They gutted our old kitchen down to the studs, moved some walls to open it up, installed all new cabinets (soft-close everything!), granite countertops, new appliances, tile backsplash, pendant lighting, and refinished the hardwood floors. Took 7 weeks exactly like they said. They showed up every day, communicated constantly, and left the house clean every night. The quality is exceptional - cabinets are perfectly level, tile is perfectly aligned, everything just works. Our kitchen went from the worst room in the house to the absolute best. Worth every penny!",
     },
     {
       name: "Kevin & Amy D.",
       location: "Centennial, CO",
-      avatar: avatar7,
+      avatar: avatar1,
       rating: 5,
-      text: "Our outdated bathrooms are now spa-like retreats. The crew was professional, worked around our schedule, and finished ahead of time. The attention to detail in the tile work is incredible!",
+      text: "We had two bathrooms that were straight out of the 1970s - harvest gold tile, old fiberglass tubs, terrible lighting. 14er renovated both at the same time over 6 weeks. Both got walk-in showers with beautiful porcelain tile, new vanities, modern mirrors, upgraded lighting, and exhaust fans that actually work. They worked around our schedules (we have three kids so mornings were crazy), protected the rest of the house with plastic barriers, and were so respectful of our space. The attention to detail in the tile work is incredible - you can tell these guys take pride in their craft. Both bathrooms look like spa retreats now. Best home investment we've made!",
     },
     {
       name: "Patricia N.",
       location: "Westminster, CO",
-      avatar: avatar8,
+      avatar: avatar2,
       rating: 5,
-      text: "Juan and his team transformed our dark, unused basement into a beautiful guest suite. They handled everything from framing to finishing touches. Highly recommend for any remodeling project!",
+      text: "Our basement was just cold concrete and storage for 15 years. Juan and his team transformed it into a beautiful 1-bedroom guest suite with full bathroom and living area. They handled everything - framing, electrical, plumbing, drywall, painting, flooring, trim work. Built a proper egress window for code, added a full bathroom with stand-up shower and beautiful tile, installed luxury vinyl throughout, and even built custom closets. The space is so nice that my in-laws actually ask to stay with us now instead of getting a hotel! Project took 8 weeks and they were here every single day making progress. Quality workmanship from start to finish.",
     },
     {
       name: "Marcus B.",
       location: "Highlands Ranch, CO",
-      avatar: avatar9,
+      avatar: avatar3,
       rating: 5,
-      text: "After interviewing multiple contractors, we chose 14er and couldn't be happier. Our kitchen remodel is stunning - custom cabinets, beautiful countertops, perfect lighting. Best investment we've made!",
+      text: "After interviewing six different contractors and getting wildly different quotes, we chose 14er and couldn't be happier. Our kitchen remodel was extensive - custom white shaker cabinets floor to ceiling, quartz countertops with waterfall edge on the island, subway tile backsplash to the ceiling, new appliances, under-cabinet LED lighting, and we opened up a wall to the living room. The transformation is stunning and the quality of work is exceptional. Juan was extremely communicative throughout - daily updates, photos of progress, never any surprises. His crew were skilled craftsmen who took pride in their work. The cabinets are perfectly level, the tile work is flawless, and every detail was executed perfectly. This is the best money we've ever spent on our home!",
     },
   ];
 
@@ -137,10 +137,10 @@ const ReviewsSection = () => {
       <div className="relative z-10 container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
-            Why 100+ Homeowners <span className="text-primary">Choose 14er</span>
+            This Is Why Colorado Homeowners <span className="text-primary">Trust Us With Their Most Important Investment</span>
           </h2>
           <p className="text-base text-white/70 max-w-xl mx-auto">
-            Hear from families who transformed their homes with 14er
+            Real stories from real families who transformed their homes—and their lives.
           </p>
         </div>
 
