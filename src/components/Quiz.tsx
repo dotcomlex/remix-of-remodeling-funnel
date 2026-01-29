@@ -459,7 +459,7 @@ const Quiz = () => {
                     placeholder="Enter ZIP code"
                     value={data.zipCode}
                     onChange={(e) => setData({ ...data, zipCode: e.target.value.replace(/\D/g, '') })}
-                    className="pl-10 h-12 text-[15px] rounded-xl border-2 focus:border-primary"
+                    className="pl-10 h-12 text-base rounded-xl border-2 focus:border-primary"
                     maxLength={5}
                   />
                 </div>
@@ -531,7 +531,7 @@ const Quiz = () => {
                         setData({ ...data, firstName: e.target.value });
                         if (errors.firstName) setErrors({ ...errors, firstName: undefined });
                       }}
-                      className={`pl-10 h-12 text-[15px] rounded-xl border-2 transition-all ${
+                      className={`pl-10 h-12 text-base rounded-xl border-2 transition-all ${
                         errors.firstName ? 'border-red-500 focus:border-red-500' : 'focus:border-primary'
                       }`}
                     />
@@ -553,7 +553,7 @@ const Quiz = () => {
                         setData({ ...data, phone: formatPhoneNumber(e.target.value) });
                         if (errors.phone) setErrors({ ...errors, phone: undefined });
                       }}
-                      className={`pl-10 h-12 text-[15px] rounded-xl border-2 transition-all ${
+                      className={`pl-10 h-12 text-base rounded-xl border-2 transition-all ${
                         errors.phone ? 'border-red-500 focus:border-red-500' : 'focus:border-primary'
                       }`}
                       maxLength={14}
@@ -579,7 +579,7 @@ const Quiz = () => {
                         setData({ ...data, email: e.target.value });
                         if (errors.email) setErrors({ ...errors, email: undefined });
                       }}
-                      className={`pl-10 h-12 text-[15px] rounded-xl border-2 transition-all ${
+                      className={`pl-10 h-12 text-base rounded-xl border-2 transition-all ${
                         errors.email ? 'border-red-500 focus:border-red-500' : 'focus:border-primary'
                       }`}
                     />
