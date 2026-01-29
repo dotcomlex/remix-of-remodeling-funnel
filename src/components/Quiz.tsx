@@ -723,17 +723,6 @@ const Quiz = () => {
                 Thank you for your interest in 14er Renovation! Unfortunately, we currently only serve homeowners in Colorado.
               </p>
               
-              <div className="bg-muted/50 rounded-lg p-4 mb-4">
-                <p className="text-xs text-muted-foreground">
-                  <strong>Looking for a contractor in your area?</strong>
-                </p>
-                <div className="flex gap-3 justify-center mt-2">
-                  <a href="https://www.homeadvisor.com" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline font-medium">HomeAdvisor</a>
-                  <a href="https://www.angi.com" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline font-medium">Angi</a>
-                  <a href="https://www.thumbtack.com" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline font-medium">Thumbtack</a>
-                </div>
-              </div>
-              
               <p className="text-xs text-muted-foreground/70 italic">
                 Think this is an error? Your ZIP code was: <strong>{data.zipCode}</strong>
               </p>
