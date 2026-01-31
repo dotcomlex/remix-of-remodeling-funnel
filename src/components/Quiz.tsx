@@ -117,20 +117,20 @@ const Quiz = () => {
 
   const getTimelineLabel = (timeline: string): string => {
     switch (timeline) {
-      case "asap": return "Within 2 weeks (ASAP)";
-      case "30-days": return "Within 30 days";
+      case "asap": return "ASAP";
+      case "1-2-weeks": return "1-2 weeks";
       case "1-2-months": return "1-2 months";
-      case "not-sure": return "Not Sure";
+      case "not-sure": return "Not sure yet";
       default: return "";
     }
   };
 
   const getBudgetLabel = (budget: string): string => {
     switch (budget) {
+      case "5-10k": return "$5,000 - $10,000";
       case "10-20k": return "$10,000 - $20,000";
-      case "20-40k": return "$20,000 - $40,000";
-      case "40-60k": return "$40,000 - $60,000";
-      case "60k+": return "$60,000+";
+      case "20-30k": return "$20,000 - $30,000";
+      case "40k+": return "$40,000+";
       default: return "";
     }
   };
@@ -390,16 +390,16 @@ const Quiz = () => {
               <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
                 <OptionCard
                   icon={Zap}
-                  label="Within 2 weeks (ASAP)"
+                  label="ASAP"
                   selected={data.timeline === "asap"}
                   onClick={() => handleTileSelect("timeline", "asap")}
                   accentColor="text-red-600"
                 />
                 <OptionCard
                   icon={Calendar}
-                  label="Within 30 days"
-                  selected={data.timeline === "30-days"}
-                  onClick={() => handleTileSelect("timeline", "30-days")}
+                  label="1-2 weeks"
+                  selected={data.timeline === "1-2-weeks"}
+                  onClick={() => handleTileSelect("timeline", "1-2-weeks")}
                   accentColor="text-orange-600"
                 />
                 <OptionCard
@@ -411,7 +411,7 @@ const Quiz = () => {
                 />
                 <OptionCard
                   icon={Clock}
-                  label="Not Sure"
+                  label="Not sure yet"
                   selected={data.timeline === "not-sure"}
                   onClick={() => handleTileSelect("timeline", "not-sure")}
                   accentColor="text-slate-500"
@@ -576,27 +576,27 @@ const Quiz = () => {
               <div className="flex flex-col gap-2 mb-4">
                 <BudgetOptionCard
                   icon={DollarSign}
+                  label="$5,000 - $10,000"
+                  selected={data.budgetRange === "5-10k"}
+                  onClick={() => handleTileSelect("budgetRange", "5-10k")}
+                />
+                <BudgetOptionCard
+                  icon={DollarSign}
                   label="$10,000 - $20,000"
                   selected={data.budgetRange === "10-20k"}
                   onClick={() => handleTileSelect("budgetRange", "10-20k")}
                 />
                 <BudgetOptionCard
                   icon={DollarSign}
-                  label="$20,000 - $40,000"
-                  selected={data.budgetRange === "20-40k"}
-                  onClick={() => handleTileSelect("budgetRange", "20-40k")}
-                />
-                <BudgetOptionCard
-                  icon={DollarSign}
-                  label="$40,000 - $60,000"
-                  selected={data.budgetRange === "40-60k"}
-                  onClick={() => handleTileSelect("budgetRange", "40-60k")}
+                  label="$20,000 - $30,000"
+                  selected={data.budgetRange === "20-30k"}
+                  onClick={() => handleTileSelect("budgetRange", "20-30k")}
                 />
                 <BudgetOptionCard
                   icon={Gem}
-                  label="$60,000+"
-                  selected={data.budgetRange === "60k+"}
-                  onClick={() => handleTileSelect("budgetRange", "60k+")}
+                  label="$40,000+"
+                  selected={data.budgetRange === "40k+"}
+                  onClick={() => handleTileSelect("budgetRange", "40k+")}
                 />
               </div>
               <button
