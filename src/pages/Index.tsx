@@ -4,9 +4,7 @@ import HeroSection from "@/components/HeroSection";
 // Lazy load below-the-fold sections for faster initial load
 const TrustBadgesSection = lazy(() => import("@/components/TrustBadgesSection"));
 const GallerySection = lazy(() => import("@/components/GallerySection"));
-const ProcessSection = lazy(() => import("@/components/ProcessSection"));
 const ReviewsSection = lazy(() => import("@/components/ReviewsSection"));
-const FinalCTASection = lazy(() => import("@/components/FinalCTASection"));
 const FAQSection = lazy(() => import("@/components/FAQSection"));
 const Footer = lazy(() => import("@/components/Footer"));
 
@@ -21,13 +19,7 @@ const Index = () => {
         <GallerySection />
       </Suspense>
       <Suspense fallback={<div className="h-96 section-gradient-dark" />}>
-        <ProcessSection />
-      </Suspense>
-      <Suspense fallback={<div className="h-96 section-gradient-dark" />}>
         <ReviewsSection />
-      </Suspense>
-      <Suspense fallback={<div className="h-64 section-gradient-dark" />}>
-        <FinalCTASection />
       </Suspense>
       <Suspense fallback={<div className="h-64 bg-muted/50" />}>
         <FAQSection />

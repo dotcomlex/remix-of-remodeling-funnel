@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { MessageCircle } from "lucide-react";
 
 const faqs = [
   {
@@ -40,23 +41,49 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="py-12 sm:py-16 bg-muted/50">
-      <div className="container max-w-3xl px-4">
-        <h2 className="text-xl sm:text-2xl font-semibold text-center mb-6 sm:mb-8">
-          Frequently Asked Questions
-        </h2>
-        <Accordion type="single" collapsible className="w-full">
+    <section className="py-16 lg:py-24 bg-gradient-to-b from-white to-slate-50">
+      <div className="container max-w-4xl px-4">
+        {/* Header */}
+        <div className="text-center mb-10 lg:mb-14">
+          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            <MessageCircle className="w-4 h-4" />
+            Common Questions
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            Everything you need to know about working with 14er Renovation
+          </p>
+        </div>
+
+        {/* FAQ Accordion */}
+        <Accordion type="single" collapsible className="space-y-4">
           {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index}`} className="border-border/50">
-              <AccordionTrigger className="text-left text-sm sm:text-base font-medium hover:no-underline py-3 sm:py-4">
+            <AccordionItem
+              key={index}
+              value={`item-${index}`}
+              className="bg-white rounded-xl shadow-sm border border-slate-100 px-6 transition-shadow hover:shadow-md"
+            >
+              <AccordionTrigger className="text-left text-base sm:text-lg font-semibold text-slate-800 hover:text-primary hover:no-underline py-5">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground pb-3 sm:pb-4">
+              <AccordionContent className="text-base text-slate-600 pb-5 leading-relaxed">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
+
+        {/* CTA Footer */}
+        <div className="text-center mt-12 p-6 bg-slate-100 rounded-xl">
+          <p className="text-slate-700 font-medium mb-2">
+            Still have questions?
+          </p>
+          <p className="text-slate-600">
+            Call us at <span className="font-semibold text-primary">(720) 989-9883</span> or complete the form above to get your free consultation.
+          </p>
+        </div>
       </div>
     </section>
   );
