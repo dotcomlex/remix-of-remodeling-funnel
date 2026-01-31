@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -16,15 +17,6 @@ const FloatingCTA = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    const heroSection = document.getElementById("hero");
-    if (heroSection) {
-      heroSection.scrollIntoView({ behavior: "smooth" });
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
   return (
     <AnimatePresence>
       {isVisible && (
@@ -35,14 +27,15 @@ const FloatingCTA = () => {
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="fixed bottom-5 left-4 right-4 sm:bottom-6 sm:left-auto sm:right-6 z-50"
         >
-          <Button
-            onClick={scrollToTop}
-            variant="cta"
-            size="lg"
-            className="w-full sm:w-auto shadow-premium text-sm sm:text-base font-semibold px-6 py-4 h-auto"
-          >
-            Claim $2,000 Discount
-          </Button>
+          <Link to="/qualify">
+            <Button
+              variant="cta"
+              size="lg"
+              className="w-full sm:w-auto shadow-premium text-sm sm:text-base font-semibold px-6 py-4 h-auto"
+            >
+              Claim $2,000 Discount
+            </Button>
+          </Link>
         </motion.div>
       )}
     </AnimatePresence>
