@@ -27,14 +27,19 @@ const QualifyPage = () => {
         <div className="w-full max-w-lg">
           {/* Progress Text */}
           <div className="text-center mb-6">
-            <span className="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">
-              Qualification Form
-            </span>
+            {/* Live Activity Indicator */}
+            <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 text-xs font-medium px-3 py-1.5 rounded-full mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              8 people are checking availability right now
+            </div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-              See if you qualify for $2,000 off
+              Save $2,000 On Your Remodel
             </h1>
             <p className="text-sm text-muted-foreground">
-              Answer a few quick questions to check your eligibility
+              Answer a few quick questions to see if you qualify
             </p>
           </div>
 

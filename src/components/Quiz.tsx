@@ -131,7 +131,6 @@ const Quiz = () => {
       case "20-40k": return "$20,000 - $40,000";
       case "40-60k": return "$40,000 - $60,000";
       case "60k+": return "$60,000+";
-      case "not-sure": return "Not sure / Need guidance";
       default: return "";
     }
   };
@@ -441,13 +440,13 @@ const Quiz = () => {
               <div className="text-center mb-5">
                 <Clock className="w-10 h-10 text-primary mx-auto mb-3" />
                 <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
-                  Quick Clarification
+                  Quick Question
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  We're currently booking projects that start within the next 60 days.
+                  We're currently taking projects that can start within the next 60 days.
                 </p>
                 <p className="text-sm text-foreground font-medium mt-2">
-                  Would you like to move forward with a consultation?
+                  Does that work for your timeline?
                 </p>
               </div>
 
@@ -465,8 +464,8 @@ const Quiz = () => {
                       <Check className="w-5 h-5 text-primary-foreground" />
                     </div>
                     <div>
-                      <p className="font-medium text-foreground">Yes, I want to start within 60 days</p>
-                      <p className="text-xs text-muted-foreground">Continue with qualification</p>
+                      <p className="font-medium text-foreground">Yes, that works for me</p>
+                      <p className="text-xs text-muted-foreground">Continue to next step</p>
                     </div>
                   </div>
                 </button>
@@ -481,8 +480,8 @@ const Quiz = () => {
                       <Calendar className="w-5 h-5 text-slate-500" />
                     </div>
                     <div>
-                      <p className="font-medium text-foreground">No, I'm planning further out</p>
-                      <p className="text-xs text-muted-foreground">We'll help you when you're ready</p>
+                      <p className="font-medium text-foreground">No, I need more time</p>
+                      <p className="text-xs text-muted-foreground">I'm planning further out</p>
                     </div>
                   </div>
                 </button>
@@ -522,15 +521,11 @@ const Quiz = () => {
               </motion.div>
               
               <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2 leading-snug">
-                We're Booking Soon!
+                Thanks For Your Interest!
               </h3>
               
               <p className="text-sm text-muted-foreground leading-relaxed mb-4 max-w-sm mx-auto">
-                Thanks for your interest! We're currently focusing on projects starting within the next 60 days.
-              </p>
-
-              <p className="text-sm font-medium text-foreground mb-3">
-                We'd love to help when you're ready!
+                We're focusing on projects starting within 60 days right now. We'd love to help when you're ready!
               </p>
 
               <div className="bg-slate-50 rounded-xl p-4 mb-4 text-left">
@@ -551,22 +546,14 @@ const Quiz = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-2">
-                <Link 
-                  to="/#gallery"
-                  className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-primary/10 text-primary text-sm font-medium rounded-lg hover:bg-primary/20 transition-colors"
-                >
-                  <Images className="w-4 h-4" />
-                  View Our Gallery
-                </Link>
-                <Link 
-                  to="/#reviews"
-                  className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-slate-100 text-foreground text-sm font-medium rounded-lg hover:bg-slate-200 transition-colors"
-                >
-                  <Star className="w-4 h-4" />
-                  Read Reviews
-                </Link>
-              </div>
+              {/* Single Back to Home button */}
+              <Link 
+                to="/"
+                className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-3 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back to Home
+              </Link>
             </motion.div>
           )}
 
@@ -610,12 +597,6 @@ const Quiz = () => {
                   label="$60,000+"
                   selected={data.budgetRange === "60k+"}
                   onClick={() => handleTileSelect("budgetRange", "60k+")}
-                />
-                <BudgetOptionCard
-                  icon={HelpCircle}
-                  label="Not sure / Need guidance"
-                  selected={data.budgetRange === "not-sure"}
-                  onClick={() => handleTileSelect("budgetRange", "not-sure")}
                 />
               </div>
               <button
@@ -687,14 +668,14 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              {/* Celebration Header - Simplified */}
+              {/* Celebration Header with actual ZIP code */}
               <div className="text-center mb-4">
                 <span className="text-2xl mb-1 block">🎉</span>
                 <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
-                  Your Zip Code Qualifies For This Offer!
+                  Congrats! Your Area ({data.zipCode}) Qualifies!
                 </h3>
                 <p className="text-sm text-muted-foreground leading-snug max-w-sm mx-auto">
-                  Complete the form below so we can contact you and schedule your 100% free estimate.
+                  Enter your info below so we can contact you and schedule your 100% free in-home consultation.
                 </p>
               </div>
 
