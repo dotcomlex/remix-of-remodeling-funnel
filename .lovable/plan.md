@@ -1,9 +1,13 @@
 
-# Critical Copy & UX Fixes Based on User Feedback
+
+# Complete Homepage + Qualify Page + Quiz Fixes
 
 ## Summary
 
-This update addresses multiple copy and UX issues found during testing: homepage headline improvements, qualify page enhancements, quiz flow refinements including removing the 5th budget option, friendlier timeline clarification language, and showing the actual ZIP code on the contact form.
+This update implements the final set of copy and layout changes:
+1. **Homepage Hero**: Replace two-column layout with centered single-column design
+2. **Qualify Page**: Update headline and increase live activity count
+3. **Quiz Component**: Update budget subtext and ensure all language is consistent
 
 ---
 
@@ -11,137 +15,189 @@ This update addresses multiple copy and UX issues found during testing: homepage
 
 | File | Changes |
 |------|---------|
-| `src/components/HeroSection.tsx` | Remove BREAKING badge, increase logo, update headline/subheadline, update CTA card copy, brighten image |
-| `src/pages/QualifyPage.tsx` | Remove "Qualification Form" badge, add live activity indicator, update headline |
-| `src/components/Quiz.tsx` | Remove 5th budget option, friendlier timeline clarification, single "Back to Home" button on disqualification, show actual ZIP in contact header |
+| `src/components/HeroSection.tsx` | Replace two-column layout with centered single-column, update all copy |
+| `src/pages/QualifyPage.tsx` | Update headline to "Check Availability", increase live count to 12, update subtext |
+| `src/components/Quiz.tsx` | Update budget question subtext |
 
 ---
 
-## Part 1: Homepage Fixes (HeroSection.tsx)
+## Part 1: HeroSection.tsx - Complete Restructure
 
-### 1.1 Remove "BREAKING" Badge
-Delete lines 45-50 containing the red "BREAKING" badge.
-
-### 1.2 Increase Logo Size
-**Current:** `h-16 sm:h-24 lg:h-36`
-**New:** `h-20 sm:h-28 lg:h-44`
-
-### 1.3 Update Headline
-**Current:**
+### Current Structure (Two-Column)
 ```text
-New Winter Program Gives Colorado Homeowners $2,000 OFF Any Remodeling Project—Only 7 Spots Left
+[Logo centered]
+[Left Column: Headline/Subheadline] | [Right Column: CTA Card]
+[Trust Strip below right column]
 ```
 
-**New:**
+### New Structure (Single-Column Centered)
 ```text
-Save $2,000 On Your Kitchen, Bathroom, Or Any Remodeling Project
-```
-Add "LIMITED SPOTS AVAILABLE" badge below headline.
-
-### 1.4 Update Subheadline
-**Current:**
-```text
-Transform your kitchen, bathroom, or any space...Take a quick 5-question quiz...
+[Logo centered]
+[Headline centered]
+[Subheadline centered]
+[CTA Card centered]
+[Trust Strip centered below]
 ```
 
-**New:**
+### Copy Changes
+
+| Element | Current | New |
+|---------|---------|-----|
+| Headline | "Save $2,000 On Your Kitchen, Bathroom, Or Any Remodeling Project" | "This New Winter Upgrade Program Helps Colorado Homeowners Save $2,000 on their remodel" |
+| Subheadline | "Fill this quick form to see if you qualify for a free consultation and $2,000 off any remodeling project." | "Only a few spots are left. Fill this quick form to see if you qualify for a FREE consultation and $2,000 off your project!" |
+| CTA Card Heading | "Save $2,000 On Your Remodel" | "Check Availability" |
+| CTA Card Subtext | "See if you qualify for a free consultation and $2,000 off any remodeling project." | "Takes less than 30 seconds to complete" |
+| Button Text | "Check Availability" | "Check Availability Now" |
+| Trust Indicator | "60 seconds or less" | "30 seconds" |
+
+### Elements to Remove
+- "LIMITED SPOTS AVAILABLE" badge below headline
+- "LIMITED SPOTS" badge inside CTA card
+- Two-column flex layout (`lg:flex-row lg:items-start lg:justify-between`)
+
+### Structural Changes
+- Remove left/right column wrappers
+- Wrap everything in `max-w-3xl mx-auto` centered container
+- Add `text-center` to headline section
+- Center the CTA card with `flex justify-center`
+- Adjust padding: `py-6 lg:py-12`
+- Adjust logo margin: `mb-6 lg:mb-8`
+- Logo size: `h-20 sm:h-28 lg:h-40` (slightly smaller than lg:h-44)
+
+---
+
+## Part 2: QualifyPage.tsx - Headline Updates
+
+### Changes
+
+| Element | Current | New |
+|---------|---------|-----|
+| Live Activity Count | "8 people" | "12 people" |
+| Headline | "Save $2,000 On Your Remodel" | "Check Availability" |
+| Subheadline | "Answer a few quick questions to see if you qualify" | "Takes less than 30 seconds to complete" |
+
+### Lines Affected
+- Line 36: Activity count text
+- Line 38-40: h1 headline
+- Line 41-43: p subheadline
+
+---
+
+## Part 3: Quiz.tsx - Budget Subtext Update
+
+### Change
+
+| Element | Current (Line 573-574) | New |
+|---------|------------------------|-----|
+| Budget Subtext | "(This won't affect your pricing—it just helps us prepare the right options for you)" | "(This helps us prepare the right options for you)" |
+
+This simplifies the copy to match the user's instructions.
+
+---
+
+## Visual Comparison
+
+### Homepage Hero - Before
 ```text
-Fill this quick form to see if you qualify for a free consultation and $2,000 off any remodeling project.
+┌─────────────────────────────────────────────────┐
+│                    [LOGO]                       │
+├───────────────────────┬─────────────────────────┤
+│  Save $2,000 On Your  │   ┌─────────────────┐  │
+│  Kitchen, Bathroom... │   │ LIMITED SPOTS   │  │
+│                       │   │ Save $2,000...  │  │
+│  [LIMITED SPOTS]      │   │                 │  │
+│                       │   │ [Check Avail]   │  │
+│  Fill this quick form │   │                 │  │
+│  to see if you qual.. │   │ 60s | 100+      │  │
+│                       │   └─────────────────┘  │
+│                       │  Licensed | Warranty   │
+└───────────────────────┴─────────────────────────┘
 ```
 
-### 1.5 Update CTA Card
-- Add "LIMITED SPOTS" urgency badge at top
-- Change heading from "See If You Qualify" to "Save $2,000 On Your Remodel"
-- Update button text from "Start Qualification Quiz" to "Check Availability"
-- Redesign trust indicators to horizontal layout with cleaner styling
-- Add `whitespace-nowrap` to prevent text wrapping on mobile
-
-### 1.6 Brighten Hero Image
-Add `brightness-110` to the image and reduce overlay opacity.
-
----
-
-## Part 2: Qualify Page Fixes (QualifyPage.tsx)
-
-### 2.1 Remove "Qualification Form" Badge
-Delete the badge element at lines 30-32.
-
-### 2.2 Add Live Activity Indicator
-Add pulsing dot with text: "8 people are checking availability right now"
-
-### 2.3 Update Headline
-**Current:** "See if you qualify for $2,000 off"
-**New:** "Save $2,000 On Your Remodel"
-
-### 2.4 Update Subheadline
-**Current:** "Answer a few quick questions to check your eligibility"
-**New:** "Answer a few quick questions to see if you qualify"
+### Homepage Hero - After
+```text
+┌─────────────────────────────────────────────────┐
+│                    [LOGO]                       │
+│                                                 │
+│      This New Winter Upgrade Program Helps      │
+│    Colorado Homeowners Save $2,000 on their     │
+│                    remodel                      │
+│                                                 │
+│        Only a few spots are left. Fill this     │
+│        quick form to see if you qualify...      │
+│                                                 │
+│            ┌─────────────────────┐              │
+│            │  Check Availability │              │
+│            │  Takes less than    │              │
+│            │  30 seconds         │              │
+│            │                     │              │
+│            │ [Check Avail Now]   │              │
+│            │                     │              │
+│            │  30s  |  100+       │              │
+│            └─────────────────────┘              │
+│                                                 │
+│         Licensed & Insured | 1-Year Warranty    │
+└─────────────────────────────────────────────────┘
+```
 
 ---
 
-## Part 3: Quiz Component Fixes (Quiz.tsx)
+## Implementation Details
 
-### 3.1 Remove 5th Budget Option (Lines 614-619)
-Remove the "Not sure / Need guidance" option from the budget step. Only keep 4 options:
-- $10,000 - $20,000
-- $20,000 - $40,000
-- $40,000 - $60,000
-- $60,000+
+### HeroSection.tsx Changes
 
-Also update `getBudgetLabel()` helper to remove the "not-sure" case.
+**Lines 25-123** - Replace entire content div with new centered layout:
 
-### 3.2 Update Timeline Clarification Language (Lines 431-501)
-**Changes:**
-- "Quick Clarification" → "Quick Question"
-- "Would you like to move forward with a consultation?" → "Does that work for your timeline?"
-- "Yes, I want to start within 60 days" → "Yes, that works for me"
-- "Continue with qualification" → "Continue to next step"
-- "No, I'm planning further out" → "No, I need more time"
+1. Adjust outer container padding to `py-6 lg:py-12`
+2. Update logo container margin to `mb-6 lg:mb-8`
+3. Reduce logo size to `lg:h-40` from `lg:h-44`
+4. Remove the `flex flex-col lg:flex-row...` wrapper (line 36)
+5. Replace with single centered container `max-w-3xl mx-auto`
+6. Add centered headline section with new copy
+7. Add centered CTA card section with new copy
+8. Add centered trust strip at bottom
 
-### 3.3 Fix Timeline Disqualification Buttons (Lines 504-570)
-**Changes:**
-- Remove "Read Reviews" button
-- Change to single "Back to Home" button that links to `/`
-- Update heading from "We're Booking Soon!" to "Thanks For Your Interest!"
+### QualifyPage.tsx Changes
 
-### 3.4 Show Actual ZIP Code on Contact Step (Lines 690-698)
-**Current:** "Your Zip Code Qualifies For This Offer!"
-**New:** "Congrats! Your Area ({data.zipCode}) Qualifies!"
+**Lines 29-43** - Update the headline section:
 
-Also update subheadline:
-**Current:** "...schedule your 100% free estimate."
-**New:** "...schedule your 100% free in-home consultation."
+1. Line 36: Change "8 people" to "12 people"
+2. Lines 38-40: Change h1 from "Save $2,000 On Your Remodel" to "Check Availability"
+3. Lines 41-43: Change p from "Answer a few quick questions..." to "Takes less than 30 seconds to complete"
+
+### Quiz.tsx Changes
+
+**Lines 573-574** - Update budget subtext:
+
+1. Change from "(This won't affect your pricing—it just helps us prepare the right options for you)"
+2. To: "(This helps us prepare the right options for you)"
 
 ---
 
-## Visual Summary
+## Verification Checklist
 
-### Homepage Hero Before/After
+### Homepage
+- [ ] Logo centered at top
+- [ ] Headline: "This New Winter Upgrade Program Helps Colorado Homeowners Save $2,000 on their remodel"
+- [ ] Subheadline: "Only a few spots are left..."
+- [ ] CTA card centered below (NOT side-by-side)
+- [ ] CTA card heading says "Check Availability"
+- [ ] CTA card subtext says "Takes less than 30 seconds to complete"
+- [ ] Button says "Check Availability Now"
+- [ ] Trust indicators show "30 seconds" and "100+ qualified"
+- [ ] NO two-column layout
+- [ ] NO "LIMITED SPOTS" badges
 
-| Element | Before | After |
-|---------|--------|-------|
-| Badge | "🚨 BREAKING" | Removed |
-| Logo size | h-16/h-24/h-36 | h-20/h-28/h-44 |
-| Headline | "New Winter Program Gives..." | "Save $2,000 On Your Kitchen..." |
-| CTA button | "Start Qualification Quiz" | "Check Availability" |
-| Image | Dark overlay | Brightened with brightness-110 |
+### Qualify Page
+- [ ] Live activity: "12 people are checking availability right now"
+- [ ] Headline: "Check Availability"
+- [ ] Subheadline: "Takes less than 30 seconds to complete"
+- [ ] NO "$2,000" mention in headline
 
-### Quiz Flow Changes
+### Quiz
+- [ ] Budget has only 4 options (already done)
+- [ ] Budget subtext: "(This helps us prepare the right options for you)"
+- [ ] Timeline clarification says "Quick Question" (already done)
+- [ ] Timeline disqualification has single "Back to Home" button (already done)
+- [ ] Contact form shows actual ZIP code (already done)
 
-| Step | Before | After |
-|------|--------|-------|
-| Budget options | 5 options | 4 options (removed "Not sure") |
-| Timeline clarification | Formal language | Friendly language |
-| Disqualification | 2 buttons (Gallery + Reviews) | 1 button (Back to Home) |
-| Contact header | Generic ZIP message | Shows actual ZIP code |
-
----
-
-## Benefits
-
-- Cleaner, more professional homepage without "BREAKING" urgency
-- Friendlier, less "qualification" focused language
-- Streamlined budget options (removes low-value "not sure" responses)
-- Single clear CTA on disqualification screen
-- Personalized contact step with actual ZIP code
-- Better mobile text wrapping with `whitespace-nowrap`
