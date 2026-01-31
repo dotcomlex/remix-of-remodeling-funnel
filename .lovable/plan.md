@@ -1,101 +1,43 @@
 
 
-# Phase 2: Hero Redesign + Qualify Page + Quiz Updates
+# Phase 3: Text Visibility and Contrast Fixes
 
 ## Summary
 
-This comprehensive update includes:
-1. New hero background image (bright Colorado mountains)
-2. Simplified CTA (remove white box, button only)
-3. Subtle rocking animation on CTA button
-4. Qualify page background image (soft misty mountains)
-5. Updated budget ranges and timeline options
-6. Stronger text shadows for readability
+This phase addresses critical visibility issues where text is hard to read on bright backgrounds. The new golden-hour mountain hero image provides better natural contrast, and we'll strengthen shadows, add overlays, and improve the qualify page contrast.
 
 ---
 
-## Files to Create/Modify
+## Files to Modify
 
 | File | Action | Changes |
 |------|--------|---------|
-| `src/assets/hero-mountains-daylight.png` | CREATE | Copy uploaded daylight mountain image |
-| `src/assets/qualify-bg-mountains.png` | CREATE | Copy uploaded soft misty mountain image |
-| `src/components/HeroSection.tsx` | MODIFY | New background, simplified CTA, reduced spacing |
-| `src/pages/QualifyPage.tsx` | MODIFY | Background image, remove header, center quiz |
-| `src/components/Quiz.tsx` | MODIFY | New budget ranges, updated timeline options |
-| `src/index.css` | MODIFY | Add stronger text shadow, rocking animation |
+| `src/assets/14er-mountain-hero.webp` | CREATE | Copy uploaded golden-hour mountain image |
+| `src/components/HeroSection.tsx` | MODIFY | New background, update subheadline text |
+| `src/pages/QualifyPage.tsx` | MODIFY | Dark overlay, prominent badge, solid quiz card |
+| `src/index.css` | MODIFY | Strengthen text shadow even more |
 
 ---
 
-## Part 1: HeroSection.tsx - Complete Redesign
+## Part 1: Hero Section Fixes
 
 ### 1.1 Replace Background Image
 
-**Current Import (Line 3):**
-```tsx
-import heroImage from "@/assets/hero-colorado-home.png";
-```
+The new golden-hour mountain image has dramatic lighting with darker tones in the sky and forest - perfect for white text visibility.
 
-**New Import:**
+**Current Import (Line 3):**
 ```tsx
 import heroImage from "@/assets/hero-mountains-daylight.png";
 ```
 
-### 1.2 Reduce Logo to Headline Spacing
-
-**Current (Line 28):**
+**New Import:**
 ```tsx
-className="flex justify-center mb-6 lg:mb-8"
+import heroImage from "@/assets/14er-mountain-hero.webp";
 ```
 
-**New:**
-```tsx
-className="flex justify-center mb-3 lg:mb-4"
-```
+### 1.2 Strengthen Text Shadow Even More
 
-### 1.3 Add Stronger Text Shadow Class
-
-Update headline/subheadline to use new `hero-text-shadow-strong` class for readability on bright background.
-
-### 1.4 Remove White CTA Card - Replace with Standalone Button
-
-**Current Structure (Lines 56-98):**
-```text
-[motion.div wrapper]
-  [div className="w-full max-w-lg"]
-    [div className="quiz-card-glass rounded-2xl..."]  <-- REMOVE THIS WHITE BOX
-      [Check Availability heading]                    <-- REMOVE
-      [Takes less than 30 seconds text]              <-- REMOVE
-      [Button]                                        <-- KEEP (move out)
-      [Trust indicators with border-t]               <-- MODIFY & MOVE
-    [/div]
-  [/div]
-[/motion.div]
-```
-
-**New Structure:**
-```text
-[motion.div wrapper]
-  [motion.div - button with rocking animation]
-    [Button with larger styling and shadow]
-  [/motion.div]
-  [Trust indicators (directly on background, white text)]
-[/motion.div]
-```
-
-### 1.5 Trust Indicators Styling
-
-Move trust indicators outside the (now removed) card and style for visibility on image background:
-- White text with slight transparency
-- Primary colored icons
-- Positioned directly below button
-
----
-
-## Part 2: index.css - New Animations and Styles
-
-### 2.1 Add Stronger Text Shadow (Line ~217)
-
+**Current CSS (Lines 219-224):**
 ```css
 .hero-text-shadow-strong {
   text-shadow: 
@@ -105,247 +47,198 @@ Move trust indicators outside the (now removed) card and style for visibility on
 }
 ```
 
-### 2.2 Add Subtle Rocking Animation (Line ~303)
-
+**New CSS (Maximum Visibility):**
 ```css
-@keyframes subtleRock {
-  0%, 100% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(-0.5deg);
-  }
-  75% {
-    transform: rotate(0.5deg);
-  }
-}
-
-.animate-subtle-rock {
-  animation: subtleRock 3s ease-in-out infinite;
-}
-
-.animate-subtle-rock:hover {
-  animation-play-state: paused;
+.hero-text-shadow-strong {
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 1),
+    0 3px 6px rgba(0, 0, 0, 0.95),
+    0 6px 12px rgba(0, 0, 0, 0.8),
+    0 12px 24px rgba(0, 0, 0, 0.6);
 }
 ```
+
+This adds a near-black base shadow with 100% opacity for maximum contrast.
+
+### 1.3 Update Subheadline Text
+
+**Current (Line 51-52):**
+```tsx
+Only a few spots are left. Fill this quick form to see if you qualify...
+```
+
+**New:**
+```tsx
+Only a few spots are left. Click the button below to see if you qualify...
+```
+
+Change: "Fill this quick form" to "Click the button below"
 
 ---
 
-## Part 3: QualifyPage.tsx - Background and Layout
+## Part 2: Qualify Page Contrast Fixes
 
-### 3.1 Add Background Image Import
+### 2.1 Add Dark Overlay to Background
 
+**Current (Lines 9-14):**
 ```tsx
-import qualifyBgImage from "@/assets/qualify-bg-mountains.png";
-```
-
-### 3.2 Remove Header Section
-
-Delete the entire header section (Lines 9-23) that contains:
-- "Back to Home" link
-- Logo in corner
-
-### 3.3 Add Background Image Container
-
-Replace the simple gradient background with a full-page image:
-
-**Current (Line 8):**
-```tsx
-<div className="min-h-screen bg-gradient-to-b from-slate-50 to-white flex flex-col">
-```
-
-**New Structure:**
-```tsx
-<div className="min-h-screen relative">
-  {/* Background Image */}
-  <div className="fixed inset-0 z-0">
-    <img 
-      src={qualifyBgImage} 
-      alt="" 
-      className="w-full h-full object-cover"
-    />
-  </div>
-
-  {/* Content */}
-  <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-8">
-    ...
-  </div>
+<div className="fixed inset-0 z-0">
+  <img 
+    src={qualifyBgImage} 
+    alt="" 
+    className="w-full h-full object-cover"
+  />
 </div>
 ```
 
-### 3.4 Update Quiz Card Styling
-
-Ensure strong contrast against the light background:
+**New (with dark gradient overlay):**
 ```tsx
-<div className="quiz-card-glass rounded-2xl shadow-quiz-glow p-5 sm:p-6 w-full border border-primary/20 bg-white/95">
+<div className="fixed inset-0 z-0">
+  <img 
+    src={qualifyBgImage} 
+    alt="" 
+    className="w-full h-full object-cover"
+  />
+  {/* Dark overlay for better contrast */}
+  <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/30" />
+</div>
 ```
 
-### 3.5 Update Live Activity Badge
+### 2.2 Make Live Activity Badge MORE Prominent
 
-Style for visibility on new background:
+**Current (Lines 25-31):**
 ```tsx
 <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-emerald-700 text-xs font-medium px-3 py-1.5 rounded-full mb-4 shadow-md">
 ```
 
----
-
-## Part 4: Quiz.tsx - Budget and Timeline Updates
-
-### 4.1 Update Budget Ranges (Lines 577-600)
-
-**Current Options:**
-- $10,000 - $20,000
-- $20,000 - $40,000
-- $40,000 - $60,000
-- $60,000+
-
-**New Options:**
-- $5,000 - $10,000 (NEW lower entry point)
-- $10,000 - $20,000
-- $20,000 - $30,000 (changed from $20-40k)
-- $40,000+ (simplified from $60k+)
-
-### 4.2 Update getBudgetLabel Helper (Lines 128-136)
-
+**New (Bright & Bold):**
 ```tsx
-const getBudgetLabel = (budget: string): string => {
-  switch (budget) {
-    case "5-10k": return "$5,000 - $10,000";
-    case "10-20k": return "$10,000 - $20,000";
-    case "20-30k": return "$20,000 - $30,000";
-    case "40k+": return "$40,000+";
-    default: return "";
-  }
-};
+<div className="inline-flex items-center gap-2 bg-emerald-500 text-white text-xs font-bold px-4 py-2 rounded-full mb-4 shadow-xl border-2 border-white/50">
 ```
 
-### 4.3 Update Timeline Options (Lines 391-418)
+Changes:
+- Solid emerald-500 background (not transparent white)
+- White text (not emerald text)
+- font-bold (not font-medium)
+- Larger padding (px-4 py-2)
+- Stronger shadow (shadow-xl)
+- White border for extra pop
 
-**Current Options:**
-- Within 2 weeks (ASAP)
-- Within 30 days
-- 1-2 months
-- Not Sure
+### 2.3 Strengthen Headline & Subheadline
 
-**New Options:**
-- ASAP (simplified label)
-- 1-2 weeks (new granularity, replaces "30 days")
-- 1-2 months
-- Not sure yet (friendlier)
-
-### 4.4 Update getTimelineLabel Helper (Lines 118-126)
-
+**Current (Lines 32-37):**
 ```tsx
-const getTimelineLabel = (timeline: string): string => {
-  switch (timeline) {
-    case "asap": return "ASAP";
-    case "1-2-weeks": return "1-2 weeks";
-    case "1-2-months": return "1-2 months";
-    case "not-sure": return "Not sure yet";
-    default: return "";
-  }
-};
+<h1 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
+  Check Availability
+</h1>
+<p className="text-sm text-muted-foreground">
+  Takes less than 30 seconds to complete
+</p>
+```
+
+**New (Maximum Contrast):**
+```tsx
+<h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-2">
+  Check Availability
+</h1>
+<p className="text-sm sm:text-base font-medium text-slate-700">
+  Takes less than 30 seconds to complete
+</p>
+```
+
+Changes:
+- Headline: Larger (text-2xl/3xl), font-extrabold, explicit text-slate-900
+- Subheadline: Responsive size, font-medium, darker text-slate-700
+
+### 2.4 Strengthen Footer Contrast
+
+**Current (Line 46):**
+```tsx
+<footer className="w-full py-4 px-4 bg-white/50 backdrop-blur-sm">
+```
+
+**New:**
+```tsx
+<footer className="w-full py-4 px-4 bg-white/80 backdrop-blur-sm border-t border-slate-200">
 ```
 
 ---
 
 ## Visual Comparison
 
-### Homepage Hero - Before vs After
+### Hero Section - Before vs After
 
 **BEFORE:**
 ```text
-[LOGO]
-      (large gap)
-
-This New Winter Upgrade Program... (dark background)
-
-┌─────────────────────────────────┐
-│      Check Availability         │
-│   Takes less than 30 seconds    │
-│  [Check Availability Now ->]    │
-│  ✓ Licensed    🛡️ Warranty     │
-└─────────────────────────────────┘
+[BRIGHT BLUE SKY BACKGROUND]
+White text with moderate shadow
+(hard to read in places)
+"Fill this quick form..."
 ```
 
 **AFTER:**
 ```text
-[LOGO]
- (reduced gap)
-
-This New Winter Upgrade Program... (BRIGHT mountain background, strong shadow)
-
-[CHECK AVAILABILITY NOW ->] (standalone button, subtle rocking)
-
-✓ Licensed & Insured  |  🛡️ 1-Year Warranty (white text on image)
+[GOLDEN-HOUR MOUNTAIN PEAKS - dramatic dark/warm tones]
+White text with MAXIMUM shadow (near-black base)
+(100% readable everywhere)
+"Click the button below..."
 ```
 
 ### Qualify Page - Before vs After
 
 **BEFORE:**
 ```text
-← Back to Home                    [LOGO]
-─────────────────────────────────────────
-         (plain gradient bg)
-
-    🟢 12 people checking...
-       Check Availability
-    Takes less than 30 seconds
-
-    ┌─────────────────────┐
-    │    Quiz Card        │
-    └─────────────────────┘
+[Soft misty background - no overlay]
+→ Pale badge (white bg, green text)
+→ Light headline (text-foreground)
+→ Everything blends together
 ```
 
 **AFTER:**
 ```text
-(SOFT MISTY MOUNTAIN BACKGROUND - full bleed)
-
-    🟢 12 people checking...
-       Check Availability
-    Takes less than 30 seconds
-
-    ┌─────────────────────┐
-    │    Quiz Card        │
-    │  (high contrast)    │
-    └─────────────────────┘
+[Soft misty background + DARK GRADIENT OVERLAY]
+→ BRIGHT GREEN badge (emerald-500, white text, white border)
+→ BOLD headline (text-slate-900, font-extrabold)
+→ Maximum contrast throughout
 ```
 
 ---
 
-## Implementation Order
+## Implementation Details
 
-1. Copy uploaded images to assets folder
-2. Update `src/index.css` with new animations/styles
-3. Update `src/components/HeroSection.tsx`
-4. Update `src/pages/QualifyPage.tsx`
-5. Update `src/components/Quiz.tsx`
+### CSS Changes (src/index.css, Lines 219-224)
+
+Replace the existing `.hero-text-shadow-strong` with maximum visibility version:
+- 4-layer shadow stack
+- Base layer at 100% opacity
+- Creates a near-black outline effect
+
+### HeroSection.tsx Changes
+
+1. Line 3: Update import to new webp image
+2. Line 52: Change "Fill this quick form" to "Click the button below"
+
+### QualifyPage.tsx Changes
+
+1. Lines 9-14: Add dark gradient overlay after background image
+2. Line 25: Replace badge classes with bold emerald styling
+3. Lines 32-37: Update headline/subheadline with stronger colors
+4. Line 46: Strengthen footer background
 
 ---
 
 ## Verification Checklist
 
-### Homepage Hero
-- [ ] New bright mountain background visible
-- [ ] Text has strong shadow for readability
-- [ ] Logo spacing reduced (mb-3 lg:mb-4)
-- [ ] White CTA card removed
-- [ ] CTA button is standalone with shadow
-- [ ] Button has subtle rocking animation
-- [ ] Trust indicators below button (white text)
+### Hero Section
+- [ ] New golden-hour mountain image loaded
+- [ ] Text has maximum contrast shadow
+- [ ] Subheadline says "Click the button below"
+- [ ] Text 100% readable on mobile
 
 ### Qualify Page
-- [ ] "Back to Home" header removed
-- [ ] Soft misty mountain background visible
-- [ ] Quiz perfectly centered
-- [ ] High contrast on quiz card
-- [ ] Live activity badge visible
-
-### Quiz Component
-- [ ] Budget: $5K-10K, $10K-20K, $20K-30K, $40K+
-- [ ] Timeline: "ASAP", "1-2 weeks", "1-2 months", "Not sure yet"
-- [ ] All webhook labels match new values
-
-### Trust Badges (Already Fixed)
-- [ ] Logo scroll loops seamlessly (already using duplicated array)
+- [ ] Dark gradient overlay on background
+- [ ] Live badge: bright emerald with white text
+- [ ] Headline: text-2xl/3xl, font-extrabold, text-slate-900
+- [ ] Subheadline: font-medium, text-slate-700
+- [ ] Footer has stronger contrast
 
