@@ -22,14 +22,14 @@ const faqs = [
       "Yes. We are fully licensed and insured, including liability and workers' compensation. This protects you, your property, and ensures all work meets local building codes and requirements.",
   },
   {
-    question: "How long does a typical remodeling project take?",
+    question: "What areas do you serve?",
     answer:
-      "Timelines vary based on project scope. Kitchen remodels typically take 4-8 weeks, bathrooms 2-4 weeks, and basements 6-10 weeks. We'll provide a detailed timeline during your consultation.",
+      "We serve major cities throughout Colorado including Denver, Boulder, Fort Collins, Colorado Springs, Aurora, Lakewood, Arvada, and surrounding areas. If you're located in Colorado, we can likely help - just enter your zip code in our qualification form to confirm.",
   },
   {
-    question: "Do I need to move out during the remodel?",
+    question: "Can you help with design and material selection?",
     answer:
-      "Most homeowners stay in their homes during remodeling. We work to minimize disruption, maintain clean work areas, and coordinate schedules to keep your daily life as normal as possible.",
+      "Absolutely! During your free consultation, we'll provide design recommendations, show you material samples, and help you choose options that fit your style and budget. We can also create mockup designs so you can see exactly how your project will look before we start. We'll guide you through every decision to ensure you love the final result.",
   },
   {
     question: "What does the $2,000 Winter Upgrade Program discount apply to?",

@@ -220,7 +220,7 @@ const ReviewsSection = () => {
                   size="xl" 
                   className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow"
                 >
-                  Claim Your $2,000 Discount
+                  Check Availability Now
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>

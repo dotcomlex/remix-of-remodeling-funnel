@@ -1,10 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Quiz from "@/components/Quiz";
 import { Shield } from "lucide-react";
 import qualifyBgImage from "@/assets/14er-paper-mountain-bg.webp";
 
 const QualifyPage = () => {
   const [quizStarted, setQuizStarted] = useState(false);
+  const [liveCount, setLiveCount] = useState(25);
+
+  // Dynamic live count - changes every 8-12 seconds
+  useEffect(() => {
+    const updateLiveCount = () => {
+      const newCount = Math.floor(Math.random() * 6) + 23; // 23-28
+      setLiveCount(newCount);
+    };
+
+    const interval = setInterval(() => {
+      updateLiveCount();
+    }, Math.floor(Math.random() * 4000) + 8000); // 8-12 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="min-h-screen relative">
@@ -32,7 +47,7 @@ const QualifyPage = () => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
                 </span>
-                12 people are checking availability right now
+                {liveCount} people are checking availability right now
               </div>
               
               {/* Header - HIDES when quiz starts */}
