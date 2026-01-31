@@ -1,100 +1,193 @@
 
+# Smart Qualification Quiz + Two-Page Architecture
 
-# Mobile-Optimize Reviews Section + Generate Gender-Matched Avatars
+## Overview
 
-## Summary
-
-Two major changes:
-1. Remove `line-clamp-6` and add responsive mobile optimizations throughout the ReviewsSection
-2. Generate 12 unique avatar images matching each reviewer's gender using AI image generation
+This is a major architectural change that transforms the quiz flow from an embedded component to a dedicated qualification page, adds smart timeline filtering, and brings back budget range questions with proper value thresholds.
 
 ---
 
-## Part 1: Mobile Optimizations
+## Architecture Changes
 
-### Changes to `src/components/ReviewsSection.tsx`
-
-| Element | Current | After (Mobile/Desktop) |
-|---------|---------|------------------------|
-| Section padding | `py-16 lg:py-24` | `py-12 sm:py-16 lg:py-24` |
-| Headline text | `text-2xl sm:text-3xl lg:text-4xl` | `text-xl sm:text-2xl lg:text-4xl leading-tight` |
-| Subheadline | `text-base` | `text-sm sm:text-base px-4` |
-| Grid gaps | `gap-5` | `gap-4 sm:gap-5` |
-| Card padding | `p-6` | `p-5 sm:p-6 h-full flex flex-col` |
-| Quote icon | `w-8 h-8 mb-4` | `w-6 h-6 sm:w-8 sm:h-8 mb-3 sm:mb-4` |
-| Review text | `line-clamp-6 text-sm` | `text-xs sm:text-sm` (NO line-clamp) |
-| Stars | `w-4 h-4` | `w-3.5 h-3.5 sm:w-4 sm:h-4` |
-| Avatar | `w-12 h-12` | `w-10 h-10 sm:w-12 sm:h-12` |
-| Name text | `text-sm` | `text-xs sm:text-sm` |
-| Location | `text-xs` | `text-[10px] sm:text-xs` |
-| Verified badge | `text-xs` | `text-[10px] sm:text-xs` |
-| Nav buttons | `w-10 h-10` | `w-9 h-9 sm:w-10 sm:h-10` |
-
----
-
-## Part 2: Generate 12 Unique Gender-Matched Avatars
-
-### Reviewer Gender Analysis
-
-| # | Name | Gender | New Avatar File |
-|---|------|--------|-----------------|
-| 1 | Michael R. | Male | avatar-michael.jpg |
-| 2 | Sarah M. | Female | avatar-sarah.jpg |
-| 3 | James T. | Male | avatar-james.jpg |
-| 4 | Linda K. | Female | avatar-linda.jpg |
-| 5 | David & Rachel P. | Couple | avatar-david-rachel.jpg |
-| 6 | Carlos G. | Male | avatar-carlos.jpg |
-| 7 | Jennifer & Tom H. | Couple | avatar-jennifer-tom.jpg |
-| 8 | Robert S. | Male | avatar-robert.jpg |
-| 9 | Lisa W. | Female | avatar-lisa.jpg |
-| 10 | Kevin & Amy D. | Couple | avatar-kevin-amy.jpg |
-| 11 | Patricia N. | Female | avatar-patricia.jpg |
-| 12 | Marcus B. | Male | avatar-marcus.jpg |
-
-### AI Image Generation Prompts
-
-I'll generate professional headshot-style portraits:
-
-- **Males:** Professional headshot of a friendly middle-aged man, natural lighting, warm smile, residential home background blur, high quality photo
-- **Females:** Professional headshot of a friendly middle-aged woman, natural lighting, warm smile, residential home background blur, high quality photo  
-- **Couples:** Friendly middle-aged couple standing together, natural lighting, warm smiles, residential home background blur, high quality photo
-
----
-
-## Implementation Steps
-
-### Step 1: Generate 12 Avatar Images
-Using AI image generation (Nano banana model), create:
-- 5 male portraits (Michael, James, Carlos, Robert, Marcus)
-- 4 female portraits (Sarah, Linda, Lisa, Patricia)
-- 3 couple portraits (David & Rachel, Jennifer & Tom, Kevin & Amy)
-
-### Step 2: Update Imports
-Replace the generic avatar imports with named ones:
-```tsx
-import avatarMichael from "@/assets/avatar-michael.jpg";
-import avatarSarah from "@/assets/avatar-sarah.jpg";
-// ... etc for all 12
+### Current Structure
+```text
+/ (Index)
+├── HeroSection (contains embedded Quiz)
+├── TrustBadgesSection
+├── GallerySection
+├── ReviewsSection
+└── Footer
 ```
 
-### Step 3: Update Reviews Array
-Assign each review its matching avatar:
-```tsx
-{ name: "Michael R.", avatar: avatarMichael, ... }
-{ name: "Sarah M.", avatar: avatarSarah, ... }
-// ... etc
-```
+### New Structure
+```text
+/ (Index - Landing Page)
+├── HeroSection (CTA button → links to /qualify)
+├── TrustBadgesSection
+├── GallerySection
+├── ReviewsSection
+└── Footer
 
-### Step 4: Apply Mobile Optimizations
-Apply all the responsive class changes listed in Part 1.
+/qualify (Quiz-Only Page)
+├── Simple Header (logo + back link)
+├── Quiz Component (full focus, no distractions)
+└── Minimal Footer
+```
 
 ---
 
-## Result
+## New Quiz Flow (5 Questions + Smart Clarification)
 
-- Full review text visible on all devices (no truncation)
-- Compact, readable layout on mobile with smaller text and tighter spacing
-- Each reviewer has a unique avatar matching their gender
-- No recycled/duplicate avatars
-- Professional, authentic-looking headshots
+| Step | Question | Options | Logic |
+|------|----------|---------|-------|
+| 1 | Project Type | Kitchen / Bath / Both / Other | Auto-advance |
+| 2 | Timeline | ASAP / 30 days / 1-2 months / Not sure | If "Not sure" → Clarification screen |
+| 2b | Clarification | "Start within 60 days?" Yes/No | Yes → Continue, No → Disqualify |
+| 3 | Budget Range | $10-20K / $20-40K / $40-60K / $60K+ / Not sure | Auto-advance |
+| 4 | ZIP Code | Colorado validation | Manual continue |
+| 5 | Contact | Name + Phone + Email | Submit |
+
+---
+
+## Files to Create/Modify
+
+| File | Action | Purpose |
+|------|--------|---------|
+| `src/pages/QualifyPage.tsx` | CREATE | New quiz-only page |
+| `src/App.tsx` | MODIFY | Add /qualify route |
+| `src/components/HeroSection.tsx` | MODIFY | Replace Quiz with CTA button |
+| `src/components/Quiz.tsx` | MODIFY | Add timeline clarification + update budget options |
+| `src/components/FloatingCTA.tsx` | MODIFY | Link to /qualify instead of scroll |
+
+---
+
+## Technical Implementation Details
+
+### 1. Create QualifyPage.tsx (NEW FILE)
+
+A dedicated page with:
+- Simple header with logo and "Back to Home" link
+- Clean white/gray background (no hero image)
+- Centered Quiz component with heading
+- Minimal footer with security note
+
+### 2. Update App.tsx
+
+Add the new route:
+```tsx
+import QualifyPage from "./pages/QualifyPage";
+
+<Route path="/qualify" element={<QualifyPage />} />
+```
+
+### 3. Update HeroSection.tsx
+
+Replace the embedded `<Quiz />` with a CTA card:
+- "See If You Qualify" heading
+- Subtext explaining the 5-question quiz
+- "Start Qualification Quiz" button linking to /qualify
+- Trust indicators (60 seconds, 100+ homeowners)
+- Keep the trust strip below
+
+### 4. Update Quiz.tsx - Timeline Clarification
+
+Add new state:
+```tsx
+const [needsTimelineClarification, setNeedsTimelineClarification] = useState(false);
+const [timelineDisqualified, setTimelineDisqualified] = useState(false);
+```
+
+Modify timeline auto-advance logic:
+- If user selects "Not sure" → Show clarification screen
+- Clarification offers two options:
+  - "Yes, I want to start within 60 days" → Continue to budget
+  - "No, I'm planning further out" → Show timeline disqualification
+
+### 5. Update Quiz.tsx - Budget Options
+
+Replace current yes/no budget with specific ranges:
+- $10,000 - $20,000
+- $20,000 - $40,000
+- $40,000 - $60,000
+- $60,000+
+- Not sure / Need guidance
+
+Update `getBudgetLabel()` helper and webhook payload accordingly.
+
+### 6. Add Timeline Disqualification Screen
+
+New screen for users who are planning too far out:
+- "We're Booking Soon!" heading
+- Friendly message about 60-day focus
+- Action items: Save phone, bookmark site
+- Links to Gallery and Reviews sections
+
+### 7. Update FloatingCTA.tsx
+
+Change from scrolling to quiz to navigating:
+```tsx
+import { Link } from "react-router-dom";
+
+<Link to="/qualify">
+  <Button variant="cta">Claim $2,000 Discount</Button>
+</Link>
+```
+
+---
+
+## Disqualification Screens Summary
+
+| Scenario | Screen | Message |
+|----------|--------|---------|
+| ZIP not in Colorado | "We Only Serve Colorado" | Existing - keep as-is |
+| Timeline too far out | "We're Booking Soon!" | New - friendly, keeps door open |
+
+---
+
+## Webhook Payload Update
+
+New budget_range values in payload:
+```tsx
+const getBudgetLabel = (budget: string): string => {
+  switch (budget) {
+    case "10-20k": return "$10,000 - $20,000";
+    case "20-40k": return "$20,000 - $40,000";
+    case "40-60k": return "$40,000 - $60,000";
+    case "60k+": return "$60,000+";
+    case "not-sure": return "Not sure / Need guidance";
+    default: return "";
+  }
+};
+```
+
+---
+
+## User Experience Flow
+
+### Happy Path
+1. User lands on homepage → Sees CTA "See If You Qualify"
+2. Clicks button → Taken to /qualify page
+3. Answers 5 questions → Submits form
+4. Sees success screen with next steps
+
+### Timeline Clarification Path
+1. User selects "Not sure" on timeline
+2. Sees clarification: "We're booking within 60 days"
+3. Option A: "Yes, continue" → Proceeds to budget
+4. Option B: "No, planning further" → Friendly disqualification with helpful links
+
+### Out-of-State Path
+1. User enters non-Colorado ZIP
+2. Sees "We Only Serve Colorado" (existing behavior)
+
+---
+
+## Benefits of This Approach
+
+1. **Focused conversion** - Quiz page has zero distractions
+2. **Quality filtering** - Timeline clarification weeds out tire-kickers gracefully
+3. **Budget qualification** - Ranges starting at $10K filter low-value leads
+4. **Professional UX** - Two-page structure like HomeBuddy and other lead gen sites
+5. **Mobile optimized** - Clean, fast-loading quiz page
+6. **Door stays open** - Disqualified users get helpful next steps, may return later
 
