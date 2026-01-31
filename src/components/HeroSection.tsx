@@ -18,14 +18,17 @@ const HeroSection = () => {
           loading="eager" 
           decoding="async" 
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
+        {/* Main dark gradient - stronger opacity */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
+        {/* Vignette effect - darker edges for focus */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-6 lg:py-12">
         {/* Logo - centered with reduced spacing */}
         <motion.div 
-          className="flex justify-center mb-3 lg:mb-4" 
+          className="flex justify-center mb-2 lg:mb-3" 
           initial={{ opacity: 0, scale: 0.9 }} 
           animate={{ opacity: 1, scale: 1 }} 
           transition={{ duration: 0.5 }}
@@ -66,7 +69,7 @@ const HeroSection = () => {
                 <Button 
                   variant="cta" 
                   size="xl" 
-                  className="group shadow-2xl text-lg px-8 py-6"
+                  className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow"
                 >
                   Check Availability Now
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />

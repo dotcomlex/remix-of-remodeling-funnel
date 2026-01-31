@@ -1,8 +1,11 @@
+import { useState } from "react";
 import Quiz from "@/components/Quiz";
 import { Shield } from "lucide-react";
-import qualifyBgImage from "@/assets/qualify-bg-mountains.png";
+import qualifyBgImage from "@/assets/14er-paper-mountain-bg.webp";
 
 const QualifyPage = () => {
+  const [quizStarted, setQuizStarted] = useState(false);
+
   return (
     <div className="min-h-screen relative">
       {/* Background Image - Fixed */}
@@ -19,28 +22,34 @@ const QualifyPage = () => {
       {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col">
         {/* Quiz Container */}
-        <main className="flex-1 flex items-center justify-center px-4 py-8 sm:py-12">
+        <main className="flex-1 flex items-center justify-center px-4 py-4 sm:py-8">
           <div className="w-full max-w-lg">
             {/* Progress Text */}
-            <div className="text-center mb-6">
-              {/* Live Activity Indicator */}
-              <div className="inline-flex items-center gap-2 bg-emerald-500 text-white text-xs font-bold px-4 py-2 rounded-full mb-4 shadow-xl border-2 border-white/50">
+            <div className="text-center mb-4">
+              {/* Live Activity Indicator - RED badge, ALWAYS visible */}
+              <div className="inline-flex items-center gap-2 bg-red-500 text-white text-xs font-bold px-4 py-2 rounded-full mb-4 shadow-xl border-2 border-white/50">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
                 </span>
                 12 people are checking availability right now
               </div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-2">
-                Check Availability
-              </h1>
-              <p className="text-sm sm:text-base font-medium text-slate-700">
-                Takes less than 30 seconds to complete
-              </p>
+              
+              {/* Header - HIDES when quiz starts */}
+              {!quizStarted && (
+                <>
+                  <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-2">
+                    Check Availability
+                  </h1>
+                  <p className="text-sm sm:text-base font-medium text-slate-700">
+                    Takes less than 30 seconds to complete
+                  </p>
+                </>
+              )}
             </div>
 
             {/* Quiz Component */}
-            <Quiz />
+            <Quiz onStart={() => setQuizStarted(true)} />
           </div>
         </main>
 

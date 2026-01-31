@@ -331,6 +331,26 @@
   animation-play-state: paused;
 }
 
+/* Glowing pulse animation for CTA button */
+@keyframes ctaGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(251, 146, 60, 0.4),
+      0 0 40px rgba(251, 146, 60, 0.2),
+      0 20px 40px -10px rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(251, 146, 60, 0.6),
+      0 0 60px rgba(251, 146, 60, 0.4),
+      0 20px 40px -10px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.animate-cta-glow {
+  animation: ctaGlow 2s ease-in-out infinite;
+}
+
 /* Performance optimizations */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

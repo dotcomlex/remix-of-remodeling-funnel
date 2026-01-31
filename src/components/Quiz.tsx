@@ -42,7 +42,11 @@ const isColoradoZipCode = (zip: string): boolean => {
 };
 
 
-const Quiz = () => {
+interface QuizProps {
+  onStart?: () => void;
+}
+
+const Quiz = ({ onStart }: QuizProps) => {
   const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -61,6 +65,10 @@ const Quiz = () => {
   });
 
   const handleTileSelect = (field: string, value: string) => {
+    // Trigger onStart callback when user first interacts (step 1, no project selected yet)
+    if (step === 1 && !data.projectType && onStart) {
+      onStart();
+    }
     setData({ ...data, [field]: value });
   };
 
