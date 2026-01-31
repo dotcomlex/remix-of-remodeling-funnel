@@ -35,7 +35,7 @@ const faqs = [
   {
     question: "What does the $2,000 Winter Upgrade Program discount apply to?",
     answer:
-      "The $2,000 discount applies to any remodeling project - kitchens, bathrooms, basements, or combinations. Projects must be scheduled by January 31st to qualify for this limited-time offer.",
+      "The $2,000 discount applies to any remodeling project - kitchens, bathrooms, basements, or combinations.",
   },
 ];
 
