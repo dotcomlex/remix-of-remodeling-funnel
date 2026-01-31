@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Star, ChevronLeft, ChevronRight, Quote, ArrowRight } from "lucide-react";
 import heroImage from "@/assets/hero-colorado-home.png";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import avatarMichael from "@/assets/avatar-michael.jpg";
 import avatarSarah from "@/assets/avatar-sarah.jpg";
 import avatarJames from "@/assets/avatar-james.jpg";
@@ -207,6 +209,22 @@ const ReviewsSection = () => {
             >
               <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
+          </div>
+
+          {/* Inline CTA - matches hero button style */}
+          <div className="flex justify-center mt-8 sm:mt-10">
+            <motion.div className="animate-subtle-rock">
+              <Link to="/qualify">
+                <Button 
+                  variant="cta" 
+                  size="xl" 
+                  className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow"
+                >
+                  Claim Your $2,000 Discount
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </div>

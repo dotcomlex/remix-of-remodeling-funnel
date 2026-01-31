@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 // Gallery images - optimized webp before/after renovation photos
 import galleryKitchenModern from "@/assets/gallery-kitchen-modern.webp";
@@ -108,6 +110,22 @@ const GallerySection = () => {
               />
             </button>
           ))}
+        </div>
+
+        {/* Inline CTA - matches hero button style */}
+        <div className="flex justify-center mt-10 sm:mt-12">
+          <motion.div className="animate-subtle-rock">
+            <Link to="/qualify">
+              <Button 
+                variant="cta" 
+                size="xl" 
+                className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow"
+              >
+                Check Availability Now
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </div>
     </section>

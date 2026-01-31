@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
 import HeroSection from "@/components/HeroSection";
-import FloatingCTA from "@/components/FloatingCTA";
 
 // Lazy load below-the-fold sections for faster initial load
 const TrustBadgesSection = lazy(() => import("@/components/TrustBadgesSection"));
@@ -25,7 +24,6 @@ const Index = () => {
       <Suspense fallback={null}>
         <Footer />
       </Suspense>
-      <FloatingCTA />
     </main>
   );
 };
