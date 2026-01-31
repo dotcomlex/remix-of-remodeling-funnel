@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { 
   MapPin, ChefHat, Bath, Home, HelpCircle, 
   Zap, Calendar, CalendarClock, Clock,
   ArrowRight, ArrowLeft, CheckCircle2, Shield, Phone,
-  User, Mail, Loader2, Star, Check, Award, Gem
+  User, Mail, Loader2, Star, Check, Gem, DollarSign,
+  Bookmark, ExternalLink, Images, MessageSquare
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -45,6 +47,8 @@ const Quiz = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDisqualified, setIsDisqualified] = useState(false);
+  const [needsTimelineClarification, setNeedsTimelineClarification] = useState(false);
+  const [timelineDisqualified, setTimelineDisqualified] = useState(false);
   const [errors, setErrors] = useState<{ firstName?: string; phone?: string; email?: string }>({});
   const [data, setData] = useState<QuizData>({
     projectType: "",
@@ -68,10 +72,15 @@ const Quiz = () => {
   }, [data.projectType, step]);
 
   useEffect(() => {
-    if (step === 2 && data.timeline) {
-      setTimeout(() => setStep(3), 300);
+    if (step === 2 && data.timeline && !needsTimelineClarification) {
+      // Check if they selected "Not sure yet"
+      if (data.timeline === "not-sure") {
+        setTimeout(() => setNeedsTimelineClarification(true), 300);
+      } else {
+        setTimeout(() => setStep(3), 300);
+      }
     }
-  }, [data.timeline, step]);
+  }, [data.timeline, step, needsTimelineClarification]);
 
   useEffect(() => {
     if (step === 3 && data.budgetRange) {
@@ -110,16 +119,19 @@ const Quiz = () => {
     switch (timeline) {
       case "asap": return "Within 2 weeks (ASAP)";
       case "30-days": return "Within 30 days";
-      case "1-3-months": return "1-3 months";
-      case "exploring": return "Not Sure";
+      case "1-2-months": return "1-2 months";
+      case "not-sure": return "Not Sure";
       default: return "";
     }
   };
 
   const getBudgetLabel = (budget: string): string => {
     switch (budget) {
-      case "yes": return "Yes, I know my budget";
-      case "not-yet": return "Not yet, need guidance";
+      case "10-20k": return "$10,000 - $20,000";
+      case "20-40k": return "$20,000 - $40,000";
+      case "40-60k": return "$40,000 - $60,000";
+      case "60k+": return "$60,000+";
+      case "not-sure": return "Not sure / Need guidance";
       default: return "";
     }
   };
@@ -250,7 +262,7 @@ const Quiz = () => {
     </button>
   );
 
-  // BudgetOptionCard - clean without subtext
+  // BudgetOptionCard - for budget ranges
   const BudgetOptionCard = ({ 
     icon: Icon, 
     label, 
@@ -264,7 +276,7 @@ const Quiz = () => {
   }) => (
     <button
       onClick={onClick}
-      className={`relative flex items-center gap-3 p-4 rounded-xl border-2 bg-white w-full min-h-[70px] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
+      className={`relative flex items-center gap-3 p-4 rounded-xl border-2 bg-white w-full min-h-[60px] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] group ${
         selected 
           ? "border-primary bg-gradient-to-r from-primary/10 to-primary/5 shadow-md" 
           : "border-slate-200 hover:border-primary/50 shadow-sm"
@@ -301,7 +313,7 @@ const Quiz = () => {
       <div className="quiz-card-glass rounded-2xl shadow-quiz-glow p-5 sm:p-6 w-full border border-primary/20">
         
         {/* Progress Dots - Inside card */}
-        {!isSubmitted && !isDisqualified && (
+        {!isSubmitted && !isDisqualified && !timelineDisqualified && (
           <div className="flex justify-center gap-2 mb-4">
             {[1, 2, 3, 4, 5].map((dotStep) => (
               <div
@@ -364,7 +376,7 @@ const Quiz = () => {
           )}
 
           {/* Step 2: Timeline */}
-          {step === 2 && !isSubmitted && (
+          {step === 2 && !isSubmitted && !needsTimelineClarification && !timelineDisqualified && (
             <motion.div
               key="step2"
               variants={cardVariants}
@@ -393,16 +405,16 @@ const Quiz = () => {
                 />
                 <OptionCard
                   icon={CalendarClock}
-                  label="1-3 months"
-                  selected={data.timeline === "1-3-months"}
-                  onClick={() => handleTileSelect("timeline", "1-3-months")}
+                  label="1-2 months"
+                  selected={data.timeline === "1-2-months"}
+                  onClick={() => handleTileSelect("timeline", "1-2-months")}
                   accentColor="text-teal-600"
                 />
                 <OptionCard
                   icon={Clock}
                   label="Not Sure"
-                  selected={data.timeline === "exploring"}
-                  onClick={() => handleTileSelect("timeline", "exploring")}
+                  selected={data.timeline === "not-sure"}
+                  onClick={() => handleTileSelect("timeline", "not-sure")}
                   accentColor="text-slate-500"
                 />
               </div>
@@ -416,8 +428,150 @@ const Quiz = () => {
             </motion.div>
           )}
 
-          {/* Step 3: Budget - 2 OPTIONS */}
-          {step === 3 && !isSubmitted && (
+          {/* Timeline Clarification - Only shows if they selected "not-sure" */}
+          {step === 2 && needsTimelineClarification && !timelineDisqualified && !isSubmitted && (
+            <motion.div
+              key="timeline-clarification"
+              variants={cardVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.25 }}
+            >
+              <div className="text-center mb-5">
+                <Clock className="w-10 h-10 text-primary mx-auto mb-3" />
+                <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
+                  Quick Clarification
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  We're currently booking projects that start within the next 60 days.
+                </p>
+                <p className="text-sm text-foreground font-medium mt-2">
+                  Would you like to move forward with a consultation?
+                </p>
+              </div>
+
+              <div className="space-y-3 mb-4">
+                <button
+                  onClick={() => {
+                    setNeedsTimelineClarification(false);
+                    setData({ ...data, timeline: "1-2-months" }); // Set to acceptable timeline
+                    setTimeout(() => setStep(3), 300); // Continue to budget
+                  }}
+                  className="w-full p-4 rounded-xl border-2 border-primary bg-gradient-to-r from-primary/10 to-primary/5 hover:shadow-lg transition-all text-left"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                      <Check className="w-5 h-5 text-primary-foreground" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-foreground">Yes, I want to start within 60 days</p>
+                      <p className="text-xs text-muted-foreground">Continue with qualification</p>
+                    </div>
+                  </div>
+                </button>
+                <button
+                  onClick={() => {
+                    setTimelineDisqualified(true);
+                  }}
+                  className="w-full p-4 rounded-xl border-2 border-slate-200 hover:border-slate-300 hover:shadow-md transition-all text-left"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0">
+                      <Calendar className="w-5 h-5 text-slate-500" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-foreground">No, I'm planning further out</p>
+                      <p className="text-xs text-muted-foreground">We'll help you when you're ready</p>
+                    </div>
+                  </div>
+                </button>
+              </div>
+
+              <button
+                onClick={() => {
+                  setNeedsTimelineClarification(false);
+                  setData({ ...data, timeline: "" }); // Reset timeline
+                }}
+                className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Go back
+              </button>
+            </motion.div>
+          )}
+
+          {/* Timeline Disqualification - Planning too far out */}
+          {timelineDisqualified && !isSubmitted && (
+            <motion.div
+              key="timeline-disqualified"
+              variants={cardVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.3 }}
+              className="py-4 text-center"
+            >
+              <motion.div 
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                className="w-14 h-14 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center"
+              >
+                <Calendar className="w-7 h-7 text-blue-600" />
+              </motion.div>
+              
+              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2 leading-snug">
+                We're Booking Soon!
+              </h3>
+              
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4 max-w-sm mx-auto">
+                Thanks for your interest! We're currently focusing on projects starting within the next 60 days.
+              </p>
+
+              <p className="text-sm font-medium text-foreground mb-3">
+                We'd love to help when you're ready!
+              </p>
+
+              <div className="bg-slate-50 rounded-xl p-4 mb-4 text-left">
+                <p className="text-xs font-semibold text-foreground mb-2">Here's what to do:</p>
+                <div className="space-y-2 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                    <span>Save our number: <strong className="text-foreground">(720) 989-9883</strong></span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Bookmark className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                    <span>Bookmark: <strong className="text-foreground">14erenovations.com</strong></span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MessageSquare className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                    <span>Reach out when your timeline is closer!</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Link 
+                  to="/#gallery"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-primary/10 text-primary text-sm font-medium rounded-lg hover:bg-primary/20 transition-colors"
+                >
+                  <Images className="w-4 h-4" />
+                  View Our Gallery
+                </Link>
+                <Link 
+                  to="/#reviews"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-slate-100 text-foreground text-sm font-medium rounded-lg hover:bg-slate-200 transition-colors"
+                >
+                  <Star className="w-4 h-4" />
+                  Read Reviews
+                </Link>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Step 3: Budget Range */}
+          {step === 3 && !isSubmitted && !needsTimelineClarification && (
             <motion.div
               key="step3"
               variants={cardVariants}
@@ -426,21 +580,42 @@ const Quiz = () => {
               exit="exit"
               transition={{ duration: 0.25 }}
             >
-              <h3 className="text-base sm:text-lg font-medium text-foreground mb-4 text-center leading-tight">
-                Do you have a set budget for this project?
+              <h3 className="text-base sm:text-lg font-medium text-foreground mb-2 text-center leading-tight">
+                What's your estimated budget?
               </h3>
-              <div className="flex flex-col gap-3 mb-4">
+              <p className="text-xs text-muted-foreground text-center mb-4">
+                (This won't affect your pricing—it just helps us prepare the right options for you)
+              </p>
+              <div className="flex flex-col gap-2 mb-4">
+                <BudgetOptionCard
+                  icon={DollarSign}
+                  label="$10,000 - $20,000"
+                  selected={data.budgetRange === "10-20k"}
+                  onClick={() => handleTileSelect("budgetRange", "10-20k")}
+                />
+                <BudgetOptionCard
+                  icon={DollarSign}
+                  label="$20,000 - $40,000"
+                  selected={data.budgetRange === "20-40k"}
+                  onClick={() => handleTileSelect("budgetRange", "20-40k")}
+                />
+                <BudgetOptionCard
+                  icon={DollarSign}
+                  label="$40,000 - $60,000"
+                  selected={data.budgetRange === "40-60k"}
+                  onClick={() => handleTileSelect("budgetRange", "40-60k")}
+                />
                 <BudgetOptionCard
                   icon={Gem}
-                  label="Yes, I know my budget"
-                  selected={data.budgetRange === "yes"}
-                  onClick={() => handleTileSelect("budgetRange", "yes")}
+                  label="$60,000+"
+                  selected={data.budgetRange === "60k+"}
+                  onClick={() => handleTileSelect("budgetRange", "60k+")}
                 />
                 <BudgetOptionCard
                   icon={HelpCircle}
-                  label="Not yet, need guidance"
-                  selected={data.budgetRange === "not-yet"}
-                  onClick={() => handleTileSelect("budgetRange", "not-yet")}
+                  label="Not sure / Need guidance"
+                  selected={data.budgetRange === "not-sure"}
+                  onClick={() => handleTileSelect("budgetRange", "not-sure")}
                 />
               </div>
               <button
@@ -622,16 +797,6 @@ const Quiz = () => {
                   "Get My Free Consultation"
                 )}
               </Button>
-
-              {/* Back Button */}
-              <button
-                onClick={handleBack}
-                disabled={isSubmitting}
-                className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1 mt-3"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Go back
-              </button>
 
               {/* Trust Footer - Enhanced */}
               <div className="flex flex-wrap items-center justify-center gap-x-1.5 text-[10px] text-muted-foreground pt-4 mt-4 border-t border-border/50">
