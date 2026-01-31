@@ -1,10 +1,10 @@
 
 
-# Phase 5: CTA Optimization & FAQ Refinement
+# Phase 6: CTA & FAQ Improvements
 
 ## Summary
 
-This phase removes the distracting floating CTA button and adds prominent inline CTA buttons after the Gallery and Reviews sections. The FAQ section will be kept as-is with all 6 questions (recommended).
+This phase makes 4 remaining changes: update Reviews CTA text, add dynamic live badge, and replace two FAQ questions with new ones focused on service areas and design assistance.
 
 ---
 
@@ -12,204 +12,197 @@ This phase removes the distracting floating CTA button and adds prominent inline
 
 | File | Action | Changes |
 |------|--------|---------|
-| `src/pages/Index.tsx` | MODIFY | Remove FloatingCTA import and component |
-| `src/components/GallerySection.tsx` | MODIFY | Add inline CTA button at end |
-| `src/components/ReviewsSection.tsx` | MODIFY | Add inline CTA button at end |
-| `src/components/FAQSection.tsx` | NO CHANGE | Keep all 6 FAQs (recommended) |
+| `src/components/ReviewsSection.tsx` | MODIFY | Change CTA text to "Check Availability Now" |
+| `src/pages/QualifyPage.tsx` | MODIFY | Add dynamic live count (23-28, refreshes every 8-12 sec) |
+| `src/components/FAQSection.tsx` | MODIFY | Replace FAQs #4 and #5 with new questions |
 
 ---
 
-## Part 1: Remove Floating CTA
+## Already Completed (No Action Needed)
 
-### File: `src/pages/Index.tsx`
-
-**Current (Lines 3 and 28):**
-```tsx
-import FloatingCTA from "@/components/FloatingCTA";
-...
-<FloatingCTA />
-```
-
-**Changes:**
-- Remove the import statement on line 3
-- Remove the `<FloatingCTA />` component on line 28
-
-The floating button is removed because it overlays content on mobile, making it difficult to read reviews and interact with the page.
+- FloatingCTA removal - Done in Phase 5
+- CTA after Gallery section - Done in Phase 5 (already says "Check Availability Now")
 
 ---
 
-## Part 2: Add CTA to Gallery Section
-
-### File: `src/components/GallerySection.tsx`
-
-**Add imports at top:**
-```tsx
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-```
-
-**Add after the thumbnail gallery (after line 111, before closing `</div>` and `</section>`):**
-
-```tsx
-{/* Inline CTA - matches hero button style */}
-<div className="flex justify-center mt-10 sm:mt-12">
-  <motion.div className="animate-subtle-rock">
-    <Link to="/qualify">
-      <Button 
-        variant="cta" 
-        size="xl" 
-        className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow"
-      >
-        Check Availability Now
-        <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-      </Button>
-    </Link>
-  </motion.div>
-</div>
-```
-
-This CTA appears right after users see the beautiful project transformations, capitalizing on their excitement.
-
----
-
-## Part 3: Add CTA to Reviews Section
+## Part 1: Update Reviews Section CTA Text
 
 ### File: `src/components/ReviewsSection.tsx`
 
-**Add imports at top:**
+**Current (Line 223):**
 ```tsx
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+Claim Your $2,000 Discount
 ```
 
-**Add after the navigation buttons (after line 210, before closing `</div>` and `</section>`):**
-
+**New:**
 ```tsx
-{/* Inline CTA - matches hero button style */}
-<div className="flex justify-center mt-8 sm:mt-10">
-  <motion.div className="animate-subtle-rock">
-    <Link to="/qualify">
-      <Button 
-        variant="cta" 
-        size="xl" 
-        className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow"
-      >
-        Claim Your $2,000 Discount
-        <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-      </Button>
-    </Link>
-  </motion.div>
-</div>
+Check Availability Now
 ```
 
-This CTA appears right after users read the glowing reviews, capitalizing on the social proof they just experienced.
+This creates consistency - both inline CTAs now say "Check Availability Now".
 
 ---
 
-## Part 4: FAQ Section - Keep All 6 FAQs
+## Part 2: Dynamic Live Badge
+
+### File: `src/pages/QualifyPage.tsx`
+
+**Current (Lines 1-7):**
+```tsx
+import { useState } from "react";
+import Quiz from "@/components/Quiz";
+import { Shield } from "lucide-react";
+import qualifyBgImage from "@/assets/14er-paper-mountain-bg.webp";
+
+const QualifyPage = () => {
+  const [quizStarted, setQuizStarted] = useState(false);
+```
+
+**New:**
+```tsx
+import { useState, useEffect } from "react";
+import Quiz from "@/components/Quiz";
+import { Shield } from "lucide-react";
+import qualifyBgImage from "@/assets/14er-paper-mountain-bg.webp";
+
+const QualifyPage = () => {
+  const [quizStarted, setQuizStarted] = useState(false);
+  const [liveCount, setLiveCount] = useState(25);
+
+  // Dynamic live count - changes every 8-12 seconds
+  useEffect(() => {
+    const updateLiveCount = () => {
+      const newCount = Math.floor(Math.random() * 6) + 23; // 23-28
+      setLiveCount(newCount);
+    };
+
+    const interval = setInterval(() => {
+      updateLiveCount();
+    }, Math.floor(Math.random() * 4000) + 8000); // 8-12 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+```
+
+**Current Badge Text (Line 35):**
+```tsx
+12 people are checking availability right now
+```
+
+**New:**
+```tsx
+{liveCount} people are checking availability right now
+```
+
+This makes the badge feel more "live" and creates urgency.
+
+---
+
+## Part 3: Update FAQ Questions
 
 ### File: `src/components/FAQSection.tsx`
 
-**Recommendation: NO CHANGES**
+**Replace FAQ #4 (Lines 24-28):**
 
-The current 6 FAQs are all valuable:
-1. What types of remodeling projects do you handle?
-2. What does the free in-home consultation include?
-3. Are you licensed and insured?
+Current:
+```tsx
+{
+  question: "How long does a typical remodeling project take?",
+  answer:
+    "Timelines vary based on project scope. Kitchen remodels typically take 4-8 weeks, bathrooms 2-4 weeks, and basements 6-10 weeks. We'll provide a detailed timeline during your consultation.",
+},
+```
+
+New:
+```tsx
+{
+  question: "What areas do you serve?",
+  answer:
+    "We serve major cities throughout Colorado including Denver, Boulder, Fort Collins, Colorado Springs, Aurora, Lakewood, Arvada, and surrounding areas. If you're located in Colorado, we can likely help - just enter your zip code in our qualification form to confirm.",
+},
+```
+
+**Replace FAQ #5 (Lines 29-33):**
+
+Current:
+```tsx
+{
+  question: "Do I need to move out during the remodel?",
+  answer:
+    "Most homeowners stay in their homes during remodeling. We work to minimize disruption, maintain clean work areas, and coordinate schedules to keep your daily life as normal as possible.",
+},
+```
+
+New:
+```tsx
+{
+  question: "Can you help with design and material selection?",
+  answer:
+    "Absolutely! During your free consultation, we'll provide design recommendations, show you material samples, and help you choose options that fit your style and budget. We can also create mockup designs so you can see exactly how your project will look before we start. We'll guide you through every decision to ensure you love the final result.",
+},
+```
+
+---
+
+## Visual Comparison
+
+### Reviews Section CTA - Before vs After
+
+**BEFORE:**
+```text
+[Claim Your $2,000 Discount →]
+```
+
+**AFTER:**
+```text
+[Check Availability Now →]
+```
+
+### Live Badge - Before vs After
+
+**BEFORE:**
+```text
+🔴 12 people are checking availability right now
+(Static - never changes)
+```
+
+**AFTER:**
+```text
+🔴 27 people are checking availability right now
+(Dynamic - changes to random 23-28 every 8-12 seconds)
+```
+
+### FAQ Section - Before vs After
+
+**BEFORE:**
+```text
 4. How long does a typical remodeling project take?
 5. Do I need to move out during the remodel?
-6. What does the $2,000 Winter Upgrade Program discount apply to?
-
-**Why keep all 6:**
-- Each addresses a specific homeowner concern
-- 6 is an optimal number (not overwhelming)
-- Good for SEO (more indexed content)
-- Already well-written and comprehensive
-
-**Alternative (if fewer desired):** Remove FAQs #4 and #5 (timeline and move-out questions) to keep only 4 core FAQs. These are lower-priority topics that can be discussed during consultation.
-
----
-
-## Visual Flow Comparison
-
-### Before Phase 5
-```text
-Hero Section (with CTA)
-    |
-Trust Badges
-    |
-Gallery Section [no CTA]
-    |
-Reviews Section [no CTA]
-    |
-Footer
-    |
-[Floating CTA button covering content on mobile]
 ```
 
-### After Phase 5
+**AFTER:**
 ```text
-Hero Section (with CTA)
-    |
-Trust Badges
-    |
-Gallery Section
-    -> [INLINE CTA: "Check Availability Now"]
-    |
-Reviews Section
-    -> [INLINE CTA: "Claim Your $2,000 Discount"]
-    |
-Footer
-    |
-[No floating button - clean mobile experience]
+4. What areas do you serve?
+5. Can you help with design and material selection?
 ```
-
----
-
-## Button Style Consistency
-
-All CTA buttons use the same styling:
-- Orange gradient background (`variant="cta"`)
-- Large size (`size="xl"`)
-- Rocking animation (`animate-subtle-rock`)
-- Glowing pulse (`animate-cta-glow`)
-- Arrow icon with hover slide effect
-- Shadow for depth (`shadow-2xl`)
-
----
-
-## Conversion Strategy
-
-| Location | Button Text | Psychology |
-|----------|-------------|------------|
-| Hero | "Check Availability Now" | Immediate interest |
-| After Gallery | "Check Availability Now" | "I love these transformations!" |
-| After Reviews | "Claim Your $2,000 Discount" | "I trust these testimonials!" |
-
-The varied button text creates urgency while the consistent visual style maintains brand recognition.
 
 ---
 
 ## Verification Checklist
 
-### Index.tsx
-- [ ] FloatingCTA import removed
-- [ ] FloatingCTA component removed from render
-
-### GallerySection.tsx
-- [ ] Imports added: Link, motion, ArrowRight
-- [ ] Inline CTA button added after thumbnails
-- [ ] Text: "Check Availability Now"
-- [ ] Button has rocking + glow animations
-
 ### ReviewsSection.tsx
-- [ ] Imports added: Link, motion, ArrowRight
-- [ ] Inline CTA button added after navigation
-- [ ] Text: "Claim Your $2,000 Discount"
-- [ ] Button has rocking + glow animations
+- [ ] CTA text changed from "Claim Your $2,000 Discount" to "Check Availability Now"
+
+### QualifyPage.tsx
+- [ ] Added useEffect import
+- [ ] Added liveCount state (initial: 25)
+- [ ] Added useEffect for random interval updates
+- [ ] Badge displays dynamic {liveCount} instead of static "12"
+- [ ] Count changes every 8-12 seconds
+- [ ] Range is 23-28
 
 ### FAQSection.tsx
-- [ ] Keep all 6 FAQs (no changes required)
+- [ ] FAQ #4 replaced with "What areas do you serve?"
+- [ ] FAQ #5 replaced with "Can you help with design and material selection?"
+- [ ] Mentions mockup designs in the design FAQ answer
 
