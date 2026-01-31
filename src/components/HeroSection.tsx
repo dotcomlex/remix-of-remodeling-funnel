@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-colorado-home.png";
 import logo from "@/assets/14er-logo.png";
-import { Shield, CheckCircle, ArrowRight, Clock, Users } from "lucide-react";
+import { Shield, CheckCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
@@ -30,7 +30,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, scale: 1 }} 
           transition={{ duration: 0.5 }}
         >
-          <img src={logo} alt="14er Renovations" className="h-20 sm:h-28 lg:h-40 w-auto object-contain" />
+          <img src={logo} alt="14er Renovations" className="h-24 sm:h-32 lg:h-48 w-auto object-contain" />
         </motion.div>
 
         {/* Single centered column */}
@@ -44,8 +44,8 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight hero-text-shadow mb-4">
-              This New Winter Upgrade Program Helps Colorado Homeowners Save{" "}
-              <span className="text-highlight">$2,000</span> on their remodel
+              This New Winter Upgrade Program Is Helping Colorado Homeowners Save{" "}
+              <span className="text-highlight">$2,000</span> On Their Remodeling Project!
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed hero-text-shadow max-w-2xl mx-auto">
@@ -85,33 +85,16 @@ const HeroSection = () => {
 
                 <div className="flex items-center justify-center gap-6 mt-5 pt-5 border-t border-border/50">
                   <div className="flex items-center gap-1.5">
-                    <Clock className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">30 seconds</span>
+                    <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">Licensed & Insured</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <Users className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">100+ qualified</span>
+                    <Shield className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">1-Year Warranty</span>
                   </div>
                 </div>
               </div>
             </div>
-          </motion.div>
-
-          {/* Trust Strip */}
-          <motion.div 
-            className="flex items-center justify-center gap-4 sm:gap-6 text-white/80 text-xs sm:text-sm mt-6"
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <span className="flex items-center gap-1.5">
-              <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
-              Licensed & Insured
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
-              1-Year Warranty
-            </span>
           </motion.div>
 
         </div>
