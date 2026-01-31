@@ -22,64 +22,53 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-4 lg:py-10">
-        {/* Logo - centered and larger */}
+      <div className="relative z-10 container mx-auto px-4 py-6 lg:py-12">
+        {/* Logo - centered */}
         <motion.div 
-          className="flex justify-center mb-0 lg:mb-2" 
+          className="flex justify-center mb-6 lg:mb-8" 
           initial={{ opacity: 0, scale: 0.9 }} 
           animate={{ opacity: 1, scale: 1 }} 
           transition={{ duration: 0.5 }}
         >
-          <img src={logo} alt="14er Renovations" className="h-20 sm:h-28 lg:h-44 w-auto object-contain" />
+          <img src={logo} alt="14er Renovations" className="h-20 sm:h-28 lg:h-40 w-auto object-contain" />
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-12">
-          {/* Left column - Headline */}
+        {/* Single centered column */}
+        <div className="max-w-3xl mx-auto">
+          
+          {/* Headline and Subheadline - CENTERED */}
           <motion.div 
-            className="lg:w-1/2 xl:w-[55%]" 
+            className="text-center mb-8" 
             initial={{ opacity: 0, y: 30 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="space-y-4 sm:space-y-5 lg:space-y-6">
-              <h1 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-extrabold text-white leading-tight hero-text-shadow">
-                Save <span className="text-highlight">$2,000</span> On Your Kitchen, Bathroom, Or Any Remodeling Project
-              </h1>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight hero-text-shadow mb-4">
+              This New Winter Upgrade Program Helps Colorado Homeowners Save{" "}
+              <span className="text-highlight">$2,000</span> on their remodel
+            </h1>
 
-              <span className="inline-block bg-red-600/90 text-white text-xs font-bold uppercase px-3 py-1.5 rounded-full animate-pulse">
-                LIMITED SPOTS AVAILABLE
-              </span>
-
-              <p className="text-sm sm:text-base lg:text-lg text-white/90 max-w-lg leading-relaxed hero-text-shadow">
-                Fill this quick form to see if you qualify for a free consultation and $2,000 off any remodeling project.
-              </p>
-            </div>
+            <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed hero-text-shadow max-w-2xl mx-auto">
+              Only a few spots are left. Fill this quick form to see if you qualify for a FREE consultation and $2,000 off your project!
+            </p>
           </motion.div>
 
-          {/* Right column - CTA Card */}
+          {/* CTA Card - CENTERED */}
           <motion.div 
-            className="lg:w-1/2 xl:w-[45%] flex flex-col items-center lg:items-end gap-4" 
+            className="flex justify-center" 
             initial={{ opacity: 0, y: 30 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            {/* Main CTA Card */}
-            <div className="w-full max-w-md">
+            <div className="w-full max-w-lg">
               <div className="quiz-card-glass rounded-2xl shadow-quiz-glow p-6 sm:p-8 w-full border border-primary/20">
-                {/* Urgency Badge */}
-                <div className="flex justify-center mb-4">
-                  <span className="inline-flex items-center gap-1.5 bg-red-600/10 text-red-600 text-xs font-bold uppercase px-3 py-1 rounded-full border border-red-600/20">
-                    <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
-                    LIMITED SPOTS
-                  </span>
-                </div>
-
+                
                 <div className="text-center mb-6">
-                  <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-                    Save $2,000 On Your Remodel
+                  <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-3">
+                    Check Availability
                   </h2>
                   <p className="text-sm text-muted-foreground">
-                    See if you qualify for a free consultation and $2,000 off any remodeling project.
+                    Takes less than 30 seconds to complete
                   </p>
                 </div>
 
@@ -89,37 +78,42 @@ const HeroSection = () => {
                     size="xl" 
                     className="w-full group"
                   >
-                    Check Availability
+                    Check Availability Now
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
 
-                {/* Redesigned Trust Indicators - Horizontal */}
                 <div className="flex items-center justify-center gap-6 mt-5 pt-5 border-t border-border/50">
                   <div className="flex items-center gap-1.5">
                     <Clock className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="text-xs font-medium whitespace-nowrap">60 seconds or less</span>
+                    <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">30 seconds</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Users className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="text-xs font-medium whitespace-nowrap">100+ qualified</span>
+                    <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">100+ qualified</span>
                   </div>
                 </div>
               </div>
             </div>
-            
-            {/* Trust Strip - Below CTA */}
-            <div className="flex items-center justify-center gap-4 sm:gap-6 text-white/80 text-xs sm:text-sm">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
-                Licensed & Insured
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
-                1-Year Warranty
-              </span>
-            </div>
           </motion.div>
+
+          {/* Trust Strip */}
+          <motion.div 
+            className="flex items-center justify-center gap-4 sm:gap-6 text-white/80 text-xs sm:text-sm mt-6"
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <span className="flex items-center gap-1.5">
+              <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
+              Licensed & Insured
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
+              1-Year Warranty
+            </span>
+          </motion.div>
+
         </div>
       </div>
     </section>

@@ -33,13 +33,13 @@ const QualifyPage = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              8 people are checking availability right now
+              12 people are checking availability right now
             </div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-              Save $2,000 On Your Remodel
+              Check Availability
             </h1>
             <p className="text-sm text-muted-foreground">
-              Answer a few quick questions to see if you qualify
+              Takes less than 30 seconds to complete
             </p>
           </div>
 

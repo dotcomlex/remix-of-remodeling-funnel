@@ -571,7 +571,7 @@ const Quiz = () => {
                 What's your estimated budget?
               </h3>
               <p className="text-xs text-muted-foreground text-center mb-4">
-                (This won't affect your pricing—it just helps us prepare the right options for you)
+                (This helps us prepare the right options for you)
               </p>
               <div className="flex flex-col gap-2 mb-4">
                 <BudgetOptionCard
