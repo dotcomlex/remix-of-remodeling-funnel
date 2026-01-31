@@ -214,6 +214,14 @@
   .hero-text-shadow {
     text-shadow: 0 2px 12px hsl(0 0% 0% / 0.7), 0 4px 24px hsl(0 0% 0% / 0.5);
   }
+
+  /* Stronger hero text shadow for bright backgrounds */
+  .hero-text-shadow-strong {
+    text-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.8),
+      0 4px 8px rgba(0, 0, 0, 0.6),
+      0 8px 16px rgba(0, 0, 0, 0.4);
+  }
 }
 
 /* Quiz tile animations */
@@ -298,6 +306,27 @@
 }
 
 .animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Subtle rocking animation for CTA buttons */
+@keyframes subtleRock {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-0.5deg);
+  }
+  75% {
+    transform: rotate(0.5deg);
+  }
+}
+
+.animate-subtle-rock {
+  animation: subtleRock 3s ease-in-out infinite;
+}
+
+.animate-subtle-rock:hover {
   animation-play-state: paused;
 }
 
