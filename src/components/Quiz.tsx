@@ -687,17 +687,6 @@ const Quiz = ({ onStart }: QuizProps) => {
                 </p>
               </div>
 
-              {/* Social Proof Badge */}
-              <div className="flex items-center justify-center gap-1.5 mb-4">
-                <div className="flex">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <span className="text-xs font-medium text-foreground/70">
-                  100+ homeowners
-                </span>
-              </div>
               
               {/* Form Fields */}
               <div className="space-y-2.5 mb-4">
