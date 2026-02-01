@@ -35,11 +35,6 @@ const faqs = [
     answer:
       "Absolutely! During your free consultation, we'll provide design recommendations, show you material samples, and help you choose options that fit your style and budget. We can also create mockup designs so you can see exactly how your project will look before we start. We'll guide you through every decision to ensure you love the final result.",
   },
-  {
-    question: "What does the $2,000 Winter Upgrade Program discount apply to?",
-    answer:
-      "The $2,000 discount applies to any remodeling project - kitchens, bathrooms, basements, or combinations.",
-  },
 ];
 
 const FAQSection = () => {
