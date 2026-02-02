@@ -46,9 +46,7 @@ const [quizStarted, setQuizStarted] = useState(false);
             {/* Progress Text */}
             <div className="text-center mb-4">
               {/* Live Activity Indicator - RED badge, ALWAYS visible */}
-              <div className={`inline-flex items-center gap-2 text-white text-xs font-bold px-4 py-2 rounded-full mb-4 shadow-xl border-2 border-white/50 transition-colors duration-300 ${
-                spotsLeft <= 8 ? 'bg-red-500' : 'bg-orange-500'
-              }`}>
+              <div className="inline-flex items-center gap-2 text-white text-xs font-bold px-4 py-2 rounded-full mb-4 shadow-xl border-2 border-white/50 bg-red-500">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
