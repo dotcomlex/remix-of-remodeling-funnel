@@ -843,6 +843,14 @@ const Quiz = ({ onStart }: QuizProps) => {
                 )}
               </Button>
 
+              {/* Subtle Testimonial */}
+              <div className="mt-3">
+                <p className="text-xs text-muted-foreground/80 italic text-center leading-relaxed">
+                  "Just finished our kitchen remodel with 14er—would definitely recommend!"
+                  <span className="text-muted-foreground/60 not-italic ml-1">- Michael R., Denver</span>
+                </p>
+              </div>
+
               {/* Trust Footer - Enhanced */}
               <div className="flex flex-wrap items-center justify-center gap-x-1.5 text-[10px] text-muted-foreground pt-4 mt-4 border-t border-border/50">
                 <span className="flex items-center gap-1">
