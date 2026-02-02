@@ -750,7 +750,7 @@ const Quiz = ({ onStart }: QuizProps) => {
                   Congrats! Your Area ({data.zipCode}) Qualifies!
                 </h3>
                 <p className="text-sm text-muted-foreground leading-snug max-w-sm mx-auto">
-                  Enter your info below so we can contact you and schedule your 100% free in-home consultation.
+                  Enter your info below to claim your free consultation and lock in your $2,000 discount.
                 </p>
               </div>
 
