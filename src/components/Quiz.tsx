@@ -50,7 +50,7 @@ const CheckingMessages = ({ zipCode }: { zipCode: string }) => {
     "Verifying service coverage...",
     "Reviewing contractor schedules...",
     "Confirming project capacity...",
-    "Matching you with specialists...",
+    "Finalizing availability check...",
   ];
 
   useEffect(() => {
