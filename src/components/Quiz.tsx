@@ -138,11 +138,11 @@ const Quiz = ({ onStart }: QuizProps) => {
         setIsDisqualified(false);
         setIsCheckingZip(true);
         
-        // Show loading for 2.5 seconds, then advance
+        // Show loading for 4 seconds, then advance
         setTimeout(() => {
           setIsCheckingZip(false);
           setStep(5);
-        }, 2500);
+        }, 4000);
       } else {
         setIsDisqualified(true);
       }
