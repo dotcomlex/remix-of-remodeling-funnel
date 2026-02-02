@@ -48,13 +48,15 @@ const CheckingMessages = ({ zipCode }: { zipCode: string }) => {
   const messages = [
     `Checking availability in ${zipCode}...`,
     "Verifying service coverage...",
+    "Reviewing contractor schedules...",
     "Confirming project capacity...",
+    "Matching you with specialists...",
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setMessageIndex((prev) => (prev + 1) % messages.length);
-    }, 800);
+    }, 1800);
     
     return () => clearInterval(interval);
   }, []);
@@ -138,11 +140,11 @@ const Quiz = ({ onStart }: QuizProps) => {
         setIsDisqualified(false);
         setIsCheckingZip(true);
         
-        // Show loading for 4 seconds, then advance
+        // Show loading for 8 seconds, then advance
         setTimeout(() => {
           setIsCheckingZip(false);
           setStep(5);
-        }, 4000);
+        }, 8000);
       } else {
         setIsDisqualified(true);
       }
