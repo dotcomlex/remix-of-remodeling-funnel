@@ -41,6 +41,41 @@ const isColoradoZipCode = (zip: string): boolean => {
   return zipNum >= 80001 && zipNum <= 81658;
 };
 
+// Rotating messages for ZIP verification
+const CheckingMessages = ({ zipCode }: { zipCode: string }) => {
+  const [messageIndex, setMessageIndex] = useState(0);
+  
+  const messages = [
+    `Checking availability in ${zipCode}...`,
+    "Verifying service coverage...",
+    "Confirming project capacity...",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMessageIndex((prev) => (prev + 1) % messages.length);
+    }, 800);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <motion.div
+      key={messageIndex}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.3 }}
+    >
+      <p className="text-base sm:text-lg font-medium text-foreground">
+        {messages[messageIndex]}
+      </p>
+      <p className="text-sm text-muted-foreground mt-2">
+        Please wait a moment...
+      </p>
+    </motion.div>
+  );
+};
 
 interface QuizProps {
   onStart?: () => void;
@@ -54,6 +89,7 @@ const Quiz = ({ onStart }: QuizProps) => {
   const [needsTimelineClarification, setNeedsTimelineClarification] = useState(false);
   const [timelineDisqualified, setTimelineDisqualified] = useState(false);
   const [errors, setErrors] = useState<{ firstName?: string; phone?: string; email?: string }>({});
+  const [isCheckingZip, setIsCheckingZip] = useState(false);
   const [data, setData] = useState<QuizData>({
     projectType: "",
     timeline: "",
@@ -97,10 +133,16 @@ const Quiz = ({ onStart }: QuizProps) => {
   }, [data.budgetRange, step]);
 
   const handleNext = () => {
-    if (step === 4 && data.zipCode.length >= 5) {
+    if (step === 4 && data.zipCode.length >= 5 && !isCheckingZip) {
       if (isColoradoZipCode(data.zipCode)) {
-        setIsDisqualified(false); // Reset if user corrected their ZIP
-        setStep(5);
+        setIsDisqualified(false);
+        setIsCheckingZip(true);
+        
+        // Show loading for 2.5 seconds, then advance
+        setTimeout(() => {
+          setIsCheckingZip(false);
+          setStep(5);
+        }, 2500);
       } else {
         setIsDisqualified(true);
       }
@@ -618,7 +660,7 @@ const Quiz = ({ onStart }: QuizProps) => {
           )}
 
           {/* Step 4: ZIP Code */}
-          {step === 4 && !isSubmitted && (
+          {step === 4 && !isSubmitted && !isCheckingZip && !isDisqualified && (
             <motion.div
               key="step4"
               variants={cardVariants}
@@ -663,6 +705,29 @@ const Quiz = ({ onStart }: QuizProps) => {
                   Continue <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </div>
+            </motion.div>
+          )}
+
+          {/* ZIP Code Checking Loader */}
+          {isCheckingZip && !isSubmitted && !isDisqualified && (
+            <motion.div
+              key="checking-zip"
+              variants={cardVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.25 }}
+              className="py-8 text-center"
+            >
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                className="w-16 h-16 mx-auto mb-6"
+              >
+                <div className="w-full h-full rounded-full border-4 border-slate-200 border-t-primary" />
+              </motion.div>
+              
+              <CheckingMessages zipCode={data.zipCode} />
             </motion.div>
           )}
 
