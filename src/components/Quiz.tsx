@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-type QuizStep = 1 | 2 | 3 | 4 | 5;
+type QuizStep = 1 | 2 | 3 | 4;
 
 interface QuizData {
   projectType: string;
@@ -41,23 +41,13 @@ const isColoradoZipCode = (zip: string): boolean => {
   return zipNum >= 80001 && zipNum <= 81658;
 };
 
-// Phone number validation - blocks fake patterns, allows any valid US number
+// Phone number validation - simplified to allow more numbers through
 const isValidPhoneNumber = (phone: string): { valid: boolean; error?: string } => {
   const digits = phone.replace(/\D/g, '');
   
   // Must be exactly 10 digits
   if (digits.length !== 10) {
     return { valid: false, error: "Enter a valid 10-digit phone number" };
-  }
-  
-  // Check for all same digit (000-000-0000, 111-111-1111, etc.)
-  if (/^(.)\1{9}$/.test(digits)) {
-    return { valid: false, error: "Please enter your real phone number" };
-  }
-  
-  // Check for sequential patterns
-  if (["1234567890", "0123456789", "9876543210", "0987654321"].includes(digits)) {
-    return { valid: false, error: "Please enter your real phone number" };
   }
   
   // Area code (first 3 digits) cannot start with 0 or 1 - US phone standard
@@ -70,11 +60,6 @@ const isValidPhoneNumber = (phone: string): { valid: boolean; error?: string } =
   const exchangeCode = digits.substring(3, 6);
   if (exchangeCode[0] === '0' || exchangeCode[0] === '1') {
     return { valid: false, error: "Please enter a valid US phone number" };
-  }
-  
-  // Block 555-01XX range (reserved for fictional use)
-  if (areaCode === '555' && exchangeCode.startsWith('01')) {
-    return { valid: false, error: "Please enter your real phone number" };
   }
   
   return { valid: true };
@@ -162,19 +147,16 @@ const Quiz = ({ onStart }: QuizProps) => {
       if (data.timeline === "not-sure") {
         setTimeout(() => setNeedsTimelineClarification(true), 300);
       } else {
+        // Skip budget - go directly to ZIP (step 3)
         setTimeout(() => setStep(3), 300);
       }
     }
   }, [data.timeline, step, needsTimelineClarification]);
 
-  useEffect(() => {
-    if (step === 3 && data.budgetRange) {
-      setTimeout(() => setStep(4), 300);
-    }
-  }, [data.budgetRange, step]);
+  // Budget step removed - no auto-advance needed for it
 
   const handleNext = () => {
-    if (step === 4 && data.zipCode.length >= 5 && !isCheckingZip) {
+    if (step === 3 && data.zipCode.length >= 5 && !isCheckingZip) {
       if (isColoradoZipCode(data.zipCode)) {
         setIsDisqualified(false);
         setIsCheckingZip(true);
@@ -182,7 +164,7 @@ const Quiz = ({ onStart }: QuizProps) => {
         // Show loading for 8 seconds, then advance
         setTimeout(() => {
           setIsCheckingZip(false);
-          setStep(5);
+          setStep(4);
         }, 8000);
       } else {
         setIsDisqualified(true);
@@ -191,7 +173,7 @@ const Quiz = ({ onStart }: QuizProps) => {
   };
 
   const handleBack = () => {
-    if (step > 1 && step < 5) {
+    if (step > 1 && step < 4) {
       setStep((step - 1) as QuizStep);
     }
   };
@@ -215,7 +197,6 @@ const Quiz = ({ onStart }: QuizProps) => {
       default: return "";
     }
   };
-
   const getBudgetLabel = (budget: string): string => {
     switch (budget) {
       case "5-10k": return "$5,000 - $10,000";
@@ -408,7 +389,7 @@ const Quiz = ({ onStart }: QuizProps) => {
         {/* Progress Dots - Inside card */}
         {!isSubmitted && !isDisqualified && !timelineDisqualified && (
           <div className="flex justify-center gap-2 mb-4">
-            {[1, 2, 3, 4, 5].map((dotStep) => (
+            {[1, 2, 3, 4].map((dotStep) => (
               <div
                 key={dotStep}
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
@@ -549,7 +530,7 @@ const Quiz = ({ onStart }: QuizProps) => {
                   onClick={() => {
                     setNeedsTimelineClarification(false);
                     setData({ ...data, timeline: "1-2-months" }); // Set to acceptable timeline
-                    setTimeout(() => setStep(3), 300); // Continue to budget
+                    setTimeout(() => setStep(3), 300); // Continue to ZIP code
                   }}
                   className="w-full p-4 rounded-xl border-2 border-primary bg-gradient-to-r from-primary/10 to-primary/5 hover:shadow-lg transition-all text-left"
                 >
@@ -651,60 +632,8 @@ const Quiz = ({ onStart }: QuizProps) => {
             </motion.div>
           )}
 
-          {/* Step 3: Budget Range */}
-          {step === 3 && !isSubmitted && !needsTimelineClarification && (
-            <motion.div
-              key="step3"
-              variants={cardVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.25 }}
-            >
-              <h3 className="text-base sm:text-lg font-medium text-foreground mb-2 text-center leading-tight">
-                What's your estimated budget?
-              </h3>
-              <p className="text-xs text-muted-foreground text-center mb-4">
-                (This helps us prepare the right options for you)
-              </p>
-              <div className="flex flex-col gap-2 mb-4">
-                <BudgetOptionCard
-                  icon={DollarSign}
-                  label="$5,000 - $10,000"
-                  selected={data.budgetRange === "5-10k"}
-                  onClick={() => handleTileSelect("budgetRange", "5-10k")}
-                />
-                <BudgetOptionCard
-                  icon={DollarSign}
-                  label="$10,000 - $20,000"
-                  selected={data.budgetRange === "10-20k"}
-                  onClick={() => handleTileSelect("budgetRange", "10-20k")}
-                />
-                <BudgetOptionCard
-                  icon={DollarSign}
-                  label="$20,000 - $30,000"
-                  selected={data.budgetRange === "20-30k"}
-                  onClick={() => handleTileSelect("budgetRange", "20-30k")}
-                />
-                <BudgetOptionCard
-                  icon={Gem}
-                  label="$40,000+"
-                  selected={data.budgetRange === "40k+"}
-                  onClick={() => handleTileSelect("budgetRange", "40k+")}
-                />
-              </div>
-              <button
-                onClick={handleBack}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Go back
-              </button>
-            </motion.div>
-          )}
-
-          {/* Step 4: ZIP Code */}
-          {step === 4 && !isSubmitted && !isCheckingZip && !isDisqualified && (
+          {/* Step 3: ZIP Code */}
+          {step === 3 && !isSubmitted && !isCheckingZip && !isDisqualified && (
             <motion.div
               key="step4"
               variants={cardVariants}
@@ -775,10 +704,10 @@ const Quiz = ({ onStart }: QuizProps) => {
             </motion.div>
           )}
 
-          {/* Step 5: Contact Form */}
-          {step === 5 && !isSubmitted && (
+          {/* Step 4: Contact Form */}
+          {step === 4 && !isSubmitted && (
             <motion.div
-              key="step5"
+              key="step4"
               variants={cardVariants}
               initial="enter"
               animate="center"

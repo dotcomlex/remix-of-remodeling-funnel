@@ -47,12 +47,11 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight hero-text-shadow-strong mb-4">
-              This New Winter Upgrade Program Is Helping Colorado Homeowners Save{" "}
-              <span className="text-highlight">$2,000</span> On Their Remodel
+              Save <span className="text-highlight">$2,000</span> On Your Colorado Remodel - See If You Qualify!
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed hero-text-shadow-strong max-w-2xl mx-auto">
-              Limited spots available. Click below to see if you qualify for a free consultation and $2,000 off your kitchen or bathroom remodel.
+              Limited winter spots available. Click below to see if you qualify for a free consultation and $2,000 off your project.
             </p>
           </motion.div>
 
@@ -71,7 +70,7 @@ const HeroSection = () => {
                     size="xl" 
                     className="group shadow-2xl text-lg px-8 py-6 animate-cta-glow"
                   >
-                    See If You Qualify
+                    See If I Qualify Now
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>

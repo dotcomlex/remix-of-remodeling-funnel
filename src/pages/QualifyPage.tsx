@@ -53,7 +53,7 @@ const [quizStarted, setQuizStarted] = useState(false);
                 </span>
                 {spotsLeft <= 8 
                   ? `Only ${spotsLeft} spots left today!` 
-                  : `${spotsLeft} spots available today`
+                  : `Only ${spotsLeft} spots left today`
                 }
               </div>
               
