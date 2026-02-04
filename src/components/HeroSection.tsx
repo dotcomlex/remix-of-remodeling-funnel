@@ -47,11 +47,12 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight hero-text-shadow-strong mb-4">
-              Save <span className="text-highlight">$2,000</span> On Your Colorado Remodel - See If You Qualify!
+              Attention Colorado Homeowners: This New Winter Program Helps You Save Over{" "}
+              <span className="text-highlight">$2,000</span> On Your Remodeling Project
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed hero-text-shadow-strong max-w-2xl mx-auto">
-              Limited winter spots available. Click below to see if you qualify for a free consultation and $2,000 off your project.
+              Only available in select zip codes. Click below to see if you qualify.
             </p>
           </motion.div>
 
