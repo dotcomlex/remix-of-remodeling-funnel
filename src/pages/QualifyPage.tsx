@@ -60,17 +60,12 @@ const [quizStarted, setQuizStarted] = useState(false);
               {/* Header - HIDES when quiz starts */}
               {!quizStarted && (
                 <>
-                  <p className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-700 mb-1 leading-snug">
-                    Ready to Transform Your Home?
-                  </p>
-                  <h1 className="text-base sm:text-lg md:text-xl font-bold text-slate-900 mb-2 leading-snug">
-                    See If You Qualify for the{' '}
-                    <span className="text-primary">Winter Upgrade Program</span>
-                    <br className="sm:hidden" />
-                    {' '}and Save Thousands
+                  <h1 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 leading-relaxed">
+                    See If You Qualify for the<br />
+                    Winter Upgrade Program
                   </h1>
-                  <p className="text-sm sm:text-base font-medium text-slate-600">
-                    Takes less than 30 seconds to complete
+                  <p className="text-sm text-slate-600">
+                    Takes less than 30 seconds
                   </p>
                 </>
               )}
