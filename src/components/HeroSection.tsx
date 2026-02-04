@@ -48,11 +48,11 @@ const HeroSection = () => {
           >
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight hero-text-shadow-strong mb-4">
               This New Winter Upgrade Program Is Helping Colorado Homeowners Save{" "}
-              <span className="text-highlight">$2,000</span> On Their Bath & Kitchen Remodel
+              <span className="text-highlight">$2,000</span> On Their Remodel
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed hero-text-shadow-strong max-w-2xl mx-auto">
-              Limited spots available. Click below to see if you qualify for a free consultation and $2,000 off your project.
+              Limited spots available. Click below to see if you qualify for a free consultation and $2,000 off your kitchen or bathroom remodel.
             </p>
           </motion.div>
 
