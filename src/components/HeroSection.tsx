@@ -44,7 +44,7 @@ const HeroSection = () => {
           duration: 0.6,
           delay: 0.2
         }}>
-            <h1 className="sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug hero-text-shadow-strong mb-4 text-xl">
+            <h1 className="sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug hero-text-shadow-strong mb-6 text-xl">
               Attention Colorado Homeowners: This New Winter Program Helps You Save Over{" "}
               <span className="text-highlight">$2,000</span> On Your Remodeling Project
             </h1>
