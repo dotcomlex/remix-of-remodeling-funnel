@@ -18,10 +18,10 @@ const HeroSection = () => {
           loading="eager" 
           decoding="async" 
         />
-        {/* Main dark gradient - stronger opacity */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
+        {/* Main dark gradient - much stronger for mobile readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/55 to-black/70" />
         {/* Vignette effect - darker edges for focus */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.5)_100%)]" />
       </div>
 
       {/* Content */}
@@ -46,7 +46,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight hero-text-shadow-strong mb-4">
+            <h1 className="text-lg sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug hero-text-shadow-strong mb-4">
               Attention Colorado Homeowners: This New Winter Program Helps You Save Over{" "}
               <span className="text-highlight">$2,000</span> On Your Remodeling Project
             </h1>
