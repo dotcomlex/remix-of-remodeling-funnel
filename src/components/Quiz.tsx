@@ -41,6 +41,45 @@ const isColoradoZipCode = (zip: string): boolean => {
   return zipNum >= 80001 && zipNum <= 81658;
 };
 
+// Phone number validation - blocks fake patterns, allows any valid US number
+const isValidPhoneNumber = (phone: string): { valid: boolean; error?: string } => {
+  const digits = phone.replace(/\D/g, '');
+  
+  // Must be exactly 10 digits
+  if (digits.length !== 10) {
+    return { valid: false, error: "Enter a valid 10-digit phone number" };
+  }
+  
+  // Check for all same digit (000-000-0000, 111-111-1111, etc.)
+  if (/^(.)\1{9}$/.test(digits)) {
+    return { valid: false, error: "Please enter your real phone number" };
+  }
+  
+  // Check for sequential patterns
+  if (["1234567890", "0123456789", "9876543210", "0987654321"].includes(digits)) {
+    return { valid: false, error: "Please enter your real phone number" };
+  }
+  
+  // Area code (first 3 digits) cannot start with 0 or 1 - US phone standard
+  const areaCode = digits.substring(0, 3);
+  if (areaCode[0] === '0' || areaCode[0] === '1') {
+    return { valid: false, error: "Please enter a valid US phone number" };
+  }
+  
+  // Exchange code (digits 4-6) cannot start with 0 or 1 - US phone standard
+  const exchangeCode = digits.substring(3, 6);
+  if (exchangeCode[0] === '0' || exchangeCode[0] === '1') {
+    return { valid: false, error: "Please enter a valid US phone number" };
+  }
+  
+  // Block 555-01XX range (reserved for fictional use)
+  if (areaCode === '555' && exchangeCode.startsWith('01')) {
+    return { valid: false, error: "Please enter your real phone number" };
+  }
+  
+  return { valid: true };
+};
+
 // Rotating messages for ZIP verification
 const CheckingMessages = ({ zipCode }: { zipCode: string }) => {
   const [messageIndex, setMessageIndex] = useState(0);
@@ -197,8 +236,11 @@ const Quiz = ({ onStart }: QuizProps) => {
     const phoneDigits = data.phone.replace(/\D/g, '');
     if (!phoneDigits) {
       newErrors.phone = "Phone is required";
-    } else if (phoneDigits.length < 10) {
-      newErrors.phone = "Enter a valid 10-digit phone number";
+    } else {
+      const phoneValidation = isValidPhoneNumber(data.phone);
+      if (!phoneValidation.valid) {
+        newErrors.phone = phoneValidation.error || "Enter a valid phone number";
+      }
     }
     
     if (!data.email.trim()) {
@@ -790,14 +832,26 @@ const Quiz = ({ onStart }: QuizProps) => {
                         setData(prev => ({ ...prev, phone: formatPhoneNumber(e.target.value) }));
                         if (errors.phone) setErrors({ ...errors, phone: undefined });
                       }}
-                      className={`pl-10 h-12 text-base rounded-xl border-2 transition-all ${
+                      className={`pl-10 pr-10 h-12 text-base rounded-xl border-2 transition-all ${
                         errors.phone ? 'border-red-500 focus:border-red-500' : 'focus:border-primary'
                       }`}
                       maxLength={14}
                     />
+                    {/* Green checkmark when valid */}
+                    {data.phone.replace(/\D/g, '').length === 10 && 
+                     isValidPhoneNumber(data.phone).valid && (
+                      <div className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                        <Check className="w-3 h-3 text-emerald-600" />
+                      </div>
+                    )}
                   </div>
                   {errors.phone ? (
                     <p className="text-xs text-red-500 mt-1 pl-1">{errors.phone}</p>
+                  ) : data.phone.replace(/\D/g, '').length === 10 && 
+                      isValidPhoneNumber(data.phone).valid ? (
+                    <p className="text-[10px] text-emerald-600 mt-1 pl-1">
+                      ✓ Looks good!
+                    </p>
                   ) : (
                     <p className="text-[10px] text-muted-foreground mt-1 pl-1">
                       📱 Please double-check your number so we can reach you
