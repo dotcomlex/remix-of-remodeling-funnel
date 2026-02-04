@@ -44,13 +44,13 @@ const HeroSection = () => {
           duration: 0.6,
           delay: 0.2
         }}>
-            <h1 className="sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug hero-text-shadow-strong mb-4 text-2xl">
+            <h1 className="sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug hero-text-shadow-strong mb-8 text-2xl">
               Attention Colorado Homeowners: This New Winter Program Helps You Save Over{" "}
               <span className="text-highlight">$2,000</span> On Your Remodeling Project
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed hero-text-shadow-strong max-w-2xl mx-auto">
-              Only available in select zip codes. Click below to see if you qualify.
+              Only available in select zip codes. Click below to see if you qualify before spots run out.
             </p>
           </motion.div>
 
