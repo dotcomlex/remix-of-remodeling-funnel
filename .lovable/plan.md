@@ -1,72 +1,45 @@
 
 
-# Hero Background + Headline Mobile Optimization
+# Update Hero Headline Text
 
 ## Summary
 
-Two targeted changes to improve mobile readability: darken the hero background overlay and reduce the headline font size on mobile devices.
+Update the hero headline to new copy that emphasizes the program benefits for kitchen and bath remodels.
 
 ---
 
-## Change 1: Darken Hero Background Overlay
+## Change
 
-**File:** `src/components/HeroSection.tsx` (lines 21-24)
+**File:** `src/components/HeroSection.tsx` (line 47-49)
 
 **Current:**
 ```tsx
-{/* Main dark gradient - stronger opacity */}
-<div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
-{/* Vignette effect - darker edges for focus */}
-<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
+<h1 className="sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug hero-text-shadow-strong mb-8 text-2xl">
+  Attention Colorado Homeowners: This New Winter Program Helps You Save Over{" "}
+  <span className="text-highlight">$2,000</span> On Your Remodeling Project
+</h1>
 ```
 
 **New:**
 ```tsx
-{/* Main dark gradient - much stronger for mobile readability */}
-<div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/55 to-black/70" />
-{/* Vignette effect - darker edges for focus */}
-<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.5)_100%)]" />
+<h1 className="sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug hero-text-shadow-strong mb-8 text-2xl">
+  This New Program Is Helping Colorado Homeowners Save{" "}
+  <span className="text-highlight">$2,000+</span> On Kitchen And Bath Remodels
+</h1>
 ```
 
-**Key changes:**
-- Gradient opacity increased: 50/40/60 → 65/55/70
-- Vignette edge darkness increased: 0.4 → 0.5
-
----
-
-## Change 2: Reduce Mobile Headline Font Size
-
-**File:** `src/components/HeroSection.tsx` (line 49)
-
-**Current:**
-```tsx
-<h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight hero-text-shadow-strong mb-4">
-```
-
-**New:**
-```tsx
-<h1 className="text-lg sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug hero-text-shadow-strong mb-4">
-```
-
-**Key changes:**
-- Mobile font size: `text-2xl` → `text-lg` (1.5rem → 1.125rem)
-- Line height: `leading-tight` → `leading-snug` (more breathing room)
-
----
-
-## Files Modified
-
-| File | Change |
-|------|--------|
-| `src/components/HeroSection.tsx` | Darker overlay + smaller mobile headline |
+**What changed:**
+- Removed "Attention Colorado Homeowners:" opener
+- Changed "Winter Program Helps You Save Over" to "Program Is Helping Colorado Homeowners Save"
+- Changed "$2,000" to "$2,000+" (added plus sign)
+- Changed "On Your Remodeling Project" to "On Kitchen And Bath Remodels"
 
 ---
 
 ## Testing Checklist
 
-- [ ] Hero background is noticeably darker on mobile
-- [ ] White headline text is easy to read against mountain photo
-- [ ] Headline text size is smaller on mobile (less overwhelming)
-- [ ] Headline has slightly more breathing room between lines
-- [ ] Desktop headline unchanged at larger breakpoints (sm: and lg: sizes preserved)
+- [ ] Headline displays correctly on mobile
+- [ ] "$2,000+" is highlighted in the accent color
+- [ ] Text is readable against the dark background
+- [ ] Spacing between headline and subheadline is maintained
 
