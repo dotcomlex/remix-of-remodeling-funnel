@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Quiz from "@/components/Quiz";
 import { Shield } from "lucide-react";
 import qualifyBgImage from "@/assets/14er-paper-mountain-bg.webp";
-import logoImage from "@/assets/14er-logo-dark.png";
 
 const QualifyPage = () => {
 const [quizStarted, setQuizStarted] = useState(false);
@@ -39,16 +38,6 @@ const [quizStarted, setQuizStarted] = useState(false);
         {/* Quiz Container */}
         <main className="flex-1 flex items-center justify-center px-4 py-4 sm:py-8">
           <div className="w-full max-w-lg">
-            {/* Company Logo */}
-            <div className="text-center mb-6 pt-4">
-              <img 
-                src={logoImage} 
-                alt="14er Renovations" 
-                className="h-16 sm:h-20 mx-auto"
-                style={{ filter: 'brightness(0)' }}
-              />
-            </div>
-
             {/* Progress Text */}
             <div className="text-center mb-4">
               {/* Header - HIDES when quiz starts */}
