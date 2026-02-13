@@ -44,10 +44,10 @@ const [quizStarted, setQuizStarted] = useState(false);
               {!quizStarted && (
                 <>
                   <h1 className="text-xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-4 leading-tight">
-                    Colorado Homeowners: Save $2,000 On Your Remodeling Project - Limited Spots Available!
+                    Colorado Homeowners: Save $2,000 On Your Remodel - Limited Spots Available!
                   </h1>
                   <p className="text-xs sm:text-sm text-slate-700 font-medium max-w-2xl mx-auto leading-relaxed">
-                    <span className="font-bold text-red-600">LIMITED SPOTS AVAILABLE.</span> Fill this quick form to see if you qualify for a FREE estimate and $2,000 off your remodeling project.
+                    <span className="font-bold text-red-600">LIMITED SPOTS AVAILABLE.</span> Answer a few questions to see if you qualify for a FREE estimate and $2,000 off your remodeling project.
                   </p>
                 </>
               )}
