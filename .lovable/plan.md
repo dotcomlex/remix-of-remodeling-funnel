@@ -1,45 +1,89 @@
 
 
-# Update Hero Headline Text
+# Quiz Page Optimization - 3 Changes
 
 ## Summary
 
-Update the hero headline to new copy that emphasizes the program benefits for kitchen and bath remodels.
+Three targeted updates to the quiz funnel page to improve conversion: a new benefit-driven headline, repositioned social proof badge, and polished success screen copy.
 
 ---
 
-## Change
+## Change 1: Update Headline and Subheadline
 
-**File:** `src/components/HeroSection.tsx` (line 47-49)
+**File:** `src/pages/QualifyPage.tsx` (lines 55-61)
 
 **Current:**
-```tsx
-<h1 className="sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug hero-text-shadow-strong mb-8 text-2xl">
-  Attention Colorado Homeowners: This New Winter Program Helps You Save Over{" "}
-  <span className="text-highlight">$2,000</span> On Your Remodeling Project
-</h1>
+```
+See If You Qualify for the
+Winter Upgrade Program
+Takes less than 30 seconds
 ```
 
 **New:**
-```tsx
-<h1 className="sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug hero-text-shadow-strong mb-8 text-2xl">
-  This New Program Is Helping Colorado Homeowners Save{" "}
-  <span className="text-highlight">$2,000+</span> On Kitchen And Bath Remodels
-</h1>
+```
+Colorado Homeowners: Save $2,000 On Your Remodeling Project - Limited Spots Available!
+
+LIMITED SPOTS AVAILABLE. Fill this quick form to see if you qualify for a FREE estimate and $2,000 off your remodeling project.
 ```
 
-**What changed:**
-- Removed "Attention Colorado Homeowners:" opener
-- Changed "Winter Program Helps You Save Over" to "Program Is Helping Colorado Homeowners Save"
-- Changed "$2,000" to "$2,000+" (added plus sign)
-- Changed "On Your Remodeling Project" to "On Kitchen And Bath Remodels"
+**Details:**
+- Headline gets larger responsive sizing (`text-xl sm:text-3xl lg:text-4xl`, `font-extrabold`)
+- Subheadline includes red "LIMITED SPOTS AVAILABLE" text for urgency
+- Subheadline matches the proven lead form copy that generated 72 leads
+- Removes outdated "Winter Upgrade Program" reference
+
+---
+
+## Change 2: Move Live Viewers Badge Below Quiz
+
+**File:** `src/pages/QualifyPage.tsx` (lines 43-50, 67)
+
+- Remove the orange badge from above the headline (lines 43-50)
+- Add it below the `<Quiz />` component instead
+
+This improves visual hierarchy: users read the headline first, then engage with the quiz, then see social proof as reinforcement.
+
+---
+
+## Change 3: Update ZIP Qualification Success Screen
+
+**File:** `src/components/Quiz.tsx` (lines 719-725)
+
+**Current:**
+```
+Congrats! Your Area (80202) Qualifies!
+Enter your info below to claim your free consultation and lock in your $2,000 discount.
+```
+
+**New:**
+```
+Great News! Your Zip Code Qualifies!
+Complete the form below to get your FREE estimate and $2,000 discount.
+```
+
+- More professional tone ("Great News" vs "Congrats")
+- Removes displaying the raw ZIP code
+- "Complete the form below" is a clearer directive
+- "FREE estimate" matches lead form language
+- Removes "lock in" (too salesy)
+
+---
+
+## Files Modified
+
+| File | Changes |
+|------|---------|
+| `src/pages/QualifyPage.tsx` | New headline, new subheadline, badge moved below quiz |
+| `src/components/Quiz.tsx` | Updated success screen copy |
 
 ---
 
 ## Testing Checklist
 
-- [ ] Headline displays correctly on mobile
-- [ ] "$2,000+" is highlighted in the accent color
-- [ ] Text is readable against the dark background
-- [ ] Spacing between headline and subheadline is maintained
+- [ ] Headline reads clearly on mobile and desktop
+- [ ] "LIMITED SPOTS AVAILABLE" appears in red
+- [ ] Live viewers badge appears below the quiz card, not above headline
+- [ ] Badge still animates with pulsing dot
+- [ ] After entering a valid ZIP, success message says "Great News! Your Zip Code Qualifies!"
+- [ ] Success message mentions "FREE estimate and $2,000 discount"
 
