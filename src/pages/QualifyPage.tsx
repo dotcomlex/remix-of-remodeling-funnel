@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Quiz from "@/components/Quiz";
 import { Shield } from "lucide-react";
+import logoImage from "@/assets/14er-logo.png";
 import qualifyBgImage from "@/assets/14er-paper-mountain-bg.webp";
 
 const QualifyPage = () => {
@@ -31,6 +32,8 @@ const [quizStarted, setQuizStarted] = useState(false);
         />
         {/* Dark overlay for better contrast */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/30" />
+        {/* Extra dark gradient at top for logo visibility */}
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/70 to-transparent" />
       </div>
 
       {/* Content */}
@@ -38,6 +41,11 @@ const [quizStarted, setQuizStarted] = useState(false);
         {/* Quiz Container */}
         <main className="flex-1 flex items-center justify-center px-4 py-4 sm:py-8">
           <div className="w-full max-w-lg">
+            {/* Company Logo */}
+            <div className="text-center mb-4">
+              <img src={logoImage} alt="14er Renovations" className="h-16 sm:h-20 mx-auto" />
+            </div>
+
             {/* Progress Text */}
             <div className="text-center mb-4">
               {/* Header - HIDES when quiz starts */}
