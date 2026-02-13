@@ -718,10 +718,10 @@ const Quiz = ({ onStart }: QuizProps) => {
               <div className="text-center mb-4">
                 <span className="text-2xl mb-1 block">🎉</span>
                 <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
-                  Congrats! Your Area ({data.zipCode}) Qualifies!
+                  Great News! Your Zip Code Qualifies!
                 </h3>
                 <p className="text-sm text-muted-foreground leading-snug max-w-sm mx-auto">
-                  Enter your info below to claim your free consultation and lock in your $2,000 discount.
+                  Complete the form below to get your FREE estimate and $2,000 discount.
                 </p>
               </div>
 

@@ -40,24 +40,14 @@ const [quizStarted, setQuizStarted] = useState(false);
           <div className="w-full max-w-lg">
             {/* Progress Text */}
             <div className="text-center mb-4">
-              {/* Live Activity Indicator - ORANGE badge, ALWAYS visible */}
-              <div className="inline-flex items-center gap-2 text-white text-xs font-bold px-4 py-2 rounded-full mb-4 shadow-xl border-2 border-white/50 bg-orange-500">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-                </span>
-                {liveViewers} people checking availability right now
-              </div>
-              
               {/* Header - HIDES when quiz starts */}
               {!quizStarted && (
                 <>
-                  <h1 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 leading-relaxed">
-                    See If You Qualify for the<br />
-                    Winter Upgrade Program
+                  <h1 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4 leading-tight">
+                    Colorado Homeowners: Save $2,000 On Your Remodeling Project - Limited Spots Available!
                   </h1>
-                  <p className="text-sm text-slate-600">
-                    Takes less than 30 seconds
+                  <p className="text-sm sm:text-base text-slate-700 font-medium max-w-2xl mx-auto leading-relaxed">
+                    <span className="font-bold text-red-600">LIMITED SPOTS AVAILABLE.</span> Fill this quick form to see if you qualify for a FREE estimate and $2,000 off your remodeling project.
                   </p>
                 </>
               )}
@@ -65,6 +55,17 @@ const [quizStarted, setQuizStarted] = useState(false);
 
             {/* Quiz Component */}
             <Quiz onStart={() => setQuizStarted(true)} />
+
+            {/* Live Activity Badge - Below quiz for social proof */}
+            <div className="mt-4 text-center">
+              <div className="inline-flex items-center gap-2 text-white text-xs sm:text-sm font-bold px-4 py-2.5 rounded-full shadow-lg border-2 border-white/50 bg-orange-500">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                </span>
+                {liveViewers} people checking availability right now
+              </div>
+            </div>
           </div>
         </main>
 
