@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Quiz from "@/components/Quiz";
 import { Shield } from "lucide-react";
 import qualifyBgImage from "@/assets/14er-paper-mountain-bg.webp";
+import logoImage from "@/assets/14er-logo-dark.png";
 
 const QualifyPage = () => {
 const [quizStarted, setQuizStarted] = useState(false);
@@ -38,15 +39,25 @@ const [quizStarted, setQuizStarted] = useState(false);
         {/* Quiz Container */}
         <main className="flex-1 flex items-center justify-center px-4 py-4 sm:py-8">
           <div className="w-full max-w-lg">
+            {/* Company Logo */}
+            <div className="text-center mb-6 pt-4">
+              <img 
+                src={logoImage} 
+                alt="14er Renovations" 
+                className="h-16 sm:h-20 mx-auto"
+                style={{ filter: 'brightness(0)' }}
+              />
+            </div>
+
             {/* Progress Text */}
             <div className="text-center mb-4">
               {/* Header - HIDES when quiz starts */}
               {!quizStarted && (
                 <>
-                  <h1 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4 leading-tight">
+                  <h1 className="text-xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-4 leading-tight">
                     Colorado Homeowners: Save $2,000 On Your Remodeling Project - Limited Spots Available!
                   </h1>
-                  <p className="text-sm sm:text-base text-slate-700 font-medium max-w-2xl mx-auto leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium max-w-2xl mx-auto leading-relaxed">
                     <span className="font-bold text-red-600">LIMITED SPOTS AVAILABLE.</span> Fill this quick form to see if you qualify for a FREE estimate and $2,000 off your remodeling project.
                   </p>
                 </>
